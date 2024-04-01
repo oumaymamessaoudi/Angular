@@ -71,6 +71,10 @@ export class SigninComponent {
       return;
     }
     // Vérifier si l'email et le mot de passe correspondent à ceux de l'administrateur
+    if(this.user.password.length<6){
+      alert("Password incorrect");
+      return;
+    }
   if (this.user.email == 'admin.pi@esprit.tn' && this.user.password == 'admin1') {
 
     // Si les identifiants sont corrects, rediriger vers le backend
