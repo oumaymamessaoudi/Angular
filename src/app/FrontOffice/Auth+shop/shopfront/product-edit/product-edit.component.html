@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title text-center">Edit Product</h2>
+          <form [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <!-- Hidden input for product name -->
+              <input type="text" id="productName" class="form-control invisible" formControlName="productName">
+              <!-- Visible input for product name -->
+              <label for="productName">Product Name</label>
+              <input type="text" id="productName" class="form-control" formControlName="productName">
+              <div *ngIf="editProductForm.get('productName')?.invalid && editProductForm.get('productName')?.touched" class="text-danger">Product Name is required</div>
+            </div>
+            <div class="form-group">
+              <label for="prodDesc">Description</label>
+              <textarea id="prodDesc" class="form-control" formControlName="prodDesc"></textarea>
+              <div *ngIf="editProductForm.get('prodDesc')?.invalid && editProductForm.get('prodDesc')?.touched" class="text-danger">Description is required</div>
+            </div>
+            <div class="form-group">
+              <label for="price">Price</label>
+              <input type="number" id="price" class="form-control" formControlName="price">
+              <div *ngIf="editProductForm.get('price')?.invalid && editProductForm.get('price')?.touched" class="text-danger">Price is required</div>
+            </div>
+            <!-- Bind formControlName to prodCapacity -->
+            <div class="form-group">
+              <label for="prodCapacity">Capacity</label>
+              <input type="number" id="prodCapacity" class="form-control" formControlName="prodCapacity">
+              <div *ngIf="editProductForm.get('prodCapacity')?.invalid && editProductForm.get('prodCapacity')?.touched" class="text-danger">Capacity is required</div>
+            </div>
+            <!-- Bind formControlName to archProd -->
+            
+            <div class="form-group">
+              <label for="image">Select Image</label>
+              <input type="file" id="image" class="form-control-file" (change)="onFileSelected($event)">
+            </div>
+            <!-- Display selected image path -->
+            <div class="form-group" style="display: none;">
+              <label for="imagePath">Selected Image Path</label>
+              <input type="text" id="imagePath" class="form-control" [value]="editProductForm.get('imagePathField')?.value" disabled>
+          </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary">Edit</button>
+            </div>
+            <a [routerLink]="['/admin/productlist']" class="btn btn-secondary">
+              <i class="fas fa-arrow-left"></i> Go Back
+          </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

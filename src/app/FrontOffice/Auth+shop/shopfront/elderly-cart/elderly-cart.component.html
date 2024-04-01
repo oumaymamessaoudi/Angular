@@ -1,0 +1,106 @@
+<section class="h-100 h-custom" style="background-color: #eee;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col">
+        <div class="card">
+          <div class="card-body p-4">
+            <div class="row">
+              <div class="col-lg-7">
+                <h5 class="mb-3">
+                  <a (click)="goToProductsPage(elderlyId)" class="text-body" [style.cursor]="'pointer'">
+                    <i class="fas fa-hand-point-left me-2"></i>Continue shopping
+                  </a>
+                </h5>             <hr>
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div>
+                    <h2 class="mb-1">Your shopping cart</h2>
+                  </div>
+                </div>
+                <script src="https://js.stripe.com/v3/"></script>
+
+
+                <!-- Cart Table -->
+                <div class="cart-container">
+                  <table class="cart-table">
+                    <thead>
+                      <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Total Price</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <!-- Angular Loop for Cart Items -->
+                      <tr *ngFor="let cartItem of elderlyCart; let i = index">
+                        <ng-container *ngIf="cartItem.orderStatus === 'Pending'">
+
+                        <td>{{ cartItem.productName }}</td>
+                        <td>${{ cartItem.price }}</td>
+                        <td>${{ cartItem.totalPrice }}</td>
+                        <td>
+                          <div class="quantity-control">
+                            <button class="quantity-btn" (click)="decrementQuantity(cartItem.orderId, cartItem.quantite)" [disabled]="cartItem.quantite === 1">-</button>
+                            <span class="quantity">{{ cartItem.quantite }}</span>
+                            <button class="quantity-btn" (click)="incrementQuantity(cartItem.orderId, cartItem.quantite)" [disabled]="cartItem.quantite === cartItem.prodCapacity">+</button>
+                          </div>
+                        </td>
+                        <td>
+                          <button class="action-btn buy-btn" (click)="toggleStripeInput(cartItem.orderId)"><i class="fas fa-shopping-cart"></i> Buy</button>
+                          <button class="action-btn cancel-btn" (click)="cancelOrder(cartItem.orderId)"><i class="fas fa-times"></i> Cancel</button>
+                        </td>
+                      </ng-container>
+
+                      </tr>
+                      <!-- End Angular Loop -->
+                    </tbody>
+                  </table>
+                </div>
+                <!-- End Cart Table -->
+              </div>
+              <div class="col-lg-5">
+                <!-- Payment Form Section -->
+                <div *ngIf="showStripeInput" class="payment-form-container">
+                  <h3>Enter your card details</h3>
+                  <div class="form-group">
+                    <label for="card-name">Name on Card:</label>
+                    <input type="text" id="card-name" class="form-control" placeholder="Enter your name" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="card-number">Card Number:</label>
+                    <input type="text" id="card-number" class="form-control" placeholder="1234 5678 9012 3456" required pattern="[0-9]{13,16}">
+                    <div class="invalid-feedback">Please enter a valid card number.</div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="expiry-date">Expiry Date:</label>
+                        <input type="text" id="expiry-date" class="form-control" placeholder="MM/YY" required pattern="(0[1-9]|1[0-2])\/[0-9]{2}">
+                        <div class="invalid-feedback">Please enter a valid expiry date in MM/YY format.</div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label for="cvv">CVV:</label>
+                        <input type="text" id="cvv" class="form-control" placeholder="123" required pattern="[0-9]{3,4}">
+                        <div class="invalid-feedback">Please enter a valid CVV.</div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-block" id="pay-btn" (click)="processPayment(cartItem)">Pay Now</button>
+                </div>
+                
+                
+                <!-- End Payment Form Section -->
+            
+                <!-- End Stripe Card Input Section -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

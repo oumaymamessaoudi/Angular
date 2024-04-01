@@ -1,0 +1,33 @@
+.product-details {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 50px auto 20px; /* Adjust margin-top value to move it down */
+  max-width: 600px; /* Adjust as needed */
+}
+
+.product-details h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.product-details p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.product-details .description {
+  font-style: italic;
+}
+
+.product-details .product-image-container {
+  text-align: center;
+}
+
+.product-details img {
+  max-width: 50%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 20px;
+}

@@ -1,0 +1,60 @@
+<div class="container">
+    <section class="add-product-section">
+        <h2><i class="fas fa-capsules"></i> Add Product</h2>
+        <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()" class="add-product-form">
+            <div class="form-group">
+                <label for="productName">Product Name</label>
+                <input type="text" class="form-control" id="productName" formControlName="productName">
+                <div *ngIf="addProductForm.get('productName')?.invalid && addProductForm.get('productName')?.touched" class="error-message">
+                    Product Name is required and must contain at least 2 letters.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prodDesc">Product Description</label>
+                <input type="text" class="form-control" id="prodDesc" formControlName="prodDesc">
+                <div *ngIf="addProductForm.get('prodDesc')?.invalid && addProductForm.get('prodDesc')?.touched" class="text-danger">
+                    Product Description is required and must contain at least one word.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" formControlName="price">
+                <div *ngIf="addProductForm.get('price')?.invalid && addProductForm.get('price')?.touched" class="text-danger">
+                    Price is required and must be at least 1.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="prodCapacity">Product Capacity</label>
+                <input type="number" class="form-control" id="prodCapacity" formControlName="prodCapacity">
+                <div *ngIf="addProductForm.get('prodCapacity')?.invalid && addProductForm.get('prodCapacity')?.touched" class="text-danger">
+                    Product Capacity is required and must be at least 1.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="archProd">Availability</label>
+                <select id="archProd" formControlName="archProd" class="form-control">
+                    <option value="Available">Available</option>
+                    <option value="Not Available">Not Available</option>
+                </select>
+                <div *ngIf="addProductForm.get('archProd')?.invalid && addProductForm.get('archProd')?.touched" class="text-danger">
+                    Availability is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" id="image" name="image" class="form-control" (change)="onFileSelected($event)">
+            </div>
+            <div class="form-group">
+                <label for="imagePath">Image Path</label>
+                <input type="text" id="imagePath" name="imagePath" class="form-control invisible" [value]="imagePath" readonly>
+            </div>        
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Add Product
+
+            </button>
+            <a [routerLink]="['/admin/productlist']" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Go Back
+            </a>
+        </form>
+    </section>
+</div>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Elderly — Website Template by Colorlib</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+
+  <!-- Include Bootstrap CSS -->
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+     body {
+      background-image: url('assets/FrontOffice/images/slider-1.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-box {
+      background-color: rgba(255, 255, 255, 0.9); /* Background color with opacity */
+      border-radius: 10px; /* Rounded corners */
+      padding: 20px; /* Padding inside the box */
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+      max-width: 700px; /* Augmentez la largeur */
+      width: 100%;
+      position: absolute; /* Position absolue */
+  top: 50%; /* Centrer verticalement */
+  left: 50%; /* Centrer horizontalement */
+  transform: translate(-50%, -50%);
+     
+    }
+  </style>
+</head>
+<app-header-front></app-header-front>
+
+<body style="background-image: url('assets/FrontOffice/images/slider-1.jpg');
+background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh; /* Adjust as needed */ background-size: cover; background-position: center; background-repeat: no-repeat;">
+
+  <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+    <div class="center-box"> <!-- Centered box -->
+
+      <article class="card-body mx-auto" style="max-width: 900px;">
+        <div class="form-box"> <!-- Start of form box -->
+
+
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+
+
+<div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+ 
+  <article class="card-body mx-auto" style="max-width: 400px;">
+    
+
+    <h4 class="card-title mt-3 text-center">Create your account</h4>
+
+    <form [formGroup]="userForm" (ngSubmit)="userSign()">
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input formControlName="firstName" class="form-control" placeholder="First Name" type="text" id="firstName">
+          </div>
+          <div *ngIf="userForm.get('firstName')?.hasError('required') && userForm.get('firstName')?.touched" class="text-danger">
+            First Name is required
+          </div>
+          
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input formControlName="lastName" class="form-control" placeholder="Last Name" type="text" id="lastName">
+          </div>
+          <div *ngIf="userForm.get('lastName')?.hasError('required') && userForm.get('lastName')?.touched" class="text-danger">
+            Last Name is required
+          </div>
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+        </div>
+        <input formControlName="email" class="form-control" placeholder=" Email" type="email" id="email">
+        
+      </div>
+      <div *ngIf="userForm.get('email')?.hasError('invalidEmail') && userForm.get('email')?.touched" class="text-danger">
+        Please enter a valid email address
+      </div> <!-- form-group// -->
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+        </div>
+        
+        <input name="phoneNumber" formControlName="phoneNumber" class="form-control" placeholder="Phone Number " type="text" id="phoneNumber">
+        <div *ngIf="userForm.get('phoneNumber')?.hasError('invalidPhoneNumber') && userForm.get('phoneNumber')?.touched" class="text-danger">
+          Phone number must start with 2, 5, or 9 and have 8 digits
+        </div>
+      </div> <!-- form-group// -->
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
+        </div>
+        <input formControlName="address" class="form-control" placeholder=" Address" type="address" id="address">
+      </div>
+      <!-- Additional inputs for Gender -->
+<div class="form-group input-group">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Gender</span>
+  </div>
+  <div class="form-check form-check-inline">
+    <input formControlName="gender" class="form-check-input" type="radio" value="Female" id="female">
+    <label class="form-check-label" for="female">Female</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input formControlName="gender" class="form-check-input" type="radio" value="Male" id="male">
+    <label class="form-check-label" for="male">Male</label>
+  </div>
+  </div>
+
+   <!-- form-group end.// -->
+   <div class="form-group input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"> <i class="fa fa-calendar"></i> </span>
+    </div>
+    <input formControlName="dateOfBirth" class="form-control" placeholder="Date of Birth" type="date" id="dob">
+  </div> <!-- form-group// -->
+  <div class="form-group input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+    </div>
+    <input formControlName="password" class="form-control" placeholder="Mot de Passe" type="password" id="password">
+  </div>
+  <!-- Display error message for password length -->
+  <div *ngIf="userForm.get('password')?.hasError('minlength') && userForm.get('password')?.touched" class="text-danger">
+    Password must be at least 6 characters 
+  </div>
+  
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text"> <i class="fa fa-stethoscope"></i> </span>
+        </div>
+        
+        
+        <select formControlName="role" class="form-control">
+          <option>Select Role</option>
+          <option value="doctor">Doctor</option>
+          <option value="nurse">Nurse</option>
+          <option value="elderly">Eldery</option>
+          <option value="relative">Relative</option>
+
+          <option value="ambulance-driver">Ambulance Driver</option>
+          <option value="ambulance-owner">Ambulance Owner</option>
+        </select>
+      </div>
+
+     <!-- Additional inputs for Doctor -->
+     <div *ngIf="userForm.get('role')?.value === 'doctor'">
+      <div class="form-group">
+        <label for="doctorType">Doctor Type</label>
+        <select formControlName="doctorType" name="doctorType" class="form-control">
+          <option value="Generalist">Generalist</option>
+          <option value="Specialist">Specialist</option>
+    </select>
+      </div>
+      
+
+      <div class="form-group">
+<label for="specialization">Specialization</label>
+<select formControlName="specialization" name="specialization" class="form-control">
+  <option value="Geriatrics">Geriatrics</option>
+  <option value="Cardiology">Cardiology</option>
+  <option value="Neurology">Neurology</option>
+  <option value="Rheumatology">Rheumatology</option>
+  <option value="Endocrinology">Endocrinology</option>
+  <option value="Pulmonology">Pulmonology</option>
+  <option value="Gastroenterology">Gastroenterology</option>
+  <option value="Nephrology">Nephrology</option>
+  <option value="Oncology">Oncology</option>
+  <option value="Ophthalmology">Ophthalmology</option>
+  <option value="Psychiatry">Psychiatry</option>
+  <option value="Urology">Urology</option>
+  <option value="Orthopedics">Orthopedics</option>
+  <option value="Dermatology">Dermatology</option>
+  <option value="Palliative Care">Palliative Care</option>
+</select>
+</div>
+<div class="form-group input-group">
+<div class="input-group-prepend">
+  <span class="input-group-text">Language</span>
+</div>
+<select formControlName="language" class="form-control" >
+  <option value="English">English</option>
+<option value="French">French</option>
+<option value="Spanish">Spanish</option>
+</select>
+</div>
+
+      <div class="form-group input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Schedule</span>
+          <small >  Only fill the schedule if you're a generalist !</small>
+
+        </div>
+        <!-- Checkbox bindings for schedule -->
+        <div class="form-check" *ngFor="let day of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']">
+          <input class="form-check-input" type="checkbox" [id]="day.toLowerCase()" [value]="day" (change)="updateSchedule($event, day)">
+          <label class="form-check-label" [for]="day.toLowerCase()">{{ day }}</label>
+        </div>
+      </div>
+    </div>
+      <!-- Additional inputs for Nurse -->
+      <div *ngIf="userForm.get('role')?.value === 'nurse'">
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Responsibilities</span>
+          </div>
+          <select formControlName="responsibilities" class="form-control" >
+            <option value="Gerontological Nursing">Gerontological Nursing</option>
+    <option value="Geriatric CNA (CNA-G)">Geriatric CNA (CNA-G)</option>
+    <option value="Hospice & Palliative">Hospice & Palliative</option>
+    <option value="Nurse Manager (Gerontology)">Nurse Manager (Gerontology)</option>
+  </select>
+        </div>
+      </div>
+
+      <!-- Additional inputs for Eldery -->
+    <div *ngIf="userForm.get('role')?.value === 'elderly'">
+    <div class="form-group input-group">
+    <div class="input-group-prepend">
+      <span class="input-group-text">Preferences</span>
+      </div>
+      <input formControlName="preferences" class="form-control" type="text">
+    </div>
+    <div class="form-group input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">Health Record</span>
+      </div>
+      <input formControlName="healthRecord" class="form-control" type="text">
+    </div>
+  </div>
+  
+
+      <!-- Additional inputs for Relative -->
+      <div *ngIf="userForm.get('role')?.value === 'relative'">
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Relationship</span>
+          </div>
+          <input formControlName="relationship" class="form-control" type="text">
+        </div>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Elderly Email</span>
+          </div>
+          <input formControlName="elderlyEmail" class="form-control" type="text">
+        </div>
+      </div>
+
+      <!-- Additional inputs for Ambulance Driver -->
+      <div *ngIf="userForm.get('role')?.value === 'ambulance-driver'">
+
+        <div class="form-group input-group">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="onDuty" formControlName="onDuty">
+            <label class="form-check-label" for="onDuty">On Duty</label>
+          </div>
+        </div>
+
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Driving Experience (Years)</span>
+          </div>
+          <input formControlName="drivingExperienceYears" class="form-control" type="number" min="0">
+        </div>
+      </div>
+
+      <!-- Additional inputs for Ambulance Owner -->
+      <div *ngIf="userForm.get('role')?.value === 'ambulance-owner'">
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Years of Experience</span>
+          </div>
+          <input formControlName="yearsofexperience" class="form-control" type="number" min="0">
+        </div>
+      </div>
+
+     
+     
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block" >Create Account</button>
+    </div> <!-- form-group// -->
+    </form>
+    <p class="text-center">Have an account? <a routerLink="/signIn">Log In</a></p>
+</article></div>

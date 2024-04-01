@@ -1,0 +1,31 @@
+<div style="margin-top: 60px;"> <!-- Ajoutez une marge supplémentaire au-dessus du formulaire -->
+  <form (ngSubmit)="addAmbulance()" class="ambulance-form">
+    <div class="form-group">
+      <label for="location">Location:</label>
+      <input type="text" id="location" class="form-control" [(ngModel)]="ambulance.location" name="location" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="latitude">Latitude:</label>
+      <input type="number" id="latitude" class="form-control" [(ngModel)]="ambulance.latitude" name="latitude" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="longitude">Longitude:</label>
+      <input type="number" id="longitude" class="form-control" [(ngModel)]="ambulance.longitude" name="longitude" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <input type="text" id="status" class="form-control" [(ngModel)]="ambulance.status" name="status">
+    </div>
+    
+    <div class="form-group">
+      <label for="image">Image:</label>
+      <input type="file" id="image" class="form-control-file" (change)="onFileSelected($event)" accept="image/*" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Add Ambulance</button>
+  </form>
+</div>
+

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Elderly &mdash; Website Template by Colorlib</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  
+  <style>
+    
+    body {
+      background-image: url('assets/FrontOffice/images/slider-1.jpg'); /* Replace 'path/to/your/background-image.jpg' with the path to your background image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh; /* Adjust as needed */
+    }
+  </style>
+</head>
+<app-header-front></app-header-front>
+<body>
+  <div class="wrapper fadeInDown">
+    <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <img src="assets/FrontOffice/images/elderypng.png" id="icon" alt="Icon" width="200" height="200" />
+    </div>
+
+    <!-- Login Form -->
+    <form *ngIf="showLoginForm" (ngSubmit)="userSignIn()">
+      <input [(ngModel)]="user.email" type="text" id="email" class="fadeIn second" name="email" placeholder="Your Email">
+      <input [(ngModel)]="user.password" type="password" id="password" class="fadeIn second" name="password" placeholder="password" required>
+      <div *ngIf="submitted && !user.password" class="error-message">Please fill out this field</div> <!-- Affiche le message d'erreur si le champ est vide et le formulaire a été soumis -->
+      <button type="submit" class="btn btn-primary">Login</button>
+
+
+      <a (click)="showResetPasswordForm = true">Forgot Password?</a>
+    
+<!-- Forgot Password Form -->
+<form *ngIf="showResetPasswordForm">
+  <ng-container *ngIf="!emailSent; else verificationCodeSection">
+    <div class="form-group">
+      <label for="emailLabel"></label>
+      <input type="text" id="mail" class="form-control" name="email" [(ngModel)]="email" required placeholder="Email">
+    </div>
+    <button type="button" class="btn btn-primary" (click)="sendVerificationCode()">Send Code</button>
+  </ng-container>
+  <ng-template #verificationCodeSection>
+    <div class="form-group">
+      <label for="verificationCode"></label>
+      <input type="text" id="verificationCode" class="form-control" name="verificationCode" [(ngModel)]="verificationCode" required placeholder="Verification Code">
+    </div>
+    <button type="button" class="btn btn-primary" (click)="verifyCode()">Verify Code</button>
+  </ng-template>
+<button type="button" class="btn btn-primary" (click)="showLoginFormAgain()">Back to Login</button>
+
+</form>
+
+<form *ngIf="showResetPasswordForm && verified">
+  <div class="form-group">
+    <label for="newPassword">New Password</label>
+    <input type="password" id="newPassword" class="form-control" name="newPassword" [(ngModel)]="newPassword" required>
+  </div>
+  <div class="form-group">
+    <label for="confirmPassword">Confirm Password</label>
+    <input type="password" id="confirmPassword" class="form-control" name="confirmPassword" [(ngModel)]="confirmPassword" required>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="savePassword()">Save</button>
+</form>
+
+
+<p class="text-danger" *ngIf="errorMessage">{{errorMessage}}</p>
+
+
+
+    </form>
+    
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <p class="underlineHover">You don't have an account yet? <a routerLink="/signUp">Create your account</a></p>
+  </div>
+  
+  
+
+
+</div>
+  </div>

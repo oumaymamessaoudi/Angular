@@ -1,0 +1,14 @@
+.action-button {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #ffffff; /* Adjust text color */
+    background-color: #070637; /* Change background color on hover */
+
+}
+
+.action-button:hover {
+    background-color: #73adca; /* Change background color on hover */
+}

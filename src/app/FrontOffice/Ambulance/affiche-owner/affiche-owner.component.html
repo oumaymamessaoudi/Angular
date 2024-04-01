@@ -1,0 +1,23 @@
+<div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="row">
+      <ng-container *ngIf="relatives.length > 0; else noData">
+        <div class="col">
+          <div *ngFor="let relative of relatives; let i = index">
+            <div *ngIf="!relative.dismissed" class="alert alert-info alert-dismissible fade show mb-2" role="alert">
+              {{ relative.firstName }} a appelé une ambulance pour {{ relative.elderly.firstName }}
+              <button type="button" class="btn btn-primary ml-2" (click)="removeNotification(i)">
+                OK
+              </button>
+              
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #noData>
+        <div class="col">
+          <p>Aucune donnée disponible.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+  

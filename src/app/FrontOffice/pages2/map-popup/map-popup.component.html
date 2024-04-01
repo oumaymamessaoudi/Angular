@@ -1,0 +1,14 @@
+<!-- map-popup.component.html -->
+<div class="black-overlay" (click)="closeMapPopup()"></div> <!-- Black overlay to cover the background -->
+<div class="map-popup-container">
+  <div class="map-popup-header">
+    <h3 class="popup-title">{{ doctor.username }}'s Location</h3>
+    <button class="close-btn" (click)="closeMapPopup()">
+        <i class="fas fa-times" style="color: red;"></i> <!-- Red cross icon using Font Awesome -->
+      </button>  </div>
+  <div id="map" style="height: 400px;"></div>
+  <div class="doctor-address">
+    <h4 class="address-title">Address</h4>
+    <p class="address-text">{{ doctor.doctorAddress }}</p>
+  </div>
+</div>

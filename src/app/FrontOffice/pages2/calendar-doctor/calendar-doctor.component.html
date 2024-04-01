@@ -1,0 +1,157 @@
+<div class='demo-app'>
+  <div class='demo-app-sidebar'>
+  
+    <div class='demo-app-sidebar-section'>
+      <div class="instructions-container">
+        <p>Welcome, Dr. {{ doctorUsername }}!</p> <!-- Display the doctor's username -->
+
+        <h2>Instructions</h2>
+        <!-- Add your instructions content here -->
+      </div>
+      <label>
+        <input
+          type='checkbox'
+          [checked]='calendarVisible'
+          (change)='handleCalendarToggle()'
+        />
+        toggle whole calendar
+      </label>
+        <label>
+        <input
+          type='checkbox'
+          [checked]='calendarOptions.weekends'
+          (change)='handleWeekendsToggle()'
+        />
+        toggle weekends
+      </label>
+    </div>
+    
+    <div class='demo-app-sidebar-section'>
+      <h2>Waiting List ({{ pendingEvents.length }})</h2>
+      <ul>
+        <li *ngFor='let event of pendingEvents'>
+          <b>{{ event.start | date:'medium' }}</b>
+          <i>{{ event.title }}</i>
+          <div class="action-buttons">
+            <button class="action-button approve-button" (click)="approveAppointment(+event.id)">Approve</button>
+            <button class="action-button reject-button" (click)="rejectAppointment(+event.id)">Reject</button>
+          </div>
+            <!-- Confirm/Cancel form under each appointment -->
+          <div *ngIf="selectedAppointmentId === +event.id && showApprovalForm" class="approval-form">
+            <div class="card">
+              <p id="title">Are you sure you want to approve the Appointment ?</p>
+              <form [formGroup]="appointmentForm2" (ngSubmit)="scheduleMeeting()">
+                <div class="form-group">
+                  <input type="hidden" id="appointmentId" formControlName="appointmentId" [value]="appointmentId" />
+                
+                  <label for="appointmentName" hidden>Appointment Name:</label>
+                  <input  type="hidden" d="appointmentName" formControlName="appointmentName" />
+                
+                 
+                
+                  <input
+                    type="datetime-local"
+                    id="appointmentTime"
+                    formControlName="appointmentTime"
+                    [value]="formatAppointmentTime()"
+                    readonly
+                    [hidden]="true"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    type="email"
+                    id="email"
+                    class="form-control"
+                    formControlName="email"
+                    [hidden]="true"
+                  />
+                </div>
+                <div class="form-actions">
+                  <button type="button" id="cancel-button" (click)="cancelApproval()">Cancel</button>
+                  <button type="submit" id="confirm-button">Confirm</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- End Confirm/Cancel form -->
+        </li>
+      </ul>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <!-- Displaying Approved Appointments -->
+       <div class='demo-app-sidebar-section'>
+        <div class="section-box">
+          <h2>Approved Appointments ({{ approvedEvents.length }})</h2>
+          <ul>
+            <li *ngFor='let event of approvedEvents'>
+              <div class="appointment-item">
+                <div>
+                  <b>{{ event.start | date:'medium' }}</b>
+                  <i>{{ event.title }}</i>
+                </div>
+                <div class="action-button-container">
+                  <button class="action-button mark-as-done-button" (click)="completeAppointment(+event.id)">Mark as Done</button>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      
+
+
+    <!-- Displaying Completed Appointments -->
+    <div class='demo-app-sidebar-section'>
+      <div class="section-box">
+        <h2>Completed Appointments ({{ completedEvents.length }})</h2>
+        <ul>
+          <li *ngFor='let event of completedEvents'>
+            <div class="appointment-item">
+              <div>
+                <b>{{ event.start | date:'medium' }}</b>
+                <i>{{ event.title }}</i>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+      
+
+
+    <div class='demo-app-sidebar-section'>
+      <h2>All Appointments ({{ currentEvents.length }})</h2>
+      <ul>
+        <li *ngFor='let event of currentEvents'>
+          <b>{{ event.start | date:'medium' }}</b>
+          <i>{{ event.title }}</i>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class='demo-app-main'>
+    <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
+      <ng-template #eventContent let-arg>
+        <b>{{ arg.timeText }}</b>
+        <i>{{ arg.event.title }}</i>
+      </ng-template>
+    </full-calendar>
+  </div>
+</div>
+

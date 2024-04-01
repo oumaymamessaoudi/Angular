@@ -1,0 +1,176 @@
+<!-- elderly-dashboard.component.html -->
+
+<!-- Navbar with invisible block -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Navbar content -->
+</nav>
+
+<div class="background-container">
+  <div class="search-container2 text-center">
+    <h1 class="mb-4">Find A Specialist</h1>
+
+    <!-- Improved Search Row -->
+    <div class="row mb-4">
+      <div class="col-md-6 mx-auto">
+        <div class="input-group">
+          <input type="text" placeholder="Search Doctors by Specialty" [(ngModel)]="searchSpecialty" (input)="searchDoctors()"class="form-control">
+       
+       
+       
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="button" (click)="searchDoctors()">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-map-display *ngIf="showMap" [doctors]="doctors"></app-map-display>
+<div class="invisible-block"></div> <!-- Add this line -->
+
+ 
+<div class="col-lg-3">
+      <div class="card filtering-box">
+        <div class="card-header">
+          <h4>Find A Doctor</h4>
+        </div>
+        <div class="card-body">
+          <!-- Gender Dropdown -->
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender" class="form-control" [(ngModel)]="selectedGender" (change)="searchDoctors()">
+              <option value="">All Genders &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x25BC;</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+          <!-- Specialization Dropdown -->
+          <div class="form-group">
+            <label for="specialization">Specialization</label>
+            <select id="specialization" class="form-control" [(ngModel)]="selectedSpecialization" (change)="searchDoctors()">
+              <option value="">All Specializations  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x25BC;</option>
+              <option *ngFor="let specialization of specializations" [value]="specialization">{{ specialization }}</option>
+            </select>
+          </div>
+          <!-- Language Dropdown -->
+          <div class="form-group">
+            <label for="language">Spoken language</label>
+            <select id="language" class="form-control" [(ngModel)]="selectedLanguage" (change)="searchDoctors()">
+              <option value="">All Languages  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x25BC;</option>
+              <option *ngFor="let language of languages" [value]="language">{{ language }}</option>
+            </select>
+          </div>
+          <!-- City Dropdown -->
+          <div class="form-group">
+            <label for="city">City</label>
+            <select id="city" class="form-control" [(ngModel)]="selectedCity" (change)="searchDoctors()">
+              <option value="">All Cities &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x25BC;</option>
+              <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+            </select>
+          </div>
+          <!-- Search Button -->
+          <button class="btn btn-primary btn-block" (click)="searchDoctorsz()">Search</button>
+        </div>
+      </div>
+    </div>
+    <!-- Doctors List -->
+    <div class="col-lg-9">
+      <!-- Doctors List Display -->
+    </div>
+<div class="container mt-5 card-container">
+  
+  <div class="row">
+    <!-- Doctors List displayed in 3x3 grid -->
+    <div *ngFor="let doctor of doctors" class="col-lg-4 mb-4">
+      <div class="card doctor-card">
+        <!-- Card Content -->
+        <img [src]="doctor.imagedoc" class="card-img-top" alt="{{ doctor.lastName }} Image">
+        <div class="card-body">
+          <h4 class="card-title">Dr {{ doctor.lastName }} {{ doctor.firstName }}</h4>
+          <div class="fixed-bottom-content">
+            <p class="card-text"><strong>Speciality: </strong>{{ doctor.specialization }}</p>
+            <p class="card-text"><strong>Phone Number:</strong> {{ doctor.phoneNumber }}</p>
+            <p class="card-text"><strong>Address:</strong> {{ doctor.address }}</p>
+          </div>
+             <div class="social">
+            <a href="#"><i class="ri-twitter-fill"></i></a>
+            <a href="#"><i class="ri-facebook-fill"></i></a>
+            <a href="#"><i class="ri-instagram-fill"></i></a>
+            <a href="#"><i class="ri-linkedin-box-fill"></i></a>
+          </div>
+          <button class="btn btn-primary  fixed-bottom-btn" (click)="navigateToDoctorProfile(doctor.idDoctor)">View Profile</button>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<app-map-popup *ngIf="showPopupMap" [doctor]="selectedDoctor" (close)="closeMapPopup()"></app-map-popup>
+
+
+
+
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+<div class="invisible-block"></div> <!-- Add this line -->
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ... rest of your code ... -->
+
+<!-- ... rest of your code ... -->
+
+<link href="/assets/assetDoctor/css/style.css" rel="stylesheet">
+<script src="/assets/assetDoctor/js/aos.js"></script>
+
+ 
+ <style>.filtering-box {
+  border: 10px solid #e5e5e5;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+ 
+  width: 105%;
+    position: absolute;
+    left: 20px;
+  
+}
+
+.filtering-box .card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.filtering-box .form-group {
+  margin-bottom: 15px;
+}
+
+.filtering-box button {
+  margin-top: 15px;
+}
+</style>

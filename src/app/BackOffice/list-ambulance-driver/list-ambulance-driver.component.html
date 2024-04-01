@@ -1,0 +1,128 @@
+<link href="/assets/BackOffice/assets/libs/css/style.css "rel="stylesheet">
+
+ <!-- Bootstrap CSS -->
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/bootstrap/css/bootstrap.min.css">
+ <link href="/assets/BackOffice/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/libs/css/style.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/chartist-bundle/chartist.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/morris-bundle/morris.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/c3charts/c3.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+
+
+<app-sidebar-back></app-sidebar-back>
+<!-- user-list.component.html -->
+<div></div>
+<div class="container mt-md-5 pt-md-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div *ngIf="ambulanceDrivers.length > 0; else noAmbulanceDrivers">
+          <h2 class="text-center mb-4">Ambulance Driver List</h2>
+  
+          <table class="table mx-auto">
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>AmbulanceDriver ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>email</th>
+                <th>Phone Number</th>
+                <th>Gender</th>
+                <th>Role</th>
+                <th>driving Experience Years</th>
+                <th>On Duty</th>
+                <th>Actions</th>
+             
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ambulanceDriver of ambulanceDrivers">
+                <td>{{ ambulanceDriver.user.id }}</td>
+                <td>{{ ambulanceDriver.ambulanceDriverID }}</td>
+                <td>{{ ambulanceDriver.firstName }}</td>
+                <td>{{ ambulanceDriver.lastName }}</td>
+                <td>{{ambulanceDriver.email}}</td>
+                <td>{{ ambulanceDriver.phoneNumber }}</td>
+                <td>{{ambulanceDriver.gender}}</td>
+                <td>{{ ambulanceDriver.role }}</td>
+                <td>{{ ambulanceDriver.drivingExperienceYears }}</td>
+                <td>{{ ambulanceDriver.onDuty }}</td>
+
+<!-- Ajoutez le bouton "Update" à chaque ligne du tableau -->
+<td>
+  <button class="btn btn-primary" (click)="updateAmbulanceDriver(ambulanceDriver.ambulanceDriverID)">Update</button>
+</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Form for updating doctor -->
+    <div class="col-md-4">
+      <div class="container">
+        <h3 class="text-right">Edit Ambulance Driver</h3>
+        <form [formGroup]="ambulanceDriverForm" (ngSubmit)="submitUpdate()">
+          <div class="form-group">
+            <label for="firstName">first Name</label>
+            <input formControlName="firstName" class="form-control" type="firstName" id="firstName">
+          </div>
+      <div class="form-group">
+        <label for="lastName">last Name</label>
+        <input formControlName="lastName" class="form-control" type="lastName" id="lastName">
+      </div>
+        
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input formControlName="email" class="form-control" type="email" id="email">
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input formControlName="phoneNumber" class="form-control" type="text" id="phoneNumber">
+    </div>
+    <div class="form-group">
+      <label>Gender</label>
+      <div class="form-check">
+        <input formControlName="gender" class="form-check-input" type="radio" id="female" value="Female">
+        <label class="form-check-label" for="female">Female</label>
+      </div>
+      <div class="form-check">
+        <input formControlName="gender" class="form-check-input" type="radio" id="male" value="Male">
+        <label class="form-check-label" for="male">Male</label>
+      </div>
+    </div>
+
+   
+    <div class="form-group">
+      <label for="drivingExperienceYears">driving Experience Years</label>
+      <input formControlName="drivingExperienceYears" class="form-control" type="text" id="drivingExperienceYears">
+    </div>
+    <div class="form-group">
+      <label for="onDuty">On Duty</label>
+      <input formControlName="onDuty" class="form-control" type="text" id="onDuty">
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>
+    
+        <ng-template #noAmbulanceDrivers>
+          <p class="text-center">No ambulancDrivers found.</p>
+        </ng-template>
+    </div>
+    </div>
+    </div>
+
+    
+    <app-navbar-back></app-navbar-back>
+    
+    <script src="/assets/BackOffice/assets/libs/js/dashboard-ecommerce.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/dashboard-finance.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/dashboard-influencer.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/dashboard-sales.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/gmaps.minjs"></script>
+    <script src="/assets/BackOffice/assets/libs/js/google_map.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/jvectormap.custom.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/main-js"></script>
+    
+    

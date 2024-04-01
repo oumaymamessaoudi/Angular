@@ -1,0 +1,243 @@
+h2 {
+  font-size: 28px; /* Adjust the font size */
+  color: #4a4a4a; /* Set the text color */
+  margin-bottom: 30px; /* Add some bottom margin */
+  text-align: left; /* Align the text to the left */
+  text-transform: uppercase; /* Convert text to uppercase */
+  letter-spacing: 2px; /* Add spacing between letters */
+  font-weight: bold; /* Make the text bold */
+}
+
+h2::after {
+  content: ''; /* Add empty content */
+  display: block; /* Display as block element */
+  width: 150px; /* Set the width */
+  height: 2px; /* Set the height */
+  background-color: #007bff; /* Set the background color */
+  margin: 10px 0; /* Add margin top and bottom, set left and right to 0 */
+}
+
+
+
+
+/* Adjust the layout for user info */
+.user-info {
+  display: flex;
+  align-items: center;
+  width: 100%; /* Ensure the user info takes up the entire width */
+}
+
+/* Make the container smaller */
+.list-group-item {
+  padding: 5px; /* Adjust as needed */
+  width: 50%; /* Ensure the list items take up the entire width */
+}
+
+/* Reduce space between elements */
+.status-container,
+.email,
+.badge-container {
+  margin-right: 5px; /* Adjust as needed */
+}
+
+.email {
+  margin: 0 auto; /* Center the email */
+}
+
+/* Align badge container to the left */
+.badge-container {
+  margin-right: auto; /* Push the badge container to the left */
+}
+
+/* Align status container to the right */
+.status-container {
+  margin-left: auto; /* Push the status container to the right */
+}
+
+/* Styles for online status */
+.status-indicator.online {
+  color: green; /* Set the color to green for online status */
+}
+
+/* Styles for offline status */
+.status-indicator.offline {
+  color: red; /* Set the color to red for offline status */
+}
+
+
+
+
+
+.badge-container {
+  display: flex;
+  align-items: center;
+}
+
+.badge-icon {
+  margin-right: 10px; /* Adjust the margin as needed */
+  color: #007bff; /* Example color */
+}
+
+.badge-text {
+  margin-left: 5px; /* Adjust the margin as needed */
+  color: #007bff; /* Example color */
+
+}
+
+
+
+
+
+
+.chat-container {
+  margin-top: 50px; /* Adjust this value as needed */
+}
+
+
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 700px; /* Set a maximum width for the container */
+  max-height: 500px; /* Set a maximum height for the container */  overflow-y: auto;
+  background-color: #F5F5F5; /* Add a vertical scrollbar when content exceeds the container height */
+}
+
+/* CSS to position the back button at the top left */
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+
+
+.message-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+}
+.sender-text-message {
+  color:#ffffff /* Set the text color */
+}
+.sender-message {
+  background-color: #007bff; /* Sender's message color */
+  margin-left: auto; /* Move sender's message to the right */
+  max-width: 50%; /* Adjust the maximum width as needed */
+  word-break: break-all; /* Add this line */
+}
+.receiver-text-message {
+  color:#000000 /* Set the text color */
+}
+
+
+.receiver-message {
+  background-color: #ffffff; /* Receiver's message color */
+  max-width: 50%; /* Adjust the maximum width as needed */
+  word-break: break-all; /* Add this line */
+}
+
+
+.message-text {
+  margin-left: 10px;
+
+}
+
+.timestamp {
+  font-size: 0.8em;
+  color: #656565;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+
+
+.button-row {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the buttons horizontally */
+}
+
+/* Custom button styles */
+.btn-recording {
+  padding: 10px 20px;
+  margin: 0 5px; /* Add some margin between buttons */
+}
+
+.btn-recording:hover {
+  opacity: 0.8; /* Reduce opacity on hover for all buttons */
+}
+
+.btn-stop {
+  background-color: #dc3545; /* Red color for stop button */
+  color: white;
+  border: none;
+}
+
+.btn-stop:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+.btn-start {
+  background-color: #28a745; /* Green color for start button */
+  color: white;
+  border: none;
+}
+
+.btn-start:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
+.btn-send {
+  background-color: #007bff; /* Blue color for send button */
+  color: white;
+  border: none;
+}
+
+.btn-send:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.btn-reset {
+  background-color: #898989; /* Grey color for reset button */
+  color: white;
+  border: none;
+}
+
+.btn-reset:hover {
+  background-color: #6e6e6e; /* Darker grey on hover */
+}
+/* CSS for context menu */
+.context-menu {
+  position: fixed;
+  z-index: 1000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 4px 0;
+}
+
+.context-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.context-menu li {
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.context-menu li:hover {
+  background-color: #f0f0f0;
+}
+
+.seen-right {
+  text-align: right;
+}

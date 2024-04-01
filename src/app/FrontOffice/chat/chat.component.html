@@ -1,0 +1,269 @@
+
+<!-- Chat component template -->
+<div class="container chat-container">
+
+<div class="container">
+  <div class="row">
+    <!-- Users list -->
+    <!-- Users list -->
+    <div class="col-md-6">
+
+      <!-- Add a back button with a custom class -->
+      <button class="btn btn-primary back-button" (click)="goBack()">Back</button>      
+      <h2>Users</h2>
+    
+      <!-- Nurse category -->
+      <h3 class="clickable" (click)="toggleList('nurse')">
+        <i class="fas fa-user-nurse"></i> Nurses <i class="fas fa-chevron-down"></i>
+      </h3>
+      <ul *ngIf="listVisibility['nurse']" class="list-group">
+        <li class="list-group-item" *ngFor="let user of users | filterByRole:'nurse'" (click)="selectUser(user)">
+
+
+          <div class="user-info">
+            <div class="status-container">
+              <span class="status-indicator" [ngClass]="{ 'online': user.online, 'offline': !user.online }">
+                <i class="fas fa-circle"></i> <!-- Online status icon -->
+              </span>
+            </div>
+      
+            <div class="email">{{ user.email }}</div>
+      
+            <div class="badge-container">
+              <span class="badge-icon">
+                <i class="fas fa-envelope"></i> <!-- Example icon from Font Awesome -->
+              </span>
+              <span class="badge-text">{{ unreadMessageCounts[user.email] }}</span>
+            </div>
+          </div>
+          
+          
+          
+        </li>
+      </ul>
+    
+      <!-- Doctor category -->
+      <h3 class="clickable" (click)="toggleList('doctor')">
+        <i class="fas fa-user-md"></i> Doctors <i class="fas fa-chevron-down"></i>
+      </h3>
+      <ul *ngIf="listVisibility['doctor']" class="list-group">
+        <li class="list-group-item" *ngFor="let user of users | filterByRole:'doctor'" (click)="selectUser(user)">
+          <div class="user-info">
+            <div class="status-container">
+              <span class="status-indicator" [ngClass]="{ 'online': user.online, 'offline': !user.online }">
+                <i class="fas fa-circle"></i> <!-- Online status icon -->
+              </span>
+            </div>
+      
+            <div class="email">{{ user.email }}</div>
+      
+            <div class="badge-container">
+              <span class="badge-icon">
+                <i class="fas fa-envelope"></i> <!-- Example icon from Font Awesome -->
+              </span>
+              <span class="badge-text">{{ unreadMessageCounts[user.email] }}</span>
+            </div>
+          </div>
+          
+          
+
+        </li>
+      </ul>
+    
+      <!-- Ambulance Owner category -->
+      <h3 class="clickable" (click)="toggleList('ambulanceOwner')">
+        <i class="fas fa-ambulance"></i> Ambulance Owners <i class="fas fa-chevron-down"></i>
+      </h3>
+      <ul *ngIf="listVisibility['ambulanceOwner']" class="list-group">
+        <li class="list-group-item" *ngFor="let user of users | filterByRole:'ambulance-owner'" (click)="selectUser(user)">
+          <div class="user-info">
+            <div class="status-container">
+              <span class="status-indicator" [ngClass]="{ 'online': user.online, 'offline': !user.online }">
+                <i class="fas fa-circle"></i> <!-- Online status icon -->
+              </span>
+            </div>
+      
+            <div class="email">{{ user.email }}</div>
+      
+            <div class="badge-container">
+              <span class="badge-icon">
+                <i class="fas fa-envelope"></i> <!-- Example icon from Font Awesome -->
+              </span>
+              <span class="badge-text">{{ unreadMessageCounts[user.email] }}</span>
+            </div>
+          </div>
+          
+          
+
+        </li>
+      </ul>
+    
+      <!-- Ambulance Driver category -->
+      <h3 class="clickable" (click)="toggleList('ambulanceDriver')">
+        <i class="fas fa-car"></i> Ambulance Drivers <i class="fas fa-chevron-down"></i>
+      </h3>
+      <ul *ngIf="listVisibility['ambulanceDriver']" class="list-group">
+        <li class="list-group-item" *ngFor="let user of users | filterByRole:'ambulance-driver'" (click)="selectUser(user)">
+          <div class="user-info">
+            <div class="status-container">
+              <span class="status-indicator" [ngClass]="{ 'online': user.online, 'offline': !user.online }">
+                <i class="fas fa-circle"></i> <!-- Online status icon -->
+              </span>
+            </div>
+      
+            <div class="email">{{ user.email }}</div>
+      
+            <div class="badge-container">
+              <span class="badge-icon">
+                <i class="fas fa-envelope"></i> <!-- Example icon from Font Awesome -->
+              </span>
+              <span class="badge-text">{{ unreadMessageCounts[user.email] }}</span>
+            </div>
+          </div>
+          
+
+        </li>
+      </ul>
+    
+      <!-- Relative category -->
+      <h3 class="clickable" (click)="toggleList('relative')">
+        <i class="fas fa-users"></i> Relatives <i class="fas fa-chevron-down"></i>
+      </h3>
+      <ul *ngIf="listVisibility['relative']" class="list-group">
+        <li class="list-group-item" *ngFor="let user of users | filterByRole:'relative'" (click)="selectUser(user)">
+          <div class="user-info">
+            <div class="status-container">
+              <span class="status-indicator" [ngClass]="{ 'online': user.online, 'offline': !user.online }">
+                <i class="fas fa-circle"></i> <!-- Online status icon -->
+              </span>
+            </div>
+      
+            <div class="email">{{ user.email }}</div>
+      
+            <div class="badge-container">
+              <span class="badge-icon">
+                <i class="fas fa-envelope"></i> <!-- Example icon from Font Awesome -->
+              </span>
+              <span class="badge-text">{{ unreadMessageCounts[user.email] }}</span>
+            </div>
+          </div>
+          
+          
+          
+        </li>
+      </ul>
+    
+      <!-- Elderlies category -->
+      <h3 class="clickable" (click)="toggleList('elderly')">
+        <i class="fas fa-user-friends"></i> Elderlies <i class="fas fa-chevron-down"></i>
+      </h3>
+      <ul *ngIf="listVisibility['elderly']" class="list-group">
+        <li class="list-group-item" *ngFor="let user of users | filterByRole:'elderly'" (click)="selectUser(user)">
+          <div class="user-info">
+            <div class="status-container">
+              <span class="status-indicator" [ngClass]="{ 'online': user.online, 'offline': !user.online }">
+                <i class="fas fa-circle"></i> <!-- Online status icon -->
+              </span>
+            </div>
+      
+            <div class="email">{{ user.email }}</div>
+      
+            <div class="badge-container">
+              <span class="badge-icon">
+                <i class="fas fa-envelope"></i> <!-- Example icon from Font Awesome -->
+              </span>
+              <span class="badge-text">{{ unreadMessageCounts[user.email] }}</span>
+            </div>
+          </div>
+          
+          
+        </li>
+      </ul>
+    
+    </div>
+    
+    
+
+
+    <!-- Conversation -->
+    <div class="col-md-6" *ngIf="selectedUser">
+      <!-- Display selected user -->
+      <h2>Chatting with {{ getUsername(selectedUser.email) }}</h2>
+      <div class="messages-container" #messagesContainer>
+        <div class="message-row" *ngFor="let message of messages" (contextmenu)="showContextMenu($event, message)">
+          <div class="message sender-message sender-text-message" *ngIf="message.senderId === currentUserEmail; else receiverMessage">
+            <div *ngIf="!editingMessageId || editingMessageId !== message.id; else editMessageContent">
+              {{ message.textContent }}
+            </div>
+            <ng-template #editMessageContent>
+              <input type="text" class="form-control" [(ngModel)]="updatedText">
+              <button class="btn btn-primary btn-sm" (click)="saveEditedMessage(message, updatedText)">Save</button>
+            </ng-template>
+            <audio controls *ngIf="message.audioContent"(play)="playAudio(message)">
+              <source [src]="getAudioUrl(message.audioContent) | async" type="audio/wav">
+              Your browser does not support the audio element.
+            </audio>
+            <small class="timestamp">{{ message.timestamp | date: 'short' }}</small>
+            
+          </div>
+
+
+
+          <ng-template #receiverMessage>
+            <div class="message receiver-message receiver-text-message">
+              <div *ngIf="message.textContent">{{ message.textContent }}</div>
+              <audio controls *ngIf="message.audioContent"(play)="playAudio(message)">
+                <source [src]="getAudioUrl(message.audioContent) | async" type="audio/wav">
+                Your browser does not support the audio element.
+              </audio>
+              <small class="timestamp">{{ message.timestamp | date: 'short' }}</small>
+              
+            </div>
+        
+          </ng-template>
+        </div>
+
+      
+      <div *ngIf="checkLastMessageSeen()" class="seen-status seen-right">
+        Seen
+      </div>
+
+
+        
+        
+      </div>
+    
+          <!-- Context menu -->
+        <div *ngIf="contextMenuVisible && contextMessage && contextMessage.senderId === currentUserEmail" class="context-menu" [style.left.px]="contextMenuX" [style.top.px]="contextMenuY">
+          <ul class="list-group">
+            <li *ngIf="!contextMessage.audioContent" class="list-group-item" (click)="editMessage(contextMessage)">Edit</li>
+                       <!-- Check if contextMessage.id is defined before calling deleteMessage -->
+            <li class="list-group-item" *ngIf="contextMessage.id !== undefined" (click)="deleteMessage(contextMessage.id)">Delete</li>
+         </ul>
+        </div>
+        
+
+      <div class="form-group">
+        <textarea class="form-control" [(ngModel)]="message" [disabled]="recording" ></textarea>
+
+              </div>
+      <div class="button-row">
+        <button class="btn btn-start" (click)="toggleRecording()">
+          <i class="fas fa-microphone"></i> {{ recording ? 'Recording...' : 'Record' }}
+        </button>
+        <button class="btn btn-stop" (click)="stopRecording()" [disabled]="!recording">
+          <i class="fas fa-stop"></i> {{ recording ? 'Stop' : 'Stop' }}
+        </button>
+        <button class="btn btn-reset" (click)="resetRecording()">Reset</button>
+        <button class="btn btn-send" (click)="sendMessage()">Send</button>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+</div>

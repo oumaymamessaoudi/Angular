@@ -1,0 +1,166 @@
+<link href="/assets/BackOffice/assets/libs/css/style.css "rel="stylesheet">
+
+ <!-- Bootstrap CSS -->
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/bootstrap/css/bootstrap.min.css">
+ <link href="/assets/BackOffice/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/libs/css/style.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/chartist-bundle/chartist.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/morris-bundle/morris.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/c3charts/c3.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+
+
+<app-sidebar-back></app-sidebar-back>
+<!-- user-list.component.html -->
+<div></div>
+<div class="container mt-md-5 pt-md-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div *ngIf="doctors.length > 0; else noDoctors">
+          <h2 class="text-center mb-4">Doctor List</h2>
+  
+          <table class="table mx-auto">
+            <thead>
+              <tr>
+                <th>Doctor ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>email</th>
+                <th>Phone Number</th>
+                <th>Gender</th>
+                <th>Role</th>
+                <th>Doctor Type</th>
+
+                <th>Schedule</th>
+                <th>Specialization</th>
+                <th>Address</th>
+                <th>List Elderly</th>
+                <th>Action</th>
+
+                
+             
+              </tr>
+              
+            </thead>
+            <tbody>
+              <tr *ngFor="let doctor of doctors">
+                <td>{{ doctor.idDoctor }}</td>
+                <td>{{ doctor.firstName }}</td>
+                <td>{{ doctor.lastName }}</td>
+                <td>{{doctor.email}}</td>
+
+                <td>{{ doctor.phoneNumber }}</td>
+                <td>{{doctor.gender}}</td>
+          
+                <td>{{ doctor.role }}</td>
+                <td>{{ doctor.doctorType }}</td>
+
+                <td>{{ doctor.schedule }}</td>
+                <td>{{ doctor.specialization }}</td>
+                <td>{{ doctor.address }}</td>
+
+
+                
+                <ul>
+                  <li *ngFor="let elderly of doctor.elderlyList">
+                    {{ elderly.firstName }} {{ elderly.lastName }} - {{ elderly.email }}
+                  </li>
+                </ul>
+<!-- Ajoutez le bouton "Update" à chaque ligne du tableau -->
+<td>
+  <button class="btn btn-primary" (click)="updateDoctor(doctor.idDoctor)">Update</button>
+</td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Form for updating doctor -->
+    <div class="col-md-4">
+      <div class="container">
+        <h3 class="text-right">Edit Doctor</h3>
+        <form [formGroup]="doctorForm" (ngSubmit)="submitUpdate()">
+          <div class="form-group">
+            <label for="firstName">first Name</label>
+            <input formControlName="firstName" class="form-control" type="firstName" id="firstName">
+          </div>
+      <div class="form-group">
+        <label for="lastName">last Name</label>
+        <input formControlName="lastName" class="form-control" type="lastName" id="lastName">
+      </div>
+        
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input formControlName="email" class="form-control" type="email" id="email">
+    </div>
+    <div class="form-group">
+      <label for="phoneNumber">Phone Number</label>
+      <input formControlName="phoneNumber" class="form-control" type="text" id="phoneNumber">
+    </div>
+    <div class="form-group">
+      <label>Gender</label>
+      <div class="form-check">
+        <input formControlName="gender" class="form-check-input" type="radio" id="female" value="Female">
+        <label class="form-check-label" for="female">Female</label>
+      </div>
+      <div class="form-check">
+        <input formControlName="gender" class="form-check-input" type="radio" id="male" value="Male">
+        <label class="form-check-label" for="male">Male</label>
+      </div>
+    </div>
+
+   
+    <div class="form-group">
+      <label for="doctorType">Doctor Type</label>
+        <select formControlName="doctorType" name="doctorType" class="form-control">
+          <option value="Generalist">Generalist</option>
+          <option value="Specialist">Specialist</option>
+    </select>
+      </div>
+      
+
+      <div class="form-group">
+<label for="specialization">Specialization</label>
+<select formControlName="specialization" name="specialization" class="form-control">
+  <option value="Geriatrics">Geriatrics</option>
+  <option value="Cardiology">Cardiology</option>
+  <option value="Neurology">Neurology</option>
+  <option value="Rheumatology">Rheumatology</option>
+  <option value="Endocrinology">Endocrinology</option>
+  <option value="Pulmonology">Pulmonology</option>
+  <option value="Gastroenterology">Gastroenterology</option>
+  <option value="Nephrology">Nephrology</option>
+  <option value="Oncology">Oncology</option>
+  <option value="Ophthalmology">Ophthalmology</option>
+  <option value="Psychiatry">Psychiatry</option>
+  <option value="Urology">Urology</option>
+  <option value="Orthopedics">Orthopedics</option>
+  <option value="Dermatology">Dermatology</option>
+  <option value="Palliative Care">Palliative Care</option>
+</select>
+     </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>
+    
+        <ng-template #noDoctors>
+          <p class="text-center">No doctors found.</p>
+        </ng-template>
+    </div>
+    </div>
+    </div>
+
+    
+    <app-navbar-back></app-navbar-back>
+    
+    <script src="/assets/BackOffice/assets/libs/js/dashboard-ecommerce.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/dashboard-finance.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/dashboard-influencer.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/dashboard-sales.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/gmaps.minjs"></script>
+    <script src="/assets/BackOffice/assets/libs/js/google_map.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/jvectormap.custom.js"></script>
+    <script src="/assets/BackOffice/assets/libs/js/main-js"></script>
+    

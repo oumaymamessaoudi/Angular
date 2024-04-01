@@ -1,0 +1,9 @@
+<div *ngIf="roleStatistics">
+  <h2>Statistiques des rôles</h2>
+  <ul>
+    <li *ngFor="let role of roleStatistics | keyvalue">
+      {{ role.key }}: {{ role.value }}%
+    </li>
+  </ul>
+</div>
+

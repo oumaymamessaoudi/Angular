@@ -1,0 +1,43 @@
+.dist-marker {
+	font-size: 9px;
+	border: 1px solid #777;
+	border-radius: 10px;
+	text-align: center;
+	color: #000;
+	background: #fff;
+}
+
+
+.custom-marker {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: red; /* ou toute autre couleur que vous préférez */
+  border: 2px solid white; /* si vous voulez une bordure */
+}
+/* afficher-ambulance.component.css */
+.reaction-marker {
+    width: 40px;
+    height: 40px;
+    background-size: cover;
+  }
+  
+  .floating-chat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+  
+  .floating-chat .btn {
+  border-radius: 50%;
+  padding: 15px; /* Increase padding for larger size */
+  font-size: 24px; /* Increase font size for larger icon */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease-in-out;
+  }
+  
+  
+  .floating-chat .btn:hover {
+    transform: scale(1.1);
+  }

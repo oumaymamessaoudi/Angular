@@ -1,0 +1,8 @@
+<div *ngIf="product" class="product-details">
+  <h2>{{ product.productName }}</h2>
+  <p>Description: {{ product.prodDesc }}</p>
+  <p>Price: ${{ product.price }}</p>
+  <div class="product-image-container">
+    <img src="{{ product.imageUrl }}" alt="Product Image">
+  </div>
+</div>

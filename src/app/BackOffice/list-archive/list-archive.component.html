@@ -1,0 +1,70 @@
+<link href="/assets/BackOffice/assets/libs/css/style.css "rel="stylesheet">
+
+ <!-- Bootstrap CSS -->
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/bootstrap/css/bootstrap.min.css">
+ <link href="/assets/BackOffice/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/libs/css/style.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/chartist-bundle/chartist.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/morris-bundle/morris.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/c3charts/c3.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+
+
+<app-sidebar-back></app-sidebar-back>
+<!-- user-list.component.html -->
+<div></div>
+<div class="container mt-md-5 pt-md-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div *ngIf="archivedUsers.length > 0; else noUsers">
+          <h2 class="text-center mb-4">Archived List</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Role</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of archivedUsers">
+                <td>{{ user.id }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.password }}</td>
+                <td>{{ user.role }}</td>
+            
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template #noUsers>
+          <p class="text-center">No users found.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+  
+  
+<app-navbar-back></app-navbar-back> 
+       
+        
+
+
+
+
+<script src="/assets/BackOffice/assets/libs/js/dashboard-ecommerce.js"></script>
+<script src="/assets/BackOffice/assets/libs/js/dashboard-finance.js"></script>
+<script src="/assets/BackOffice/assets/libs/js/dashboard-influencer.js"></script>
+<script src="/assets/BackOffice/assets/libs/js/dashboard-sales.js"></script>
+<script src="/assets/BackOffice/assets/libs/js/gmaps.minjs"></script>
+<script src="/assets/BackOffice/assets/libs/js/google_map.js"></script>
+<script src="/assets/BackOffice/assets/libs/js/jvectormap.custom.js"></script>
+<script src="/assets/BackOffice/assets/libs/js/main-js"></script>
+
+
+
+

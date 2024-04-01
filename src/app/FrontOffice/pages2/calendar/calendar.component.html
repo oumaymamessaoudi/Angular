@@ -1,0 +1,114 @@
+<div class='demo-app'>
+  <div class='demo-app-sidebar'>
+    <!-- Form Dialog in the Sidebar -->
+    <div class="doctor-info">
+      <h2>Instructions</h2>
+      <p class="small-text">Click anywhere on the calendar to book an appointment.</p>
+    </div>
+    <div *ngIf="showFormDialog" class="form-container">
+      <div>
+        <h2>Patient Details</h2>
+            <p class="small-text">Please fill the form, and we will get back to you soon. A confirmation email will be sent to you.</p>
+
+            <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+              <label for="patientName">Patient Name:</label>
+              <input type="text" id="patientName" formControlName="patientName">
+              <div *ngIf="appointmentForm.get('patientName').hasError('required')">
+                Patient Name is required.
+              </div>
+              <div *ngIf="appointmentForm.get('patientName').hasError('minlength')">
+                Patient Name must have at least 3 letters.
+              </div>
+            
+              <label for="appFrom">Appointment From:</label>
+              <input type="datetime-local" id="appFrom" formControlName="appFrom">
+              <div *ngIf="appointmentForm.get('appFrom').hasError('required')">
+                Appointment From is required.
+              </div>
+            
+              <label for="appTo">Appointment To:</label>
+              <input type="datetime-local" id="appTo" formControlName="appTo">
+              <div *ngIf="appointmentForm.get('appTo').hasError('required')">
+                Appointment To is required.
+              </div>
+              <div *ngIf="appointmentForm.hasError('appToBeforeAppFrom')">
+                Appointment To must be after Appointment From.
+              </div>
+            
+              <div class="question-container">
+                <label for="appFirst">Is this your first visit to the office?</label>
+                <div class="checkbox-wrapper">
+                  <input type="checkbox" id="appFirst" formControlName="appFirst">
+                  <span class="yes-text">Yes</span>
+                </div>
+              </div>
+            
+              <label for="symptom">Symptom:</label>
+              <input type="text" id="symptom" formControlName="symptom">
+            
+              <button type="submit">Submit</button>
+            </form>
+            
+      </div>
+    </div>
+  
+    <div class='demo-app-sidebar-section'>
+      
+      <!-- Displaying Pending Appointments -->
+      <div class="appointment-block">
+        <h2>Pending Appointments ({{ pendingAppointments.length }})</h2>
+        <ul>
+          <li *ngFor='let appointment of pendingAppointments'>
+            <b>{{ appointment.appFrom | date: 'medium' }}</b>
+            <i>{{ appointment.appStatus }}</i>
+            <div class="cancel-button-container">
+              <button class="cancel-button" (click)="cancelAppointment(appointment.idAppointment)">Cancel</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+
+    <div class="appointment-block">
+      <div class="appointment-block">
+        <h2>Completed Appointments ({{ completedAppointments.length }})</h2>
+        <ul>
+          <li *ngFor='let appointment of completedAppointments'>
+            <b>{{ appointment.appFrom | date: 'medium' }}</b>
+            <i>{{ appointment.appStatus }}</i>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="appointment-block">
+      <div class="appointment-block">
+        <h2>Rejected Appointments ({{ rejectedAppointments.length }})</h2>
+        <ul>
+          <li *ngFor='let appointment of rejectedAppointments'>
+            <b>{{ appointment.appFrom | date: 'medium' }}</b>
+            <i>{{ appointment.appStatus }}</i>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+
+
+
+
+  </div>
+</div>
+
+  <div class='demo-app-main'>
+    <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
+      <ng-template #eventContent let-arg>
+        <b>{{ arg.timeText }}</b>
+        <i>{{ arg.event.title }}</i>
+      </ng-template>
+    </full-calendar>
+  </div>
+</div>
+
+

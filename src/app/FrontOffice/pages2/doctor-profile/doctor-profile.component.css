@@ -1,0 +1,207 @@
+.doctor-profile {
+  max-width: 1000px;
+  margin: 50px ;
+  padding: 30px;
+  background-color: #f7f7f7;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Additional styles to move content to the left */
+    margin-left: 250px; /* Increase right margin to move content more to the right */
+
+}
+
+.profile-picture {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+}
+
+h1 {
+  font-size: 40px; /* Updated font size */
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.specialization {
+  font-size: 28px; /* Updated font size */
+  color: #555;
+}
+
+.info {
+  font-size: 24px; /* Updated font size */
+  margin-bottom: 5px;
+}
+
+
+
+.description {
+  font-size: 22px; /* Updated font size */
+  margin-top: 20px;
+  color: #444;
+}
+
+.ratings {
+  margin-top: 20px;
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 28px; /* Updated font size */
+}
+
+
+.rating {
+  font-size: 24px; /* Updated font size */
+  color: #666;
+  margin-left: 10px;
+}
+
+
+.btn-review {
+  margin-left: 100px; /* Move the button to the right */
+  display: inline-block; /* Ensure the button doesn't take up full width */
+
+  background-color: #546c86;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 20px; /* Updated font size */
+  cursor: pointer;
+  margin-top: -10px;
+}
+
+
+.btn-review:hover {
+  background-color: #2f7acb;
+}
+
+.invisible-block {
+  height: 50px; /* Adjust the height based on your navbar's height */
+  width: 100%;
+}
+.separator-line {
+  width: 49%; /* Set the width to 100% to match the container */
+  height: 1px; /* Set the height of the separator line */
+  background-color: #ccc; /* Set the color of the separator line */
+  margin: 20px; /* Remove any default margin */
+  margin-left: 260px;
+
+}
+
+
+
+.appointment-section {
+  max-width: 1000px; /* Adjust the max-width as needed */
+  margin-left: 252px; /* Center the section horizontally */
+  margin-right: auto; /* Center the section horizontally */
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-bottom: 40px;
+
+}
+
+.appointment-section .title {
+  font-size: 24px;
+  margin-bottom: 10px;
+ 
+  color: #333;
+}
+
+.appointment-section h2 {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.appointment-section p {
+  font-size: 20px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.btn-appointment {
+  background-color: #546c86;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.btn-appointment:hover {
+  background-color: #2f7acb;
+}
+
+
+
+
+
+
+
+
+
+
+
+.reviews-section {
+  max-width: 1000px; /* Adjust the max-width as needed */
+  margin: 30px auto; /* Center the container horizontally */
+  padding: 20px;
+  margin-left: 252px; /* Center the section horizontally */
+  margin-bottom: 40px;
+
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+ 
+.reviews-section .title {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #222121;
+
+}
+
+.review-item {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-name {
+  font-weight: bold;
+}
+
+.review-content {
+  margin-bottom: 10px;
+}
+
+.rating {
+  font-style: italic;
+  color: #999;
+}
+
+
+
+
+
+
+
+
+ 

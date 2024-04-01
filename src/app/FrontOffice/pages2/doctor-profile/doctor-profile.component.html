@@ -1,0 +1,351 @@
+<div class="invisible-block"></div>
+
+<div class="doctor-profile">    
+  <div *ngIf="doctor" class="row align-items-center">
+    <!-- Profile Picture -->
+    <div class="col-md-4">
+      <img [src]="doctor.imagedoc" alt="{{ doctor.lastName }} Image" class="profile-picture">
+      <span *ngIf="doctor.favoriteOfTheMonth" class="favorite-sign">
+        <i class="fas fa-star"></i> Doctor of the Month
+      </span>
+    </div>
+
+    <!-- Doctor Information -->
+    <div class="col-md-8">
+      <h1>Dr {{ doctor.lastName }} {{ doctor.firstName }}</h1>
+      <i class="fas fa-stethoscope"></i> {{ doctor.specialization }}
+      <p class="info">{{ doctor.phoneNumber }} | Age </p>
+      <p class="info">{{ doctor.doctorAddress }}</p>
+       
+      <!-- Ratings -->
+      <div class="ratings">
+        <span class="stars">{{ getStars() }}</span>
+        <span class="ratingTOP">{{ averageRating | number: '1.1-1' }} ({{ totalRatings }} ratings)</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<hr class="separator-line">
+
+<div class="appointment-section">
+  <h2 class="title">Book an Appointment Now</h2>
+  <p>If you're looking to schedule an appointment with Dr. {{ doctor.lastName }}, MD, we encourage you to check the calendar availability below and choose a suitable time slot for your visit. Our team is ready to assist you!</p>
+  <button class="btn-appointment" (click)="navigateToDoctorCalendar()">View Doctor's Calendar</button>
+</div>
+<hr class="separator-line">
+
+
+<div class="image-section">
+  <h2 class="title">Cabinet Pictures</h2>
+  <div *ngIf="cabinetPictures.length > 0" class="image-container">
+    <div class="image-wrapper" (click)="openImagePopup(0)">
+      <img [src]="cabinetPictures[0]" alt="Cabinet Picture">
+    </div>
+    <div class="image-wrapper shadowed" *ngIf="cabinetPictures.length > 1" (click)="openImagePopup(1)">
+      <img [src]="cabinetPictures[1]" alt="Cabinet Picture">
+      <span class="counter">+{{ cabinetPictures.length - 1 }}</span>
+    </div>
+  </div>
+</div>
+
+<hr class="separator-line">
+
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="reviews-section">
+      <h2 class="title">Patient Reviews
+       
+        <button class="btn-review btn-sm float-right" (click)="openReviewForm()">Leave a Review</button>
+    
+        <div class="review-note">
+          <div class="warning-icon">&#9888;</div> <!-- Yellow warning triangle sign -->
+          <p>Only patients who have had consultations with this doctor can write reviews.</p>
+        </div>
+        </h2>  
+          <div *ngIf="reviews && reviews.length > 0">
+            <div *ngFor="let review of reviews" class="review-item">
+              <div class="user-info">
+                <span class="user-name">{{ review.elderlyUsername }}</span>
+                <div class="rating55">
+                  <span *ngFor="let star of [1, 2, 3, 4, 5]" [class]="star <= review.rating ? 'star-icon fas fa-star' : 'star-icon far fa-star'"></span>
+                </div>
+                <span class="dots" (click)="toggleOptions(review.id)"><i class="fas fa-ellipsis-v"></i></span>
+              </div>
+              <p class="review-content">{{ review.comment }}</p>
+              <div class="options">
+                <div class="edit-delete" *ngIf="showOptions[review.id]">
+                  <button class="btn-edit" (click)="openEditReviewForm(review.id)"><i class="fas fa-edit"></i></button>
+                  <button class="btn-delete" (click)="deleteReview(doctorId, review.id, elderlyId)"><i class="fas fa-trash-alt"></i></button>
+                </div>
+              </div>
+            </div>
+                  
+        </div>
+
+      </div>
+      <div *ngIf="!reviews || reviews.length === 0" class="no-reviews">No reviews available.</div>
+    </div>
+  </div>
+  <div *ngIf="showReviewForm" class="col-md-4"> <!-- Use *ngIf to conditionally show the form -->
+    <div *ngIf="showReviewForm" class="col-md-4">
+      <div *ngIf="showReviewForm" class="review-form-container">
+        <div class="review-form">
+          <form (ngSubmit)="submitReview()">
+            <!-- Display the review data for editing -->
+            <div class="form-group">
+              <h3 class="title">Leave a Review</h3>
+              <label for="comment">Comment:</label>
+              <textarea id="comment" name="comment" [(ngModel)]="newReview.comment" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="rating">Rating:</label>
+              <input type="number" id="rating" name="rating" [(ngModel)]="newReview.rating" class="form-control" min="1" max="5" required [disabled]="newReview.rating > 5">
+            </div>
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-primary">Submit Review</button>
+              <button type="button" class="btn btn-secondary" (click)="closeReviewForm()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+<style>
+
+.favorite-sign {
+  margin-top: 20px;
+
+  margin-left: 60px;
+  display: inline-block;
+  background-color: yellow;
+  color: #333; /* Text color for contrast */
+  padding: 16px 10px; /* Adjust padding as needed */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 14px; /* Adjust font size as needed */
+  font-weight: bold; /* Bold text */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow effect */
+}
+
+
+
+.review-item {
+  
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating55 {
+  display: flex;
+  margin-left: 400px;
+
+}
+
+.rating {
+  display: flex;
+  
+}
+
+.star-icon {
+  color: #ffc107; /* Yellow color for stars */
+  font-size: 20px; /* Adjust the size of stars */
+  
+}
+
+.dots {
+  cursor: pointer;
+  color: #777;
+  font-size: 18px;
+  margin-left: 10px; /* Reduce the left margin between stars and dots */
+  margin-right: 5px; /* Reduce the right margin between dots and other content */
+}
+
+.options {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-edit,
+.btn-delete {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.btn-edit i,
+.btn-delete i {
+  font-size: 18px;
+}
+
+.btn-edit i:hover,
+.btn-delete i:hover {
+  color: #ff6347; /* Red color on hover */
+}
+ 
+
+
+
+
+  .review-content {
+  font-size: 18px; /* Adjust the font size as needed */
+  line-height: 1.5; /* Adjust the line height for better readability */
+}
+  .review-note .warning-icon {
+  color: #ffc107; /* Yellow color for the warning icon */
+  font-size: 25px; /* Adjust the size of the icon */
+  margin-right: 10px; /* Add spacing between icon and text */
+}
+  .review-note {
+    
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-note p {
+  margin: 0;
+  color: #666;
+  font-size: 18px; /* Adjust the size of the icon */
+
+}
+
+  .review-form-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: calc(110% - 75%); /* Adjust the width as needed */
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+  z-index: 1000; /* Ensure it's above other content */
+  overflow-y: auto; /* Allow scrolling if needed */
+  padding: 20px;
+}
+
+.review-form {
+  margin-top: 50px; /* Adjust the top margin as needed */
+  margin-right: 200px; /* Adjust the top margin as needed */
+
+}
+
+.form-control {
+  font-size: 28px; /* Set the font size */
+  padding: 12px; /* Add padding for better spacing */
+}
+
+.reviews-section {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reviews-section .title {
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.review-item {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.user-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 20px; /* Adjust the font size as needed */
+  color: #393939;
+
+}
+
+.ratingTOP {
+  font-style: italic;
+  color: #999;
+  font-size: 20px;
+  font-weight: bold;
+
+  margin-left: 20px;
+
+ 
+}
+.rating {
+  font-style: italic;
+  color: #999;
+  margin-left: 700px; /* Reduce the left margin between stars and dots */
+  margin-right: 5px;
+}
+
+.star-icon {
+  color: #ffc107; /* Yellow color for stars */
+  font-size: 20px; /* Adjust the size of stars */
+}
+
+.image-section {
+  max-width: 1000px; /* Adjust the max-width as needed */
+  margin: 30px auto; /* Center the container horizontally */
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-left: 252px; /* Center the section horizontally */
+  margin-bottom: 40px;
+
+}
+
+.image-section .title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.image-container {
+  display: flex;
+}
+
+.image-wrapper {
+  position: relative;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.image-wrapper .counter {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.image-wrapper.shadowed img {
+  filter: grayscale(100%) blur(2px);
+}
+
+
+</style>

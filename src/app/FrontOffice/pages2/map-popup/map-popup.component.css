@@ -1,0 +1,80 @@
+/* map-popup.component.css */
+.black-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black color */
+    z-index: 999; /* Ensure it appears above other elements */
+  }
+  
+  .map-popup-container {
+    position: fixed;
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%);
+    z-index: 1000; /* Ensure it appears above the black overlay */
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    max-width: 500px; /* Set a maximum width for the popup */
+   width: calc(100% - 100px);    max-height: 90%; /* Limit the height to 90% of the viewport */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds the container height */
+  }
+ 
+  
+  .map-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .close-btn {
+    cursor: pointer;
+  }
+  
+  #map {
+    height: 300px; /* Adjust the height of the map as needed */
+  }
+  .doctor-address {
+    margin-top: 20px; /* Adjust spacing */
+    text-align: center; /* Center align the address */
+  }
+
+
+
+
+  .popup-title {
+    color: #6671cb; /* Color for the title */
+    font-size: 24px; /* Font size for the title */
+    margin-bottom: 10px; /* Bottom margin for spacing */
+    font-weight: bold; /* Apply bold font weight to the text inside <strong> tag */
+}
+  
+.address-title {
+    color: #b92a2a; /* Color for the address title */
+    font-size: 18px; /* Font size for the address title */
+    margin-bottom: 5px; /* Bottom margin for spacing */
+    font-weight: bold; /* Apply bold font weight to the text inside <strong> tag */
+ 
+}
+  
+  .address-text {
+    color: #444; /* Color for the address text */
+    font-size: 18px; /* Font size for the address text */
+  }
+  .close-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 15px; /* Adjust the right position as needed */
+    font-size: 24px; /* Set the font size to make the icon bigger */
+    color: red;
+    background-color: transparent; /* Remove background color */
+    border: none; /* Remove border */
+    padding: 5; /* Remove padding */
+  }

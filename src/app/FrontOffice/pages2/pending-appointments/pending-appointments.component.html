@@ -1,0 +1,9 @@
+<p>pending-appointments works!</p>
+<div>
+    <h3>Pending Appointments</h3>
+    <ul>
+        <li *ngFor="let appointment of pendingAppointments">
+            {{ appointment.patientName }} - {{ appointment.appFrom }}
+        </li>
+    </ul>
+</div>

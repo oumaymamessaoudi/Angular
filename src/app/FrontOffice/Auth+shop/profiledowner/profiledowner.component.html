@@ -1,0 +1,100 @@
+<p>profiledowner works!</p>
+<link href="/assets/FrontOffice/css/_site-blocks.css" rel="stylesheet">
+<link href="/assets/FrontOffice/css/aos.css" rel="stylesheet">
+<link href="/assets/FrontOffice/css/bootstrap-datepicker.css" rel="stylesheet">
+<link href="/assets/FrontOffice/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/FrontOffice/css/bootstrap.min.css.map" rel="stylesheet">
+<link href="/assets/FrontOffice/css/jquery-ui.css" rel="stylesheet">
+<link href="/assets/FrontOffice/css/jquery.fancybox.min.css" rel="stylesheet">
+<link href="/assets/FrontOffice/css/magnific-popup.css" rel="stylesheet">
+<link href="/assets/FrontOffice/css/mediaelementplayer.css" rel="stylesheet">
+<link href="/assets/FrontOffice/css/owl.carousel.min.css" rel="stylesheet">
+<link href="/assets/FrontOffice/css/owl.theme.default.min.css" rel="stylesheet">
+<link href="/assets/FrontOffice/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link href="/assets/FrontOffice/scss/_site-navbar.scss" rel="stylesheet">
+<link href="/assets/FrontOffice/scss/_site-blocks.scss" rel="stylesheet">
+<link href="/assets/FrontOffice/scss/_site-base.scss" rel="stylesheet">
+<link href="/assets/FrontOffice/scss/style.scss" rel="stylesheet">
+
+<body style="background-image: url('assets/FrontOffice/images/slider-1.jpg'); 
+background-size: cover; 
+background-position: center; 
+background-repeat: no-repeat;">
+  <div class="container-fluid" style="padding-top: 0px;">
+ 
+    <div class="container-fluid" style="padding-top: 200px; margin-top: -50px;">
+      <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          
+          <div class="card-header" style="background-color: rgb(184, 212, 255); font-weight: bold;">
+            Ambulance Owner Profile
+          </div>
+          <div style="margin-bottom: 10px;"><strong>last Name :</strong> {{ profile.lastName }}</div>
+          <div style="margin-bottom: 10px;"><strong>first Name :</strong> {{ profile.firstName }}</div>
+          <div style="margin-bottom: 10px;"><strong>Date of Birth :</strong> {{ profile.dateOfBirth | date }}</div>
+           
+
+          <div style="margin-bottom: 10px;"><strong>years of experience :</strong> {{ profile.yearsofexperience }}</div>
+          <div style="margin-bottom: 10px;"><strong>Email :</strong> {{ profile.email }}</div>
+          <div style="margin-bottom: 10px;"><strong>Gender :</strong> {{ profile.gender }}</div>
+          <div style="margin-bottom: 10px;"><strong>Phone Number :</strong> {{ profile.phoneNumber }}</div>
+          </div>
+        </div>
+        <div class="text-center" style="margin-top: 20px;">
+          <button class="btn btn-primary" (click)="open()">Update Profile</button>
+        </div>
+    </div>
+  </div>
+
+  <div class="signin-popup" *ngIf="openforum==true">
+    <div class="signin-popup-content">
+        <div style="text-align: center;">
+            <a class="closedialog" (click)="close()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+              </a>
+        </div>
+        <form [formGroup]="Form" (ngSubmit)="onmodifie()">
+            <div class="form-group">
+              <label for="title">First Name</label>
+              <input type="text" id="title" class="form-control" formControlName="firstName" required>
+              <div *ngIf="Form.get('firstName')!.errors" class="text-danger">firstName is required</div>
+            </div>
+            <div class="form-group">
+                <label for="title">last Name</label>
+                <input type="text" id="title" class="form-control" formControlName="lastName" required>
+                <div *ngIf="Form.get('lastName')!.errors" class="text-danger">lastName is required</div>
+              </div>
+              <div class="form-group">
+                <label for="title">date Of Birth</label>
+                <input type="date" id="title" class="form-control" formControlName="dateOfBirth" required>
+                <div *ngIf="Form.get('dateOfBirth')!.errors" class="text-danger">dateOfBirth is required</div>
+              </div>
+              <div class="form-group">
+                <label for="title">email</label>
+                <input type="text" id="title" class="form-control" formControlName="email" required>
+                <div *ngIf="Form.get('email')!.errors" class="text-danger">email is required</div>
+              </div>
+              
+              <div class="form-group">
+                <label for="title">phoneNumber</label>
+                <input type="number" id="title" class="form-control" formControlName="phoneNumber" required>
+                <div *ngIf="Form.get('phoneNumber')!.errors" class="text-danger">phoneNumber is required</div>
+              </div>
+              
+              <div class="form-group">
+                <label for="title">years of experience</label> 
+                <input formControlName="yearsofexperience" class="form-control" type="number" min="0">
+               
+                </div>
+           
+            <button type="submit" class="btn btn-primary" >Update</button>
+          </form>
+          
+    </div>
+</div>
+  

@@ -1,0 +1,42 @@
+<link href="/assets/BackOffice/assets/libs/css/style.css "rel="stylesheet">
+
+ <!-- Bootstrap CSS -->
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/bootstrap/css/bootstrap.min.css">
+ <link href="/assets/BackOffice/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/libs/css/style.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/chartist-bundle/chartist.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/morris-bundle/morris.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/c3charts/c3.css">
+ <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+<div class="container">
+<app-navbar-back></app-navbar-back>
+
+<div class="container mt-3">
+  <div class="row justify-content-end">
+      <div class="col-md-8">
+          <h2 class="mt-3">Liste des ambulances</h2>
+      </div>
+  </div>
+
+  <div class="row justify-content-end">
+      <div class="col-md-8" *ngFor="let ambulance of ambulances">
+          <div class="card mb-3">
+              <img [src]="imageBaseUrl + ambulance.imageAmbul" class="card-img-top" alt="Ambulance Image"
+                  style="height: 200px; object-fit: cover;">
+              <div class="card-body">
+                  <h5 class="card-title">{{ ambulance.location }}</h5>
+                  <p class="card-text">Statut: {{ ambulance.status }}</p>
+                  <!-- Bouton "Modifier" -->
+                  <button routerLink="edit/{{ ambulance.ambulanceID }}" class="btn btn-primary mr-2">Modifier
+                  </button>
+                  <!-- Bouton "Archiver" -->
+                  <button (click)="archiveAmbulance(ambulance.ambulanceID)" class="btn btn-danger mr-2">Archiver
+                  </button>
+                  <!-- Bouton "Lire le statut" -->
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

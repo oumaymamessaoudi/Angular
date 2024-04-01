@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product List</title>
+</head>
+<body>
+    <div class="white-block"></div>
+    <div class="home_img ">
+
+    <!-- Add the image horizontally -->
+    <img src="/assets/FrontOffice/images/back.jpg" alt="Mobility Aids for the Elderly" style="width: 100%; height: 400px; display: block; margin: 0 auto;">
+    </div>
+    <!-- Your existing content -->
+
+    <script>
+        // Get all the product cards
+        const cards = document.querySelectorAll('.card');
+    
+        // Add event listeners to each card to handle image enlargement on hover
+        cards.forEach(card => {
+            const img = card.querySelector('img');
+            img.addEventListener('mouseover', () => {
+                img.style.transform = 'scale(1.1)';
+                img.style.transition = 'transform 0.3s ease';
+            });
+            img.addEventListener('mouseout', () => {
+                img.style.transform = 'scale(1)';
+            });
+        });
+       
+        // Check if webkitSpeechRecognition is supported by the browser
+        if ('webkitSpeechRecognition' in window) {
+            const recognition = new webkitSpeechRecognition();
+            recognition.lang = 'en-US';
+
+            // Event listener for when speech recognition returns a result
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                document.querySelector('.search-input').value = transcript; // Set the value of the search input to the recognized speech
+                searchProducts(); // Call the searchProducts function to perform the search
+            };
+
+            // Event listener for errors in speech recognition
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+            };
+
+            // Function to start speech recognition when the user clicks the search button
+            document.querySelector('.search-button').addEventListener('click', () => {
+                recognition.start();
+            });
+        } else {
+            console.warn('Speech recognition not supported in this browser.');
+        }
+    
+        // You can add more JavaScript logic here based on your requirements
+    </script>
+    
+</body>
+</html>
+
+
+
+
+<body>
+  
+   
+    <section id="home">
+        <div class="home_page ">
+            
+            <div class="home_txt ">
+                <p class="collection ">Mobility Essentials</p>
+                <h2>FOR SENIORS<br>Comfortable Essentials </h2>
+                    <div class="home_label ">
+                    <p>Providing Essential Products for Elderly Well-being<br>
+                        A specialized line offering premium mobility aids and comfort essentials. 
+                     </p>
+                </div>
+                <div class="home_social_icons">
+                    <a href="#"><i class='bx bxl-facebook'></i></a>
+                    <a href="#"><i class='bx bxl-twitter'></i></a>
+                    <a href="#"><i class='bx bxl-pinterest'></i></a>
+                    <a href="#"><i class='bx bxl-instagram'></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="collection">
+        <div class="collections container">
+            <div class="content">
+                <img src="/assets/FrontOffice/images/static4.png" alt="img" />
+                <div class="img-content">
+                    <p>Senior care products</p>
+                    <button><a href="#l-news-section">SHOP NOW</a></button>
+                </div>
+            </div>
+            <div class="content2">
+                <img src="/assets/FrontOffice/images/static2.webp" alt="img" />
+                <div class="img-content2">
+                    <p>Best equipment</p>
+                    <button><a href="#l-news-section">SHOP NOW</a></button>
+                </div>
+            </div>
+            <div class="content3">
+                <img src="/assets/FrontOffice/images/static3.jpg" alt="img" />
+                <div class="img-content3">
+                    <p>Medical supplies</p>
+                    <button><a href="#sellers">SHOP NOW</a></button>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+    <section id="news">
+        <div class="news-heading">
+            <p>LATEST ARRIVALS
+
+            </p>
+            <h2>New Mobility Solutions</h2>
+        </div>
+
+
+
+        <div class="header">
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search Products..." [(ngModel)]="searchTerm" (input)="searchProducts()">
+                <button class="search-button button"><i class="fas fa-search"></i></button>
+                <button class="voice-search-button"><i class="fas fa-microphone"></i></button>
+            </div>
+            
+            <button routerLink="/elderly/{{ elderlyId }}/cart" class="cart-button"><i class="fas fa-shopping-cart"></i></button>
+                </div>
+        
+        <div class="pagination">
+            <button class="pagination-btn" (click)="previousPage()" [disabled]="currentPage === 0">Previous</button>
+            <ng-container *ngFor="let page of totalPagesArray">
+              <button class="pagination-btn" (click)="goToPage(page)" [class.active]="currentPage === page">{{ page + 1 }}</button>
+            </ng-container>
+            <button class="pagination-btn" (click)="nextPage()" [disabled]="currentPage === totalPages - 1">Next</button>
+          </div>
+          
+    
+
+          <div class="l-news container" id="l-news section">
+            <div class="l-news1" *ngFor="let product of products">
+              <div class="news1-img">
+                <img [src]="product.imageUrl" alt="img">
+              </div>             
+              <div class="news1-conte">
+                <div class="date-news1">
+                  <p><i class='bx bxs-calendar'></i>{{ product.productName }}</p>
+                  <h4>$ {{ product.price }}</h4>
+                  <h4>Left : 
+                    <ng-container *ngIf="product.prodCapacity !== 0; else outOfStock">
+                        {{ product.prodCapacity }}
+                    </ng-container>
+                    <ng-template #outOfStock>
+                        Out of Stock
+                    </ng-template>
+                </h4>          
+                  <!-- Button Group -->
+                  <div class="button-group">
+                    
+                    <button class="notify-button" *ngIf="product?.productId !== undefined" [disabled]="product.prodCapacity !== 0" (click)="notifyMe(product.productId!)">Notify Me</button>
+                    <button class="buy-button" *ngIf="product?.productId !== undefined" (click)="buyProduct(product.productId!)" target="_blank">Add To Cart</button>
+                    <button class="details-button" [routerLink]="'/product-details/' + product.productId" >See More</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+    </section>
+   
+   
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const voiceSearchButton = document.querySelector('.voice-search-button');
+
+        if (voiceSearchButton) {
+            voiceSearchButton.addEventListener('click', () => {
+                if ('SpeechRecognition' in window) {
+                    const recognition = new SpeechRecognition();
+                    recognition.lang = 'en-US';
+
+                    recognition.onresult = (event) => {
+                        const transcript = event.results[0][0].transcript;
+                        document.querySelector('.search-input').value = transcript;
+                        searchProducts();
+                    };
+
+                    recognition.onerror = (event) => {
+                        console.error('Speech recognition error:', event.error);
+                    };
+
+                    recognition.start();
+                } else {
+                    console.warn('Speech recognition not supported in this browser.');
+                }
+            });
+        }
+    });
+
+    // Function to handle smooth scrolling
+    function scrollToSection(event) {
+        event.preventDefault(); // Prevent default behavior of the link
+        const section = document.getElementById("l-news-section");
+        section.scrollIntoView({ behavior: "smooth" });
+    }
+
+    // Add event listener to the "SHOP NOW" button
+    const shopNowButton = document.querySelector('button > a[href="#l-news-section"]');
+    if (shopNowButton) {
+        shopNowButton.addEventListener("click", scrollToSection);
+    }
+</script>
+
+<script>$(document).ready(function () {
+    $("a").on("click", function (event) {
+      if (this.hash !== "") {
+        event.preventDefault();
+  
+        var hash = this.hash;
+        $("html, body").animate(
+          {
+            scrollTop: $(hash).offset().top,
+          },
+          800,
+          function () {
+            window.location.hash = hash;
+          }
+        );
+      }
+    });
+  });
+  
+  $(".menu-items a").click(function () {
+    $("#checkbox").prop("checked", false);
+  });
+  </script>

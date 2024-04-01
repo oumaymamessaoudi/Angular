@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Product List</title>
+    <style>
+   body {
+            background-color: #f5f5f5; /* Set background color to match the elderly supply blue theme */
+            font-family: Arial, sans-serif; /* Use a common font for better readability */
+        }
+
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 70%;
+            position: relative;
+            background-color: #fff; /* Set background color for the container */
+            margin-right: 50px; /* Adjust margin to push table to the right */
+
+        }
+
+        h1 {
+            text-align: center;
+            color: #333; /* Adjust text color */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+
+        }
+    
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .product-img {
+    width: 200px; /* Adjust image size */
+    height: 300px; /* Adjust image size */
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+
+        .action-button {
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: #ffffff; /* Adjust text color */
+            background-color: #070637; /* Change background color on hover */
+
+        }
+
+        .action-button:hover {
+            background-color: #73adca; /* Change background color on hover */
+        }
+
+        .no-products {
+            text-align: center;
+            font-style: italic;
+            color: #73adca;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Product List</h1>
+        <button class="action-button" [routerLink]="['/admin/add-product']">
+            Add Product
+        </button>
+        <button class="action-button" [routerLink]="['/admin/historique']">
+            History
+          </button>
+          <button class="action-button" [routerLink]="['/admin/archive']">
+            Archive
+          </button>
+        <div *ngIf="products.length > 0; else noProducts">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Capacity</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of products">
+                        <td><img class="product-img" [src]="product.imageUrl" alt="Product Image"></td>
+                        <td class="product-name">{{ product.productName }}</td>
+                        <td>{{ product.prodDesc }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.prodCapacity }}</td>
+                        <td class="status">{{ product.archProd }}</td>
+                        <td>
+                            <button class="action-button" *ngIf="product.productId" (click)="toggleStatus(product.productId)">
+                                <i class="fas fa-toggle-on"></i> Archive 
+                            </button>
+                            <button class="action-button" [routerLink]="['/admin/products', product.productId, 'edit']">
+                                <i class="fas fa-edit"></i> 
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <ng-template #noProducts>
+            <p class="no-products">No products available</p>
+        </ng-template>
+    </div>
+</body>
+
+
+</html>

@@ -1,0 +1,111 @@
+<div class="container-fluid">
+    
+    <div class="row">
+        <!-- Sidebar -->
+      
+        <div class="col-md-3 sidebar">
+            <div class="profile-info">
+                <h2>{{ doctor?.lastName }}'s Dashboard</h2> <!-- Display doctor's username -->
+                <img [src]="doctor?.imagedoc" alt="Doctor Profile Image" class="profile-image img-fluid">
+                <h3 class="username">{{ doctor?.username }}</h3>
+                <p class="specialization">{{ doctor?.specialization }}</p>
+                <button type="button" (click)="goToDoctorCalendar()">Go to Calendar</button>
+                <div>
+                    <!-- Input field for file selection -->
+                    <input type="file" #fileInput style="display: none;" accept="image/*" (change)="onFileSelected($event)">
+                    <!-- Button to trigger file selection -->
+                    <button (click)="fileInput.click()">Choose File</button>
+                    <!-- Button to trigger file upload -->
+                    <button (click)="uploadProfilePicture()">Upload Profile Picture</button>
+                </div>
+                <div>
+                    <!-- Input field for file selection -->
+                    <input type="file" #fileInput style="display: none;" accept="image/*" (change)="onFileSelected2($event)">
+                    <!-- Button to trigger file selection -->
+                    <button (click)="fileInput.click()">Choose File</button>
+                    <!-- Button to trigger file upload -->
+                    <img [src]="selectedImageUrl" *ngIf="selectedImageUrl" style="width: 150px; height: 150px; object-fit: cover;">
+
+                    <button (click)="uploadCabinetPictures(fileInput.files)">Upload Cabinet Pictures</button>
+                  </div>
+                  <div *ngIf="authService.isLoggedIn()" class="floating-chat">
+        
+                    <a href="#" class="btn btn-primary" routerLink="/chat">
+                        <i class="fas fa-comment"></i>
+                    </a>
+            
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        
+        <div class="col-md-9"> <!-- Adjust the column width as needed -->
+            <div class="table-title">
+                <div class="invisible-block"></div>
+
+                <h3 class="patients-heading">Patients List</h3>
+            </div>
+            <table class="table-fill">
+                <thead>
+                    <tr>
+                        <th class="text-left">ID</th>
+                        <th class="text-left">Name</th>
+                        <th class="text-left">Phone Number</th>
+                        <th class="text-left">Email</th>
+                        <th class="text-left">Date of Birth</th>
+                        <th class="text-left">Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let patient of patients" class="table-hover">
+                        <td class="text-left">{{ patient.elderlyID }}</td>
+                        <td class="text-left">{{ patient.firstName }} {{ patient.lastName }}</td>
+                        <td class="text-left">{{ patient.phoneNumber }}</td>
+                        <td class="text-left">{{ patient.email }}</td>
+                        <td class="text-left">{{ patient.dateOfBirth }}</td>
+                        <td class="text-left">{{ patient.address }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="invisible-block"></div>
+
+            <h3 class="patients-heading">Patients Reviews</h3>
+            <div class="reviews-section">
+                <h3 class="reviews-heading">Patient Reviews</h3>
+                <div *ngIf="doctorReviews && doctorReviews.length > 0" class="reviews-container">
+                    <div *ngFor="let review of doctorReviews" class="review-item">
+                        <div class="user-info">
+                            <span class="user-name">{{ review.elderlyUsername }}</span>
+                            <div class="rating">
+                                <span *ngFor="let star of [1, 2, 3, 4, 5]" [class]="star <= review.rating ? 'star-icon fa fa-star' : 'star-icon fa fa-star-o'"></span>                            </div>
+                        </div>
+                        <p class="review-content">{{ review.comment }}</p>
+                    </div>
+                </div>
+                <p *ngIf="!doctorReviews || doctorReviews.length === 0" class="no-reviews">No reviews available.</p>
+            </div>
+            <div>
+                  <!-- <p>Average Rating: {{ averageRating }}</p> -->
+                 
+            </div>
+            
+<div class="image-section">
+    <h2 class="title">Cabinet Pictures</h2>
+    <div *ngIf="cabinetPictures.length > 0" class="image-container">
+      <div class="image-wrapper" (click)="openImagePopup(0)">
+        <img [src]="cabinetPictures[0]" alt="Cabinet Picture">
+      </div>
+      <div class="image-wrapper shadowed" *ngIf="cabinetPictures.length > 1" (click)="openImagePopup(1)">
+        <img [src]="cabinetPictures[1]" alt="Cabinet Picture">
+        <span class="counter">+{{ cabinetPictures.length - 1 }}</span>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-danger" (click)="deleteCabinetPictures(doctorId)">Delete Cabinet Pictures</button>
+
+        </div>
+    </div>
+</div>
+
+ 

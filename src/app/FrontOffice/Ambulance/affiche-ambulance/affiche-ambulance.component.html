@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liste des ambulances</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Styles -->
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    #map {
+      height: 500px;
+    }
+  </style>
+</head>
+<div *ngIf="authService.isLoggedIn()" class="floating-chat">
+        
+  <a href="#" class="btn btn-primary" routerLink="/chat">
+      <i class="fas fa-comment"></i>
+  </a>
+
+</div>
+<body>
+  <div class="container">
+    <h2>Liste des ambulances</h2>
+    <div class="form-group">
+      <label for="statusSelect">Filtrer par statut :</label>
+      <select id="statusSelect" class="form-control" [(ngModel)]="selectedStatus" (change)="filterAmbulances()">
+        <option value="">Tous les statuts</option>
+        <option value="En service">En service</option>
+        <option value="En réparation">En réparation</option>
+        <option value="Hors service">Hors service</option>
+      </select>
+    </div>
+   
+    <!-- Carte pour afficher les emplacements -->
+    <div id="map"></div>
+  </div>
+
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <!-- Votre fichier JavaScript -->
+  <script src="assets/app-afficher-ambulance.component.js"></script>
+</body>
+
+</html>

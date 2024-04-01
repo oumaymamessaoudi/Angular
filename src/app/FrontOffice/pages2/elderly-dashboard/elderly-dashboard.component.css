@@ -1,0 +1,119 @@
+/* Add this to your CSS or create a new CSS file */
+.background-container {
+  background-color: #f8f9fa; /* Set the background color to a light color */
+}
+
+.background-container {
+  background-image: url('/assets/assetDoctor/img/back.jpg'); /* Replace with the actual path to your image */
+  background-size: cover;
+  background-position: center;
+  color: #fff; 
+  padding: 20px;
+
+
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;  }
+
+.search-container {
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the background color and transparency */
+  padding: 20px;
+  
+}
+.search-container2 {
+  background-color: rgba(0, 0, 0, 0.5); /* Adjust the background color and transparency */
+  padding: 20px;
+  width: 100%;
+
+}
+.card-container {
+    gap: 3px;  margin-left: 420px; /* Dynamic right margin using a CSS variable */
+
+}
+
+/* Add additional styling for the card content as needed */
+.card {
+  background-color: rgba(255, 255, 255, 0.8); /* Adjust the background color and transparency for card */
+  padding: 20px;
+   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Box shadow for a 3D effect */
+  width: 90%;
+  height: 590px; /* Fixed height for the card */
+
+  overflow: hidden; /* Hide overflow content */
+
+}
+.btn-hide {
+  display: none; /* Hide the button */
+}
+
+/* Rest of your existing CSS styles */
+.invisible-block {
+  height: 50px; /* Adjust the height based on your navbar's height */
+  width: 100%;
+}.popup-map {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Black overlay with transparency */
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+#map {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  max-width: 600px; /* Adjust as needed */
+  max-height: 600px; /* Adjust as needed */
+  background-color: #fff; /* White background for the map */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Box shadow for a 3D effect */
+}
+.btn-lg {
+  font-size: 1.5rem; /* Adjust the font size to make the button larger */
+  padding: 10px 20px; /* Adjust the padding to increase button size */
+}
+
+.float-right {
+  float: right; /* Align the button to the left */
+  margin-right: 20px; /* Add some right margin for spacing */
+}
+
+
+.fixed-bottom-btn {
+  position: absolute;
+  bottom: 20px; /* Adjust the distance from the bottom as needed */
+  left: 50%; /* Center horizontally within the container */
+  transform: translateX(-50%); /* Center horizontally within the container */
+}
+
+
+
+
+.fixed-bottom-content {
+  position: absolute;
+  bottom: 60px; /* Adjust the distance from the bottom as needed */
+  left: 0;
+  right: 0;
+  padding: 10px;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+.doctor-card {
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px; /* Adjust padding as needed */
+  margin-bottom: 20px;
+  transition: transform 0.3s ease; /* Add smooth transition */
+}
+ 
+.doctor-card:hover {
+  transform: scale(1.05); /* Add hover effect to scale up the card */
+}
+
