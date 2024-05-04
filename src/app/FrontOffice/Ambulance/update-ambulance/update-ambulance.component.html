@@ -1,7 +1,6 @@
 <div *ngIf="ambulance" class="update-ambulance">
-  
-  <h2>Update Ambulance</h2>
-   
+    <h2>Update Ambulance</h2>
+    
     <form (ngSubmit)="updateAmbulance()" class="ambulance-form">
       <div class="form-group">
         <label for="location">Location:</label>
@@ -25,4 +24,4 @@
     <div class="image-container">
       <img *ngIf="imageUrl" [src]="imageUrl" alt="Ambulance Image" class="image-preview">
     </div>
- </div>
+</div>

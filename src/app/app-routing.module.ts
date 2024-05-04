@@ -58,8 +58,16 @@ import { TodoRelativeComponent } from './FrontOffice/pages2/todo-relative/todo-r
 import { JitsiComponent } from './FrontOffice/pages2/jitsi/jitsi.component';
 import { BoardComponent } from './FrontOffice/pages2/board/board.component';
 import { GameComponent } from './FrontOffice/pages2/game/game.component';
+import { ElderlyNadhirComponent } from './FrontOffice/Ambulance/elderly-nadhir/elderly-nadhir.component';
+import { DriverNadhirComponent } from './FrontOffice/Ambulance/driver-nadhir/driver-nadhir.component';
+import { AllTemplateDriveComponent } from './FrontOffice/Ambulance/all-template-drive/all-template-drive.component';
+import { AfficheDriverComponent } from './FrontOffice/Ambulance/affiche-driver/affiche-driver.component';
  
 const routes: Routes = [
+
+
+  { path: 'admin/get/edit/:id', component: UpdateAmbulanceComponent },
+
          { path: 'game', component: GameComponent },
 
   
@@ -194,6 +202,11 @@ const routes: Routes = [
       path: 'products/:elderlyId',
       component: ProductlistclientComponent
     },
+
+      {
+        path: 'elderly/nadhir/:elderlyId',
+        component: ElderlyNadhirComponent
+      },
     {
       path: 'profileeldery',
       component: ElderlyprofileComponent
@@ -227,6 +240,9 @@ const routes: Routes = [
       component: ElderlyCartComponent}, { path: 'dash/:elderlyId', component: ElderlyDashboardComponent }
     ]
   },
+
+
+  
     {
       path: 'admin',
       component: AllTemplateBackComponent,
@@ -246,8 +262,7 @@ const routes: Routes = [
         {
           path: 'get',
           component: GetAllAmbulanceComponent
-        },
-        { path: 'get/edit/:id', component: UpdateAmbulanceComponent }
+        }
   ,{
     path: 'get',
     component: GetAllAmbulanceComponent
@@ -368,6 +383,10 @@ children: [
     path: "calendar",
     component: CalendarComponent
       }, 
+      {
+        path: 'elderly/nadhir/:elderlyId',
+        component: ElderlyNadhirComponent
+      },
   {//http://localhost:4200/calendarDoctor/1?calendarId=1
     path: 'calendarDoctor/:id',
     component: CalendarDoctorComponent
@@ -385,10 +404,22 @@ children: [
       }
     ]
 
+  },
+
+  {
+    path: 'driv/:ambulanceId',
+    component: AfficheDriverComponent
+  },
+  {
+    path: 'd',
+    component: AllTemplateDriveComponent,
+    children: [
+      {
+        path: 'DriverNadhir/:id', // Utilisation des paramètres de route pour l'ID du parent relatif
+        component: DriverNadhirComponent
+      }
+    ]
   }
-
-
-
 
 ];
 

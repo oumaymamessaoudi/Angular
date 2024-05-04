@@ -1,0 +1,10 @@
+.background-image {
+    position: relative;
+    opacity: 0.7; /* Réduisez l'opacité de l'image en arrière-plan */
+  }
+  
+  .container {
+    position: relative;
+    z-index: 1; /* Assurez-vous que le contenu est au-dessus de l'image en arrière-plan */
+  }
+  

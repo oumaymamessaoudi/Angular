@@ -16,9 +16,13 @@ export class AmbulanceDriverComponent {
     ngOnInit(): void {
    
     
-      this.route.params.subscribe(params => {
-      
-      
+      this.route.paramMap.subscribe(params => {
+        const id = params.get('id');
+        if (id) {
+          console.log('ID de l\'ambulance:', id);
+        } else {
+          console.error('ID de l\'ambulance introuvable dans l\'URL');
+        }
       });
       }
 

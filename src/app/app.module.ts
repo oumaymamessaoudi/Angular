@@ -133,6 +133,10 @@ import { ListComponent } from './FrontOffice/pages2/list/list.component';
 import { CardComponent } from './FrontOffice/pages2/card/card.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { GameComponent } from './FrontOffice/pages2/game/game.component';
+import { DriverNadhirComponent } from './FrontOffice/Ambulance/driver-nadhir/driver-nadhir.component';
+import { HeaderTemplateDriveComponent } from './FrontOffice/Ambulance/header-template-drive/header-template-drive.component';
+import { AllTemplateDriveComponent } from './FrontOffice/Ambulance/all-template-drive/all-template-drive.component';
+import { ElderlyNadhirComponent } from './FrontOffice/Ambulance/elderly-nadhir/elderly-nadhir.component';
  
 
 
@@ -242,7 +246,14 @@ import { GameComponent } from './FrontOffice/pages2/game/game.component';
     BoardComponent,
     ListComponent,
     CardComponent,
-    GameComponent 
+    GameComponent ,
+
+    HeaderTemplateRelativeComponent,
+    AllTemplateDriveComponent,
+    HeaderTemplateDriveComponent,
+    ElderlyNadhirComponent,
+    DriverNadhirComponent,
+    ///////////////////////
 
 
   ],

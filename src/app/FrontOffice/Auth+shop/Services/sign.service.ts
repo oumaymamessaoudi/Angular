@@ -113,7 +113,6 @@ export class SignService {
 
   getUserById(doctorId: any): Observable<any> {
     const userId = this.getUserId(); // Obtenez l'ID de l'utilisateur connecté
-
     const url = `${this.base3Url}/profile/${userId}`;
     return this.httpClient.get(url);
   }

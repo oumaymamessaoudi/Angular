@@ -1,1 +1,77 @@
-<p>affiche-driver works!</p>
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Elderly &mdash; Website Template by Colorlib</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .custom-table {
+      background-color: white; /* Définir le fond du tableau en blanc */
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+  
+    <!-- Contenu de la première page avec l'image en arrière-plan -->
+    <div class="slide-item overlay background-image" style="background-image: url('assets/FrontOffice/images/slider-1.jpg')">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 ml-lg-auto"> <!-- Utilisez la classe ml-lg-auto pour déplacer le tableau vers la gauche uniquement sur les écrans larges -->
+            <!-- affiche-driver.component.html -->
+            <div class="container">
+              <div class="center">
+                <table class="custom-table" style="margin-left: -20px;"> <!-- Ajoutez une marge négative pour déplacer le contenu du tableau vers la gauche -->
+                  <thead>
+                    <tr>
+                      <th>Prénom</th>
+                      <th>Nom</th>
+                      <th>Email</th>
+                      <th>Heures de travail</th>
+                      <th>Salaire</th>
+                      <th>Actions</th>
+                      <th>Total</th>
+                      <th>Salaire</th> <!-- Ajouter une colonne pour le bouton Salaire -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let driver of ambulanceDrivers">
+                      <td>{{ driver.firstName }}</td>
+                      <td>{{ driver.lastName }}</td>
+                      <td>{{ driver.email }}</td>
+                      <td>{{ driver.workingHours }}</td>
+                      <td>{{ driver.salary }}</td>
+                      <td>
+                        <button (click)="startWork(driver)">Commencer</button>
+                        <button (click)="stopWork(driver)">Arrêter</button>
+                        <button (click)="assignAmbulance(driver)">Affecter</button>
+                      </td>
+                      <td>{{ driver.totalForDriver }}</td>
+                      <td><button (click)="calculateAndSetTotalSalary(driver)">Salaire</button></td> <!-- Bouton Salaire -->
+                    </tr>
+                  </tbody>
+                  <tfoot>
+                   
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
