@@ -85,6 +85,15 @@ export class AfficheAmbulanceComponent implements OnInit {
     }).addTo(this.map);
   }
 
+//track
+  ngOnDestroy(): void {
+    if (this.map) {
+      this.map.remove();
+    }
+  }
+
+
+
   getAmbulancesByLocation(): void {
     this.http.get<any[]>("http://localhost:8081/ambulance/affiche")
       .subscribe(

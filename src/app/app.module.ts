@@ -137,6 +137,8 @@ import { DriverNadhirComponent } from './FrontOffice/Ambulance/driver-nadhir/dri
 import { HeaderTemplateDriveComponent } from './FrontOffice/Ambulance/header-template-drive/header-template-drive.component';
 import { AllTemplateDriveComponent } from './FrontOffice/Ambulance/all-template-drive/all-template-drive.component';
 import { ElderlyNadhirComponent } from './FrontOffice/Ambulance/elderly-nadhir/elderly-nadhir.component';
+import { TrackingComponent } from './FrontOffice/Tracking/tracking/tracking.component';
+import { RelativeComponent } from './FrontOffice/Tracking/relative/relative.component';
  
 
 
@@ -254,6 +256,7 @@ import { ElderlyNadhirComponent } from './FrontOffice/Ambulance/elderly-nadhir/e
     ElderlyNadhirComponent,
     DriverNadhirComponent,
     ///////////////////////
+    TrackingComponent,RelativeComponent
 
 
   ],
