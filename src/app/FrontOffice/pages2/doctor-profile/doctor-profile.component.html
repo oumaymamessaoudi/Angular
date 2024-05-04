@@ -56,8 +56,10 @@
   <div class="col-md-8">
     <div class="reviews-section">
       <h2 class="title">Patient Reviews
-       
-        <button class="btn-review btn-sm float-right" (click)="openReviewForm()">Leave a Review</button>
+        <div class="ban-timer" *ngIf="bannedUntil">
+          <p>Remaining time: {{ remainingTime }}</p>
+        </div>
+        <button id="reviewButton" class="btn-review btn-sm float-right" (click)="openReviewForm()">Leave a Review</button>
     
         <div class="review-note">
           <div class="warning-icon">&#9888;</div> <!-- Yellow warning triangle sign -->

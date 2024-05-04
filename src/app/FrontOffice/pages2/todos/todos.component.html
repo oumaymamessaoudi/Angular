@@ -1,0 +1,365 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title> cleaned</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+      <!-- style css -->
+      <link rel="stylesheet" href="/assets/css/style.css">
+      <!-- Responsive-->
+      <link rel="stylesheet" href="/assets/css/responsive.css">
+      <!-- fevicon -->
+      <link rel="icon" href="/assets/images2/fevicon.png" type="image/gif" />
+      <!-- Scrollbar Custom CSS -->
+      <link rel="stylesheet" href="/assets/jquery.mCustomScrollbar.min.css">
+      <!-- Tweaks for older IEs-->
+      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+   </head>
+   
+   <!-- body -->
+   <body class="main-layout">
+    
+      <!-- header -->
+      <header>
+         <!-- header inner -->
+         
+         <div class="header-top">
+            <div class="header">
+               <div class="container-fluid">
+                  <div class="row">
+                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
+                        <div class="full">
+                           <div class="center-desk">
+                              <div class="logo">
+                               </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
+                        <div class="menu-area">
+                           <div class="limit-box">
+                              <nav class="main-menu">
+                              
+                              </nav>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <!-- end header inner -->
+            <!-- end header -->
+            <section class="slider_section">
+               <div id="myCarousel" class="carousel slide banner_main" data-ride="carousel">
+                  
+                  <div class="carousel-inner">
+                     <div class="carousel-item active">
+                        <div class="container">
+                           <div class="carousel-caption">
+                              <div class="row ">
+                                 <div class="col-md-7">
+                                    <div class="text-bg">
+                                       <span>TO DO LIST</span> 
+                                       <h1> {{ firstName }}'s list </h1>
+                                       <p>Welcome to your personalized to-do list. Stay organized and productive by managing your tasks efficiently.</p>
+                                       </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </section>
+         </div>
+      </header>
+      
+      <!-- three box -->
+      <div id="service" class="back_box">
+        <div class="container-fluid">
+           <div class="row">
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 padd_rile">
+                 <div class="three_box">
+                    <span>01</span>
+                    <h3>Task Organization</h3>
+                    <p>Efficiently organize your tasks and to-do lists to stay productive.</p>
+                 </div>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 padding_l">
+                 <div class="three_box yellow">
+                    <span class="yellow">02</span>
+                    <h3>Task Prioritization</h3>
+                    <p>Prioritize your tasks based on urgency and importance to manage your time effectively.</p>
+                 </div>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 padd_ri">
+                 <div class="three_box">
+                    <span>03</span>
+                    <h3>Task Reminders</h3>
+                    <p>Set reminders and notifications for important tasks to never miss a deadline.</p>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+     
+      <!-- end three box -->
+      <!-- wellcome  -->
+      <div id="clean" class="wellcome">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                <div class="titlepage">
+                  <h2>Welcome to your To Do's</h2>
+                  <p>Your ultimate task management solution. Stay organized, prioritize effectively, and never miss a deadline.</p>
+               </div>
+               
+               </div>
+            </div>
+            
+  
+
+
+
+
+ 
+
+
+
+       
+
+
+            <div class="button-container">
+               <button (click)="toggleSortDirection()" [ngClass]="{ 'ascending': sortByEarliestFirst, 'descending': !sortByEarliestFirst }">
+                  Sort by Date   <i class="fas fa-arrow-up" *ngIf="sortByEarliestFirst"></i>
+                  <i class="fas fa-arrow-down" *ngIf="!sortByEarliestFirst"></i>
+                  <i class="fas fa-arrow-up" *ngIf="!sortByEarliestFirst"></i>
+                </button>
+               <button class=" create-todo-button" (click)="showPopup()">Create To Do</button>
+            </div>
+         
+
+            <button>
+               <a href="https://twitter.com/intent/tweet?text=Visit ElderlyCare Today ! {{websiteUrl}}&hashtags=elderlyCare,visitus">
+                  Share your thoughts on <i class="fab fa-twitter"></i> <!-- Font Awesome Twitter icon -->
+              </a>
+          </button>
+
+            <div class="board-container">
+               <div class="board" style="display: flex;">
+
+                  <div *ngFor="let status of todoStatuses" style="flex: 2;">
+                     <h3>{{ status }}</h3>
+                    
+                      
+                      
+                 <div
+                 cdkDropList
+                 [id]="'todo-' + status.toLowerCase()"
+                 #todoList="cdkDropList"
+                 [cdkDropListData]="getTodosByStatus(status)"
+ 
+                 [cdkDropListConnectedTo]="boardIds"
+                 [cdkDropListEnterPredicate]="allowDropPredicate"
+                 class="todo-list"
+                 (cdkDropListDropped)="onDrop($event, status)"
+               >
+               <div *ngIf="getTodosByStatus(status).length === 0" class="empty-list-placeholder">
+                  Empty
+                </div>
+               <div
+                     class="todo-card"
+                     *ngFor="let todo of getTodosByStatus(status) "
+                     cdkDrag
+                     [cdkDragData]="todo"
+                     
+                   >
+                     <div class="todo-header">
+                       <input
+                         type="checkbox"
+                         class="todo-checkbox"
+                         [checked]="isTodoCompleted(todo)"
+                         [disabled]="isTodoCompleted(todo)"  [ngClass]="{ 'in-progress': isTodoInProgress(todo) }"
+
+                         (change)="handleTodoCompletion(todo)"
+                       />
+                       
+                       <h4 class="todo-title">{{ todo.title }}</h4>
+                     </div>
+                     <div class="todo-description">
+                       <p>{{ todo.description }}</p>
+                       <p>{{ todo.createdAt | date:'yyyy-MM-dd HH:mm' }}</p>
+
+                       <p *ngIf="todo.assignees.length > 0">
+                         Assigned to: <span class="assigned-text">{{ getAssignedNames(todo) }}</span>
+                       </p>
+                     </div>
+                     <div class="todo-actions">
+                       <button type="button" (click)="removeTodo(todo)" data-mdb-tooltip-init title="Remove">
+                         <i class="fas fa-trash-alt fa-lg text-danger"></i>
+                       </button>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             
+         </div>
+      </div>
+      <!-- end wellcome -->
+            <!-- ourwork -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+7IcOr+ytiMw1zJRusQ1G5eC3p6v5CDtfF/t3o4gc3Rw3Ot" crossorigin="anonymous">
+
+           
+            <div class="dialog-bubble" (click)="redirectToGame()">
+               Would you like to play a game? <span class="arrow">&#8594;</span> 
+               <p class="small-text">Fun fact : Playing games can help improve memory.</p>
+             </div>
+            <div *ngIf="isPopupVisible" class="popup-container">
+               <div class="popup">
+                 <span class="close" (click)="hidePopup()">&times;</span>
+                 <h2>Create To Do</h2>
+                 <form (submit)="saveTodo()"> <!-- Call saveTodo on form submit -->
+                   <!-- Title Input -->
+                  
+                  
+                      
+                         <div class="form-group">
+                         <label for="title">Title:</label>
+                         <div class="input-group">
+                            <input type="text" id="title" class="form-control" required [(ngModel)]="todoData.title" name="title" #titleInput="ngModel">
+                            <div class="input-group-append">
+                               <button class="btn btn-outline-secondary" type="button" (click)="startDictation()">
+                               <i class="fas fa-microphone"></i>
+                               </button>
+                            </div>
+                         </div>
+                            <div *ngIf="titleInput.invalid && (titleInput.dirty || titleInput.touched)" class="text-danger">Title is required</div>
+                         </div>
+                        
+                         <!-- Description Input -->
+                         <div class="form-group">
+                         <label for="description">Description:</label>
+                         <div class="input-group">
+                            <textarea id="description" class="form-control" required [(ngModel)]="todoData.description" name="description"></textarea>
+                            <div class="input-group-append">
+                               <button class="btn btn-outline-secondary" type="button" (click)="startDictation()">
+                               <i class="fas fa-microphone"></i>
+                               </button>
+                            </div>
+                         </div>
+                         </div>
+             
+             
+             
+             
+                   <!-- Assignment Section -->
+                            <div class="form-group">
+                            <h4>Get the help you need:</h4>
+                            <p class="small-text">Click on a relative to assign or unassign</p>
+             
+             
+                            <!-- Relative Checkboxes -->
+                            <div *ngFor="let relative of relatives" class="form-check">
+                               <input type="checkbox" [id]="'relative_' + relative.idRelative" class="form-check-input" [value]="relative.idRelative" (change)="updateAssignees($event)">
+                               <label [for]="'relative_' + relative.idRelative" class="form-check-label">{{ relative.firstName }}</label>
+                            </div>
+                            <!-- Volunteer Checkbox -->
+                            </div>
+             
+             
+                   <!-- Buttons -->
+                   <div class="form-group">
+                     <button type="button" class="btn btn-secondary" (click)="hidePopup()">Cancel</button>
+                     <button type="submit" class="btn btn-primary" style="margin-left: 205px;" [disabled]="titleInput.invalid">Save</button>
+                   </div>
+                 </form>
+               </div>
+             </div>
+             
+
+
+            </div>
+
+
+
+
+       <!-- end ourwork -->
+   
+      <!-- review -->
+             <!-- Javascript files-->
+      <script src="/assets/js/jquery.min.js"></script>
+      <script src="/assets/js/popper.min.js"></script>
+      <script src="/assets/js/bootstrap.bundle.min.js"></script>
+      <script src="/assets/js/jquery-3.0.0.min.js"></script>
+      <script src="/assets/js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="/assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="/assets/js/custom.js"></script>
+      <script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+       
+      <!-- google map js -->
+       <!-- end google map js -->
+   </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+<app-footer-template-nadhir></app-footer-template-nadhir>

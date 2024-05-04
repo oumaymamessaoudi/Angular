@@ -36,15 +36,7 @@
           <h4>Find A Doctor</h4>
         </div>
         <div class="card-body">
-          <!-- Gender Dropdown -->
-          <div class="form-group">
-            <label for="gender">Gender</label>
-            <select id="gender" class="form-control" [(ngModel)]="selectedGender" (change)="searchDoctors()">
-              <option value="">All Genders &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#x25BC;</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-            </select>
-          </div>
+         
           <!-- Specialization Dropdown -->
           <div class="form-group">
             <label for="specialization">Specialization</label>
@@ -149,16 +141,18 @@
 <script src="/assets/assetDoctor/js/aos.js"></script>
 
  
- <style>.filtering-box {
+ <style>
+ 
+ 
+ .filtering-box {
   border: 10px solid #e5e5e5;
   border-radius: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
- 
   width: 105%;
-    position: absolute;
-    left: 20px;
-  
+  position: absolute;
+  left: 20px;
+  height: auto; /* Change to auto height */
 }
 
 .filtering-box .card-header {

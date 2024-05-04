@@ -1,0 +1,200 @@
+<app-headertemp></app-headertemp><!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+
+
+
+    <link href="/assets/FrontOffice/css/_site-blocks.css" rel="stylesheet">
+    <link href="/assets/FrontOffice/css/aos.css" rel="stylesheet">
+    <link href="/assets/FrontOffice/css/bootstrap-datepicker.css" rel="stylesheet">
+    <link href="/assets/FrontOffice/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/FrontOffice/css/bootstrap.min.css.map" rel="stylesheet">
+    <link href="/assets/FrontOffice/css/jquery-ui.css" rel="stylesheet">
+    <link href="/assets/FrontOffice/css/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="/assets/FrontOffice/css/magnific-popup.css" rel="stylesheet">
+    <link href="/assets/FrontOffice/css/mediaelementplayer.css" rel="stylesheet">
+    <link href="/assets/FrontOffice/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="/assets/FrontOffice/css/owl.theme.default.min.css" rel="stylesheet">
+    <link href="/assets/FrontOffice/css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="/assets/FrontOffice/scss/_site-navbar.scss" rel="stylesheet">
+    <link href="/assets/FrontOffice/scss/_site-blocks.scss" rel="stylesheet">
+    <link href="/assets/FrontOffice/scss/_site-base.scss" rel="stylesheet">
+    <link href="/assets/FrontOffice/scss/style.scss" rel="stylesheet">
+    
+    
+    
+    <app-headertemp></app-headertemp>
+     
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="/assets/FrontOffice/js/aos.js"></script>
+    <script src="/assets/FrontOffice/js/bootstrap-datepicker.min.js"></script>
+    <script src="/assets/FrontOffice/js/bootstrap.min.js"></script>
+    <script src="/assets/FrontOffice/js/isotope.pkgd.min.js"></script>
+    <script src="/assets/FrontOffice/js/jquery-3.3.1.min.js"></script>
+    <script src="/assets/FrontOffice/js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="/assets/FrontOffice/js/jquery-ui.js"></script>
+    <script src="/assets/FrontOffice/js/jquery.animateNumber.min.js"></script>
+    <script src="/assets/FrontOffice/js/jquery.countdown.min.js"></script>
+    <script src="/assets/FrontOffice/js/jquery.easing.1.3.js"></script>
+    <script src="/assets/FrontOffice/js/jquery.fancybox.min.js"></script>
+    <script src="/assets/FrontOffice/js/jquery.magnific-popup.min.js"></script>
+    <script src="/assets/FrontOffice/js/jquery.stellar.min.js"></script>
+    <script src="/assets/FrontOffice/js/jquery.sticky.js"></script>
+    <script src="/assets/FrontOffice/js/jquery.waypoints.min.js"></script>
+    <script src="/assets/FrontOffice/js/main.js"></script>
+    <script src="/assets/FrontOffice/js/mediaelement-and-player.min.js"></script>
+    <script src="/assets/FrontOffice/js/owl.carousel.min.js"></script>
+    <script src="/assets/FrontOffice/js/popper.min.js"></script>
+    <script src="/assets/FrontOffice/js/slick.min.js"></script>
+    <script src="/assets/FrontOffice/js/typed.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-game Component</title>
+
+</head>
+<body>  
+    
+ 
+     <div class="invisible-block"></div>
+
+    <div class="game-selection">
+        <button class="game-button" (click)="selectGame('memory')">Memory Game</button>
+        <button class="game-button" (click)="selectGame('rocket')">Rocket Game</button>
+        <button class="game-button" (click)="selectGame('snake')">Snake Game</button>
+    </div>
+
+    <div id="memory-game-container" class="game-container hide">
+        <div class="invisible-block"></div>
+
+        <div *ngIf="gameInProgress">
+            <div class="memory-game-container">
+                <div class="memory-game">
+                    <div class="cards" *ngFor="let card of cards">
+                        <div class="card" [class.flipped]="card.flipped" (click)="flipCard(card)">
+                            <div class="front"></div>
+                            <div class="back">{{ card.value }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="game-over-container" *ngIf="!gameInProgress">
+            <div class="game-over-message">
+              <h1>Congratulations!</h1>
+              <p>You've completed the memory game.</p>
+              <div class="confetti"></div>
+        
+              <div class="confettii"></div>
+        
+              <div class="confetti"></div>
+        
+              <div class="confettiio"></div>
+        
+              <div class="confetti"></div>
+        
+              <div class="confetti"></div>
+        
+              <div class="confetti"></div>
+        
+            </div>
+            <button class="play-again-button" (click)="playAgain()">Play Again</button>
+          </div>    </div>
+
+          <div id="rocket-game-container" class="game-container hide">
+            <form>
+    <div class="board">
+         <input id="bonus_01" name="radio1" class="bonus" type="radio">
+        <input id="bonus_02" name="radio2" class="bonus" type="radio">
+        <input id="bonus_03" name="radio3" class="bonus" type="radio">
+        <input id="bonus_04" name="radio4" class="bonus" type="radio">
+        <input id="bonus_05" name="radio5" class="bonus" type="radio">
+        <input id="bonus_06" name="radio6" class="bonus" type="radio">
+        <input id="bonus_07" name="radio7" class="bonus" type="radio">
+        <input id="bonus_08" name="radio8" class="bonus" type="radio">
+        <input id="bonus_09" name="radio9" class="bonus" type="radio">
+        <input id="bonus_10" name="radio10" class="bonus" type="radio">
+        <p class="enemy" id="enemy_01"></p>
+        <p class="enemy" id="enemy_02"></p>
+        <p class="enemy" id="enemy_03"></p>
+        <p class="enemy enemy_t1" id="enemy_04"></p>
+        <p class="enemy" id="enemy_05"></p>
+        <p class="enemy" id="enemy_06"></p>
+        <p class="enemy enemy_t3" id="enemy_07"></p>
+        <p class="enemy" id="enemy_08"></p>
+        <p class="enemy" id="enemy_09"></p>
+        <p class="enemy" id="enemy_10"></p>
+        <p class="enemy enemy_t1" id="enemy_11"></p>
+        <p class="enemy" id="enemy_12"></p>
+        <p class="enemy" id="enemy_13"></p>
+        <p class="enemy enemy_t2" id="enemy_14"></p>
+        <p class="enemy" id="enemy_15"></p>
+        <p class="enemy" id="enemy_16"></p>
+        <p class="enemy enemy_t3" id="enemy_17"></p>
+        <p class="enemy" id="enemy_18"></p>
+        <p class="enemy" id="enemy_19"></p>
+        <p class="enemy enemy_t3" id="enemy_20"></p>
+        <p class="enemy" id="enemy_21"></p>
+        <p class="enemy" id="enemy_22"></p>
+        <p class="enemy enemy_t1" id="enemy_23"></p>
+        <p class="enemy" id="enemy_24"></p>
+        <p class="enemy enemy_t2" id="enemy_25"></p>
+        <p class="enemy" id="enemy_26"></p>
+        <p class="enemy" id="enemy_27"></p>
+        <p class="enemy enemy_t3" id="enemy_28"></p>
+        <p class="enemy" id="enemy_29"></p>
+        <p class="enemy" id="enemy_30"></p>
+        <p class="enemy" id="enemy_31"></p>
+        <p class="enemy" id="enemy_32"></p>
+        <p class="enemy" id="enemy_33"></p>
+        <p class="enemy" id="enemy_34"></p>
+        <p class="enemy" id="enemy_35"></p>
+        <p class="enemy" id="enemy_36"></p>
+        <p class="enemy" id="enemy_37"></p>
+        <p class="enemy" id="enemy_38"></p>
+        <p class="enemy enemy_t3" id="enemy_39"></p>
+        <p class="enemy" id="enemy_40"></p>
+        <p class="enemy" id="enemy_41"></p>
+        <p class="enemy" id="enemy_42"></p>
+        <p class="enemy" id="enemy_43"></p>
+        <p class="enemy enemy_t2" id="enemy_44"></p>
+        <p class="enemy" id="enemy_45"></p>
+        <p class="enemy" id="enemy_46"></p>
+        <p class="enemy enemy_t1" id="enemy_47"></p>
+        <p class="enemy" id="enemy_48"></p>
+        <p class="enemy" id="enemy_49"></p>
+        <p class="enemy" id="enemy_50"></p>
+         <p id="status"><strong>Help:</strong> <span class="inactive">move cursor to the field.</span><span class="active">Ships fly around the halls, click on bonuses!</span></p>
+    </div>
+   <embed src="https://www.zapsplat.com/wp-content/uploads/2015/music-game/music_zapsplat_easy_cheesy.mp3" loop="true" autostart="true" width="20" height="10"> 
+<br>
+<audio controls autoplay loop autostart>
+    <source src="https://www.zapsplat.com/wp-content/uploads/2015/music-game/music_zapsplat_easy_cheesy.mp3" type="audio/mp3">
+  </audio>
+ 
+
+ </form>    </div>
+
+ <div id="snake-game-container" class="game-container hide">
+         <canvas id="stage" height="400" width="520"></canvas>  
+           </div>
+
+   
+</body>      
+</html>  
+
+
+
+
+
+
+
+
+
+
+
+

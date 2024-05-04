@@ -6,7 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { CalendarService } from '../../services2/calendar.service';
 import { Appointment } from '../../entities/appointment.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup ,Validators} from '@angular/forms';
 declare var createGoogleEvent: any;
 
@@ -22,12 +22,12 @@ export class CalendarDoctorComponent implements OnInit {
   appointmentId: number; // Add this line
   isInputsVisible = false;
   selectedAppointmentId: number | null = null;
-
+  approvedFirstEvents: EventApi[] = [];
   completedEvents: EventApi[] = [];
   approvedEvents: EventApi[] = [];
   doctorUsername: string; // Variable to store the doctor's username
   elderlyName:string;
-  
+  approvedOnlineEvents: EventApi[] = [];
   
   doctorId: number; // Add this line
   calendarId: number; // Add this line
@@ -64,7 +64,8 @@ export class CalendarDoctorComponent implements OnInit {
     private calendarService: CalendarService,
     private changeDetector: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private fb: FormBuilder,private elementRef: ElementRef
+    private fb: FormBuilder,private elementRef: ElementRef,
+    private router: Router
   ) {}
 
 ngOnInit() {
@@ -101,30 +102,63 @@ ngOnInit() {
 
 
 
-
-
-
         
         this.loadAppointments();
         this.loadPendingAppointments();
         this.loadApprovedAppointments(); // Add this line
        this.loadCompletedAppointments(); // Add this line
-      },
+       this.fetchApprovedOnlineAppointments(); // Call method to fetch approved appointments
+       this.loadApprovedOnlineAppointments();
+       },
       (error) => {
         console.error('Error fetching doctor email:', error);
       }
     );
   });
+
+ 
 }
 
 
 
 
+ 
+
+fetchApprovedOnlineAppointments() {
+  if (!isNaN(this.calendarId) && this.calendarId > 0) {
+    this.calendarService.getOnlineApprovedAppAppointments(this.calendarId).subscribe(
+      (approvedOnlineEvents: Appointment[]) => {
+        this.updateApprovedOnlineEvents(approvedOnlineEvents);
+       
+
+         console.log('Approved2 Online Appointments:', this.approvedOnlineEvents);
+        
+
+      },
+      (error) => {
+        console.error('Error fetching approved appointments:', error);
+      }
+    );
+  } else {
+    console.error('Invalid calendarId:', this.calendarId);
+  }
+}
+ 
+updateApprovedOnlineEvents(approvedOnlineEvents: Appointment[]) {
+ 
 
 
 
-
-
+  const events: EventInput[] = approvedOnlineEvents.map((appointment) => ({
+    id: appointment.idAppointment.toString(),
+    title: appointment.patientName,
+    start: new Date(appointment.appFrom),
+    end: new Date(appointment.appTo),
+  }));
+  // Set the events to the FullCalendar
+  this.approvedOnlineEvents = events as EventApi[];
+  this.changeDetector.detectChanges();
+}
 
 
 
@@ -399,6 +433,9 @@ getEndTime(appointmentTime: Date): string {
           // Update the list of pending appointments after rejection
           this.loadPendingAppointments();
           this.loadApprovedAppointments();
+          this.loadApprovedOnlineAppointments();
+
+          this.fetchApprovedOnlineAppointments();
         },
         (error) => {
           console.error('Error rejecting appointment:', error);
@@ -413,6 +450,11 @@ getEndTime(appointmentTime: Date): string {
       this.calendarService.getApprovedAppointmentsByCalendarId(this.calendarId).subscribe(
         (approvedAppointments: Appointment[]) => {
           this.updateApprovedAppointments(approvedAppointments);
+          
+
+        console.log('Approved888882 Appointments:', this.approvedEvents);
+         
+
         },
         (error) => {
           console.error('Error fetching approved appointments:', error);
@@ -422,7 +464,20 @@ getEndTime(appointmentTime: Date): string {
       console.error('Invalid calendarId:', this.calendarId);
     }
   }
- 
+  loadApprovedOnlineAppointments() {
+    if (!isNaN(this.calendarId) && this.calendarId > 0) {
+      this.calendarService.getApprovedAppointmentsByCalendarId(this.calendarId).subscribe(
+        (approvedOnlineAppointments: Appointment[]) => {
+          this.updateApprovedOnlineAppointments(approvedOnlineAppointments);
+        },
+        (error) => {
+          console.error('Error fetching approved online appointments:', error);
+        }
+      );
+    } else {
+      console.error('Invalid calendarId:', this.calendarId);
+    }
+  }
   updateApprovedAppointments(approvedAppointments: Appointment[]) {
     console.log('Approved Appointments:', approvedAppointments);
 
@@ -439,7 +494,22 @@ getEndTime(appointmentTime: Date): string {
     this.approvedEvents = events as EventApi[];
     this.changeDetector.detectChanges();
   }
+  updateApprovedOnlineAppointments(approvedOnlineAppointments: Appointment[]) {
+    console.log('Approved online Appointments:', approvedOnlineAppointments);
 
+
+
+
+    const events: EventInput[] = approvedOnlineAppointments.map((appointment) => ({
+      id: appointment.idAppointment.toString(),
+      title: appointment.patientName,
+      start: new Date(appointment.appFrom),
+      end: new Date(appointment.appTo),
+    }));
+    // Set the events to the FullCalendar
+    this.approvedEvents = events as EventApi[];
+    this.changeDetector.detectChanges();
+  }
   completeAppointment(appointmentId: number) {
     const isConfirmed = window.confirm('Are you sure you want to Mark this appointment As Done?');
  
@@ -449,6 +519,7 @@ getEndTime(appointmentTime: Date): string {
           // Update the list of pending appointments after completion
           this.loadPendingAppointments();
           this.loadApprovedAppointments();
+          this.loadApprovedOnlineAppointments();
               window.location.reload();
 
 
@@ -491,5 +562,9 @@ getEndTime(appointmentTime: Date): string {
       console.error('Invalid calendarId:', this.calendarId);
     }
   }
+  goToJitsi(id: number) {
+    this.router.navigate(['jitsi', id]);
+  }
+
  
 }

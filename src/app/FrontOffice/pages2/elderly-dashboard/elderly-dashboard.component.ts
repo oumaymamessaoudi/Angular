@@ -184,8 +184,13 @@ this.doctors = this.mapImageUrls(doctors);             },
   mapImageUrls(doctors: Doctor[]): Doctor[] {
     return doctors.map(doctor => {
       if (doctor.imagedoc) {
-        const filename = doctor.imagedoc.includes('null') ? doctor.imagedoc.split(',').pop().split('\\').pop() : doctor.imagedoc.split('\\').pop(); // Obtenir le nom de fichier à partir de l'URL
-        doctor.imagedoc = `assets/FrontOffice/images/${filename}`; // Construire le chemin relatif
+        // Doctor has an image, construct the image URL
+        const filename = doctor.imagedoc.includes('null') ? doctor.imagedoc.split(',').pop().split('\\').pop() : doctor.imagedoc.split('\\').pop(); // Get the filename from the URL
+        doctor.imagedoc = `assets/FrontOffice/images/${filename}`; // Construct the relative path
+      } else {
+        // Doctor doesn't have an image, set default image path
+        doctor.imagedoc = 'assets/FrontOffice/images/doctors-4.jpg';
+        
       }
       return doctor;
     });

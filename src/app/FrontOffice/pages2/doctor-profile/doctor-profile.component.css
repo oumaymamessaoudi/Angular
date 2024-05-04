@@ -153,7 +153,7 @@ h1 {
   max-width: 1000px; /* Adjust the max-width as needed */
   margin: 30px auto; /* Center the container horizontally */
   padding: 20px;
-  margin-left: 252px; /* Center the section horizontally */
+  margin-left: 292px; /* Center the section horizontally */
   margin-bottom: 40px;
 
   margin-top: 40px;
@@ -201,7 +201,73 @@ h1 {
 
 
 
+.btn-review[disabled] {
+  background-color: #f0f0f0; /* Light gray background */
+  color: #ff0000; /* Dark text color */
+  cursor: not-allowed; /* Change cursor to not-allowed */
+  border-color: #ff0000; /* Light gray border color */
+  opacity: 0.8; /* Reduced opacity for disabled look */
+  box-shadow: none; /* Remove any box shadow */
+  filter: grayscale(50%); /* Apply grayscale effect to make it visually disabled */
+}/* Styles for the ban timer container */
 
+/* Styles for the ban timer container */
+.ban-timer-container {
+  position: absolute;
+  top: 50%;
+  right: 0; /* Align to the right side */
+  transform: translateY(-50%);
+  background-color: #f1f1f1;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgb(255, 7, 7);
+}
 
+/* Styles for the ban timer text */
+.ban-timer-container p {
+  font-size: 16px;
+  color: #ff0000;
+  margin: 0;
+}
+
+/* Styles for the Patient Reviews heading */
+.title {
+  position: relative;
+  z-index: 1;
+}
+
+/* Styles for the "You are banned" message */
+.banned-message {
+  position: absolute;
+  top: 50%;
+  right: 0; /* Align to the right side */
+  transform: translateY(-50%);
+  color: rgba(255, 0, 0, 0.4); /* Example color */
+  font-weight: bold;
+}
+
+.ban-timer {
+  font-family: Arial, sans-serif;
+  display: inline-block;
+  background-color: #f1f1f1;
+  padding: 3px 6px; /* Adjust padding for smaller size */
+  border-radius: 3px; /* Adjust border radius for smaller corners */
+  box-shadow: 0 1px 2px rgb(255, 0, 0); /* Smaller shadow */
+  font-size: 14px; /* Adjust font size for smaller text */
+  margin-left: 90px; /* Add left margin for spacing */
+  margin-bottom: 20px; /* Add left margin for spacing */
+  font-weight: bold;
+  color: #ff0000;
+
+}
+.ban-timer span {
+  font-weight: bold;
+  color: #ff000071;
+}
 
  
+.title {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px; /* Add right margin to create space between elements */
+}

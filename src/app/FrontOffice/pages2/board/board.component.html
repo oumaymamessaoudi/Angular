@@ -1,0 +1,127 @@
+<div class="invisible-block"></div>
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="kanban-board"> <div *ngFor="let list of board.lists" class="kanban-list"> <h3>{{ list.name }}</h3> 
+  <div cdkDropList [cdkDropListData]="list.cards" class="kanban-card-container" (cdkDropListDropped)="onDrop($event, list, list)" >
+     <div *ngFor="let card of list.cards" cdkDrag class="todo-card"> <div class="todo-header"> <input type="checkbox" class="todo-checkbox" [checked]="isTodoCompleted(card.todo)" [disabled]="isTodoCompleted(card.todo)" (change)="handleTodoCompletion(card.todo)"> <h3 class="todo-title">{{ card.todo.title }}</h3> </div> <div class="todo-description"> <p>{{ card.todo.description }}</p> <p *ngIf="card.todo.assignees.length > 0"> Assigned to: <span class="assigned-text">{{ getAssignedNames(card.todo) }}</span> </p> </div> <div class="todo-actions"> <!-- Use a button for remove action --> <button type="button" (click)="removeTodo(card.todo)" data-mdb-tooltip-init title="Remove"> <i class="fas fa-trash-alt fa-lg text-danger"></i> </button> </div> </div> </div> </div> </div>
+
+ 
+ 
+<div class="button-container">
+  <button class=" create-todo-button" (click)="showPopup()">Create To Do</button>
+</div>
+
+
+<div class="todo-cards-container">
+  <div *ngFor="let todo of todos" class="todo-card">
+    <div class="todo-header">
+      <input type="checkbox" class="todo-checkbox" [checked]="isTodoCompleted(todo)" [disabled]="isTodoCompleted(todo)" (change)="handleTodoCompletion(todo)">
+      <h3 class="todo-title">{{ todo.title }}</h3>
+    </div>
+    <div class="todo-description">
+      <p>{{ todo.description }}</p>
+      <p *ngIf="todo.assignees.length > 0">
+          Assigned to: <span class="assigned-text">{{ getAssignedNames(todo) }}</span>
+        </p>      </div>
+
+        <div class="todo-actions">
+          <!-- Use a button for remove action -->
+          <button type="button" (click)="removeTodo(todo)" data-mdb-tooltip-init title="Remove">
+            <i class="fas fa-trash-alt fa-lg text-danger"></i>
+          </button>
+        </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="isPopupVisible" class="popup-container">
+  <div class="popup">
+    <span class="close" (click)="hidePopup()">&times;</span>
+    <h2>Create To Do</h2>
+    <form (submit)="saveTodo()"> <!-- Call saveTodo on form submit -->
+      <!-- Title Input -->
+     
+     
+     
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <div class="input-group">
+          <input type="text" id="title" class="form-control" required [(ngModel)]="todoData.title" name="title" #titleInput="ngModel">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="startDictation()">
+              <i class="fas fa-microphone"></i>
+            </button>
+          </div>
+        </div>
+        <div *ngIf="titleInput.invalid && (titleInput.dirty || titleInput.touched)" class="text-danger">Title is required</div>
+      </div>
+      
+      <!-- Description Input -->
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <div class="input-group">
+          <textarea id="description" class="form-control" required [(ngModel)]="todoData.description" name="description"></textarea>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="startDictation()">
+              <i class="fas fa-microphone"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      
+
+      
+      <!-- Assignment Section -->
+      <div class="form-group">
+        <h4>Get the help you need:</h4>
+        <p class="small-text">Click on a relative to assign or unassign</p>
+
+        <!-- Relative Checkboxes -->
+        <div *ngFor="let relative of relatives" class="form-check">
+          <input type="checkbox" [id]="'relative_' + relative.idRelative" class="form-check-input" [value]="relative.idRelative" (change)="updateAssignees($event)">
+          <label [for]="'relative_' + relative.idRelative" class="form-check-label">{{ relative.firstName }}</label>
+        </div>
+        <!-- Volunteer Checkbox -->
+       
+      </div>
+      <!-- Buttons -->
+      <div class="form-group">
+        <button type="button" class="btn btn-secondary" (click)="hidePopup()">Cancel</button>
+        <button type="submit" class="btn btn-primary" style="margin-left: 205px;" [disabled]="titleInput.invalid">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+        
+      <!-- end wellcome -->

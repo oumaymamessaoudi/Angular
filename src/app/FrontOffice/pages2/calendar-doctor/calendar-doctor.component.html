@@ -3,27 +3,12 @@
   
     <div class='demo-app-sidebar-section'>
       <div class="instructions-container">
-        <p>Welcome, Dr. {{ doctorUsername }}!</p> <!-- Display the doctor's username -->
-
-        <h2>Instructions</h2>
+ 
+        <h2 class="welcome-message"> Dr. {{ doctorUsername }}'s Calendar :</h2>
         <!-- Add your instructions content here -->
       </div>
-      <label>
-        <input
-          type='checkbox'
-          [checked]='calendarVisible'
-          (change)='handleCalendarToggle()'
-        />
-        toggle whole calendar
-      </label>
-        <label>
-        <input
-          type='checkbox'
-          [checked]='calendarOptions.weekends'
-          (change)='handleWeekendsToggle()'
-        />
-        toggle weekends
-      </label>
+     
+       
     </div>
     
     <div class='demo-app-sidebar-section'>
@@ -87,32 +72,47 @@
 
 
 
-
-
-
-
-
-       <!-- Displaying Approved Appointments -->
-       <div class='demo-app-sidebar-section'>
-        <div class="section-box">
-          <h2>Approved Appointments ({{ approvedEvents.length }})</h2>
-          <ul>
-            <li *ngFor='let event of approvedEvents'>
-              <div class="appointment-item">
-                <div>
-                  <b>{{ event.start | date:'medium' }}</b>
-                  <i>{{ event.title }}</i>
-                </div>
-                <div class="action-button-container">
-                  <button class="action-button mark-as-done-button" (click)="completeAppointment(+event.id)">Mark as Done</button>
-                </div>
+    <div class='demo-app-sidebar-section'>
+      <div class="section-box">
+        <h2>Approved Appointments ({{ approvedEvents.length }})</h2>
+        <ul>
+          <li *ngFor='let event of approvedEvents'>
+            <div class="appointment-item">
+              <div>
+                <b>{{ event.start | date:'medium' }}</b>
+                <i>{{ event.title }}</i>
               </div>
-            </li>
-          </ul>
-        </div>
+              <div class="action-button-container">
+                <button class="action-button mark-as-done-button" (click)="completeAppointment(+event.id)">Mark as Done</button>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
+    </div>
+    
+    <!-- Display Approved Online Appointments -->
+    <div class='demo-app-sidebar-section' *ngIf="approvedOnlineEvents.length > 0">
+      <div class="section-box">
+        <h2>Approved Online Appointments ({{ approvedOnlineEvents.length }})</h2>
+        <ul>
+          <li *ngFor='let onlineEvent of approvedOnlineEvents'>
+            <div class="appointment-item">
+              <div>
+                <b>{{ onlineEvent.start | date:'medium' }}</b>
+                <i>{{ onlineEvent.title }}</i>
+              </div>
+              <div class="action-button-container">
+                 <button class="action-button3 go-to-consultation-button" (click)="goToJitsi(doctorId)">Go to Consultation</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
 
-      
+
 
 
     <!-- Displaying Completed Appointments -->

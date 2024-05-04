@@ -124,7 +124,16 @@ import { AllTemplateRelativeComponent } from './FrontOffice/Ambulance/all-templa
 import { HeaderTemplateRelativeComponent } from './FrontOffice/Ambulance/header-template-relative/header-template-relative.component';
 import { ProfiledownerComponent } from './FrontOffice/Auth+shop/profiledowner/profiledowner.component';
 import { ProfilerelativeComponent } from './FrontOffice/Auth+shop/profilerelative/profilerelative.component';
-
+import { TodosComponent } from './FrontOffice/pages2/todos/todos.component';
+import { TodoRelativeComponent } from './FrontOffice/pages2/todo-relative/todo-relative.component';
+import { DatePipe } from '@angular/common';
+import { JitsiComponent } from './FrontOffice/pages2/jitsi/jitsi.component';
+ import { BoardComponent } from './FrontOffice/pages2/board/board.component';
+import { ListComponent } from './FrontOffice/pages2/list/list.component';
+import { CardComponent } from './FrontOffice/pages2/card/card.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { GameComponent } from './FrontOffice/pages2/game/game.component';
+ 
 
 
 @NgModule({
@@ -226,7 +235,14 @@ import { ProfilerelativeComponent } from './FrontOffice/Auth+shop/profilerelativ
     AllTemplateRelativeComponent,
     HeaderTemplateRelativeComponent,
     ProfiledownerComponent,
-    ProfilerelativeComponent
+    ProfilerelativeComponent,
+    TodosComponent,
+    TodoRelativeComponent,
+    JitsiComponent,
+    BoardComponent,
+    ListComponent,
+    CardComponent,
+    GameComponent 
 
 
   ],
@@ -236,15 +252,14 @@ import { ProfilerelativeComponent } from './FrontOffice/Auth+shop/profilerelativ
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-
-
     ScheduleModule, RecurrenceEditorModule, DropDownListModule, ComboBoxModule, AutoCompleteModule, MultiSelectModule, ListBoxModule, DropDownTreeModule, MentionModule, TextBoxModule, NumericTextBoxModule, MaskedTextBoxModule, SliderModule, UploaderModule, ColorPickerModule, SignatureModule, RatingModule, ButtonModule, CheckBoxModule, RadioButtonModule, SwitchModule, ChipListModule, FabModule, SpeedDialModule, AccordionModule, ToolbarModule, ContextMenuModule, BreadcrumbModule, CarouselModule, TabModule, TreeViewModule, SidebarModule, MenuModule, AppBarModule, StepperModule,
     FullCalendarModule,
     BrowserAnimationsModule,    MatDialogModule,  ReactiveFormsModule
     
-  
+   ,DragDropModule
+
   ],
-  providers: [SharedService,MatDialog,
+  providers: [SharedService,MatDialog,DatePipe,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} } 
 ],

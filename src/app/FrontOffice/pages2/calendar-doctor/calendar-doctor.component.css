@@ -32,8 +32,17 @@ h2 {
   }
   
   .demo-app-sidebar-section {
-    padding: 2em;
-  }
+    margin-bottom: 10px; /* Adjust the margin bottom as needed */
+ 
+  }/* CSS for the welcome message */
+.welcome-message {
+  text-align: center; /* Center the text */
+  font-size: 24px; /* Adjust font size */
+  font-weight: bold; /* Make the text bold */
+  color: #0f4b76; /* Dark color for the text */
+  margin-bottom: 40px; /* Add space below the welcome message */
+}
+
   
   .demo-app-main {
     flex-grow: 1;
@@ -166,17 +175,17 @@ h2 {
   
   /* Button styles */
   .action-button {
-    padding: 8px 18px;
+  padding: 8px 5px; /* Increased padding for wider buttons */
     background-color: #596ed6;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 14px;
     font-weight: bold;
     text-transform: uppercase;
-    margin-right: 285px;
+    margin-right: 165px;
   }
   
   .action-button:hover {
@@ -238,4 +247,30 @@ h2 {
     font-weight: bold;
   }
    .welcome-dr { font-size: 2rem; font-weight: bold; margin-bottom: 1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-.doctor-name { color: #409EFF; text-transform: uppercase; }  
+.doctor-name { color: #409EFF; text-transform: uppercase; }
+.action-button3 {
+  padding: 8px 5px; /* Increased padding for wider buttons */
+    background-color: #61adff;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-right: 165px;
+  }  
+  .action-button3:hover{
+    padding: 8px 5px; /* Increased padding for wider buttons */
+      background-color: #395f89;
+      color: white;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 14px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-right: 165px;
+    }  

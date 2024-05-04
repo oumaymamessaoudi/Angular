@@ -6,10 +6,11 @@
         <div class="col-md-3 sidebar">
             <div class="profile-info">
                 <h2>{{ doctor?.lastName }}'s Dashboard</h2> <!-- Display doctor's username -->
-                <img [src]="doctor?.imagedoc" alt="Doctor Profile Image" class="profile-image img-fluid">
+                <img [src]="doctor?.imagedoc" alt=" " class="profile-image img-fluid">
                 <h3 class="username">{{ doctor?.username }}</h3>
                 <p class="specialization">{{ doctor?.specialization }}</p>
                 <button type="button" (click)="goToDoctorCalendar()">Go to Calendar</button>
+
                 <div>
                     <!-- Input field for file selection -->
                     <input type="file" #fileInput style="display: none;" accept="image/*" (change)="onFileSelected($event)">
@@ -49,7 +50,6 @@
             <table class="table-fill">
                 <thead>
                     <tr>
-                        <th class="text-left">ID</th>
                         <th class="text-left">Name</th>
                         <th class="text-left">Phone Number</th>
                         <th class="text-left">Email</th>
@@ -59,8 +59,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let patient of patients" class="table-hover">
-                        <td class="text-left">{{ patient.elderlyID }}</td>
-                        <td class="text-left">{{ patient.firstName }} {{ patient.lastName }}</td>
+                         <td class="text-left">{{ patient.firstName }} {{ patient.lastName }}</td>
                         <td class="text-left">{{ patient.phoneNumber }}</td>
                         <td class="text-left">{{ patient.email }}</td>
                         <td class="text-left">{{ patient.dateOfBirth }}</td>

@@ -21,4 +21,7 @@ export interface Elderly {
    // ambulances: Ambulance[];
    // toDoList: TodoList;
   //  forumPosts: ForumPost[];
+  badCommentsCount: number;
+   banned :boolean ;
+
   }

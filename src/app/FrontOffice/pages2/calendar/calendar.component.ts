@@ -7,7 +7,7 @@ import listPlugin from '@fullcalendar/list';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import { MatDialog } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CalendarService } from '../../services2/calendar.service';
 import { DoctorCalendarDTO } from '../../entities/doctor-calendar.dto';
 import { Appointment } from '../../entities/appointment.model';
@@ -71,7 +71,8 @@ export class CalendarComponent implements OnInit {
     private changeDetector: ChangeDetectorRef,
     public dialog: MatDialog,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.appointmentForm = this.formBuilder.group({
       patientName: ['', [Validators.required, Validators.minLength(3)]],
@@ -171,20 +172,33 @@ export class CalendarComponent implements OnInit {
       }
     );
   }
+  goToConsultation(): void {
+    // Construct the URL for the consultation
+    const consultationUrl = 'https://meet.jit.si/bwb-bfqi-vmh'; // Replace with your consultation URL
+
+    // Redirect the user to the consultation URL
+    window.location.href = consultationUrl;
+  } 
   updateCalendarEvents(appointments: Appointment[]) {
     const approvedAppointments = appointments.filter(appointment => appointment.appStatus === 'APPROVED');
+    const onlineAppointments = appointments.filter(appointment => appointment.appFirst === true);
+
     const events: EventInput[] = approvedAppointments.map((appointment) => ({
       id: appointment.idAppointment.toString(), // Adjust the property name
       title: appointment.patientName,
       start: new Date(appointment.appFrom), // Convert string to Date
       end: new Date(appointment.appTo),     // Update with the correct property
       color: this.getRandomColor(),
-
+      extendedProps: {
+        ['isOnline']: appointment.appFirst === true
+      }
     }));
 
     // Set the events to the FullCalendar
     this.currentEvents = events as EventApi[];
     this.calendarOptions.events = events;
+    this.pendingEvents = this.currentEvents.filter(event => event.extendedProps['isOnline']);
+
     this.changeDetector.detectChanges();
   }
 
@@ -203,20 +217,58 @@ export class CalendarComponent implements OnInit {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    // You can decide when to show the form, for example, when a date is selected
-     const startDate = selectInfo.startStr;
-  const endDate = selectInfo.endStr;
 
+    const selectedDate = new Date(selectInfo.startStr);
+    const today = new Date(); // Get today's date
+    
+    // Check if the selected date is earlier than today
+    if (selectedDate < today) {
+      // Display an error message or take appropriate action
+      alert('You cannot select a date earlier than today for the appointment.');
+      return; // Exit the method
+    }
+    
+    // You can decide when to show the form, for example, when a date is selected
+    const startDate = new Date(selectInfo.startStr);
+    const endDate = new Date(selectInfo.endStr);
+    
   // Pre-fill the form fields
   this.appointmentForm.patchValue({
     patientName: '', // You can set a default value or leave it empty
-    appFrom: startDate,
-    appTo: endDate,
+    appFrom: startDate.toISOString().substring(0, 16), // Set appFrom in ISO string format
+    appTo: this.calculateAppTo(startDate).toISOString().substring(0, 16), // Calculate and set appTo
     appFirst: false, // Default to false
     symptom: '', // You can set a default value or leave it empty
   });
+  
+  // Disable the appTo input field
+  setTimeout(() => {
+    const appToInput = document.getElementById('appTo') as HTMLInputElement;
+    appToInput.disabled = true;
+  });
+
+  this.appointmentForm.get('appFrom')?.valueChanges.subscribe((appFrom: string) => {
+    const appFromDate = new Date(appFrom);
+    appFromDate.setHours(appFromDate.getHours() + 1); // Add 1 hour to appFrom
+
+    const appToDate = this.calculateAppTo(appFromDate);
+    this.appointmentForm.patchValue({ appTo: appToDate.toISOString().substring(0, 16) });
+  });
     this.showFormDialog = true;
   }
+
+
+  calculateAppTo(startDate: Date): Date {
+    // Clone the startDate to avoid mutating the original date object
+    const appTo = new Date(startDate.getTime());
+  
+    // Add 2 hours to appTo
+    appTo.setHours(appTo.getHours() + 1);
+  
+    return appTo;
+  }
+
+
 
   onSubmit() {
     const patientNameControl = this.appointmentForm.get('patientName');

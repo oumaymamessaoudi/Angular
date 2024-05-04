@@ -14,7 +14,10 @@ export class DoctorProfileService {
 
   constructor(private http: HttpClient) { }
 
-
+  
+  getElderlyBannedStatus(elderlyId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/Doctor/elderly/${elderlyId}/banned-status`);
+  }
 
   getProfile(id: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/api/profile/${id}`);
@@ -60,8 +63,7 @@ export class DoctorProfileService {
   editReview(reviewId: number, updatedReview: Review, elderlyId: number): Observable<Review> {
     const url = `${this.baseUrl}/Doctor/${reviewId}?elderlyId=${elderlyId}`;
  
-    console.log("psspsppsspps", elderlyId);
-    return this.http.put<Review>(url, updatedReview);
+     return this.http.put<Review>(url, updatedReview);
   }
   getPatientsByDoctorId(doctorId: number): Observable<Elderly[]> {
     const url = `${this.baseUrl}/Doctor/patients/${doctorId}`;
@@ -97,4 +99,14 @@ deleteCabinetPictures(doctorId: number): Observable<any> {
     });
     return this.http.post<any>(`${this.baseUrl}/Doctor/upload-cabinet-pictures/${doctorId}`, formData);
   }
+
+  getElderlyBannedUntil(elderlyId: number): Observable<Date> {
+    const url = `${this.baseUrl}/Doctor/${elderlyId}/bannedUntil`;
+    return this.http.get<Date>(url).pipe(
+      catchError((error: any) => {
+        throw error;
+      })
+    );
+  }
+
 }

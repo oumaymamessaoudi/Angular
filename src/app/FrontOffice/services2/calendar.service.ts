@@ -100,7 +100,10 @@ getCompletedAppointmentsByCalendarId(calendarId: number): Observable<Appointment
   const url = `${this.baseUrl}/appointments/${calendarId}/completed-appointments`;
   return this.http.get<Appointment[]>(url);
 }
-
+getOnlineApprovedAppAppointments(calendarId: number): Observable<Appointment[]> {
+  const url = `${this.baseUrl}/appointments/${calendarId}/online-appointments`;
+  return this.http.get<Appointment[]>(url);
+}
 
 getApprovedAppointmentsByCalendarId(calendarId: number): Observable<Appointment[]> {
   const url = `${this.baseUrl}/appointments/${calendarId}/approved-appointments`;

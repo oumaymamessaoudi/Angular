@@ -284,4 +284,36 @@ button[type="submit"]:hover {
 
 .cancel-button:hover {
   background-color: #cb5f6a; /* Darker shade on hover */
+}/* Styles for the "Go to Consultation" button */
+.consultation-button-container {
+  position: relative; /* Ensure the container is positioned relative to allow absolute positioning */
+}
+
+.consultation-button {
+  position: absolute; /* Position the button absolutely within its container */
+  top: 50%; /* Position the button vertically at the center of its container */
+  left: 50%; /* Position the button horizontally at the center of its container */
+  transform: translate(-50%, -50%); /* Center the button exactly at the center of its container */
+  background-color: #61adff; /* Blue background color */
+  color: #fff; /* White text color */
+  border: none; /* Remove border */
+  padding: 6px 10px; /* Adjust padding for smaller size */
+  font-size: 10px; /* Adjust font size */
+  cursor: pointer; /* Show pointer cursor on hover */
+  border-radius: 2px; /* Add rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.consultation-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+.fc-event-element .action-button-container {
+  position: absolute;
+  right: 60px;
+  bottom: 50px;
+}
+
+.fc-event-element {
+  min-width: 100px; /* Minimum width of 100 pixels */
+  min-height: 50px; /* Minimum height of 50 pixels */
 }

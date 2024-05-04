@@ -36,7 +36,7 @@
               </div>
             
               <div class="question-container">
-                <label for="appFirst">Is this your first visit to the office?</label>
+                <label for="appFirst">Would you like your consultation to be online?</label>
                 <div class="checkbox-wrapper">
                   <input type="checkbox" id="appFirst" formControlName="appFirst">
                   <span class="yes-text">Yes</span>
@@ -104,11 +104,21 @@
   <div class='demo-app-main'>
     <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
       <ng-template #eventContent let-arg>
-        <b>{{ arg.timeText }}</b>
-        <i>{{ arg.event.title }}</i>
+        <div *ngIf="arg.event.extendedProps.isOnline">
+          <!-- Display "Go to Consultation" button for online appointments -->
+          <div class='fc-event-element'>
+            <div class='action-button-container'>
+              <button class="consultation-button" (click)="goToConsultation()">Go to Consultation</button>
+            </div>
+            
+      </div>    </div>
+           <!-- Display event information for non-online appointments -->
+          <b>{{ arg.timeText }}</b>
+          <i>{{ arg.event.title }}</i>
+    
+ 
       </ng-template>
     </full-calendar>
   </div>
 </div>
-
 

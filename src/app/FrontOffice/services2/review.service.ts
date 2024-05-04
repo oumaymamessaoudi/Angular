@@ -1,15 +1,21 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, interval, throwError } from 'rxjs';
 import { Review } from '../entities/review.model';
+import { AuthService } from '../Auth+shop/Services/AuthService';
+import { switchMap } from 'rxjs/operators';
+import { SignService } from '../Auth+shop/Services/sign.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReviewService {
   private baseUrl = 'http://localhost:8081'; // Replace with your backend URL
+  private readonly checkInterval = 60000; // Check every minute (adjust as needed)
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: SignService) {
+ 
+   }
 
   getAllReviews(): Observable<Review[]> {
     return this.http.get<Review[]>(`${this.baseUrl}/Doctor/review/All`);
@@ -49,4 +55,10 @@ export class ReviewService {
       })
     );
   }
+
+  
+  public getArchivedStatus(elderlyId: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/Doctor/${elderlyId}/checkArchivedStatus`);
+  }
+
 }

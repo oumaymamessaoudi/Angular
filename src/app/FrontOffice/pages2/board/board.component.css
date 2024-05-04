@@ -1,0 +1,295 @@
+.kanban-board {
+  display: flex;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.kanban-list {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.todo-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  transition: transform 0.3s ease;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+[cdkDrag] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: white;
+  margin-bottom: 5px;
+  min-height: 100px; /* Increase the minimum height of the cards */
+  border: none; /* Remove the border */
+
+}
+
+ 
+  .popup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+  }
+  
+  .popup {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+  }
+  
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+
+
+
+
+
+
+  .header-container {
+    margin-left: 20px;
+    margin-top: 60px; /* Adjust the margin as needed */
+      justify-content: center;
+    overflow: hidden; /* Hide overflow to prevent the image from overflowing */
+ }
+  
+  .calendar-image {
+     height: 300px; /* Increase the height to make it taller */
+    width: 1490px; /* Let the width adjust automatically */
+   }
+   .todo-lists-text {
+    position: absolute;
+    top: 25%; /* Adjust this value to move the text higher */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  
+ 
+  
+.todo-card:hover {
+    align-items: center;
+    display: flex;
+    padding: 15px;
+  }
+  .todo-header {
+    display: flex;
+    align-items: center;
+  }
+  .todo-checkbox {
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    appearance: none;
+    border: 2px solid #35c63a;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    transition: background-color 0.2s ease;
+  }
+  
+  .todo-checkbox:checked {
+    background-color: #FF5733;
+  }
+  .todo-owner-text {
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px; /* Add bottom margin to create space between the owner text and the image */
+  }
+  
+  .checkmark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 5px;
+    border-left: 2px solid #FFF;
+    border-bottom: 2px solid #FFF;
+    transform: rotate(-45deg);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .todo-checkbox:checked + .checkmark {
+    opacity: 1;
+  }
+ 
+.todo-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  max-height: 40px; /* Maximum height for two lines of text */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+ 
+.todo-description {
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 15px;
+  }
+  
+  .assigned-text {
+    font-style: italic;
+    color: #9c7de0;
+  }
+  .create-todo-button {
+    background-color: #3282ce; /* Orange color */
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 18px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-right: 50px;
+    margin-bottom: 40px;
+
+
+  }
+  
+  .create-todo-button:hover {
+    background-color: #16b1ff; /* Darker orange color */
+  }
+  .button-container {
+    display: flex;
+    justify-content: flex-end; /* Align the button to the right */
+    margin-top: 20px;
+  }.todo-checkbox:checked {
+    background-color: #4CAF50; /* Green background when checked */
+  }
+  
+  .todo-checkbox[disabled] {
+    cursor: not-allowed; /* Change cursor to not-allowed when disabled */
+  }
+
+
+
+
+
+
+
+  .gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #7e40f6;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(
+      to right,
+      rgba(126, 64, 246, 1),
+      rgba(80, 139, 252, 1)
+    );
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(
+      to right,
+      rgba(126, 64, 246, 1),
+      rgba(80, 139, 252, 1)
+    );
+  }
+  
+  .mask-custom {
+    background: rgba(24, 24, 16, 0.2);
+    border-radius: 2em;
+    backdrop-filter: blur(25px);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    background-clip: padding-box;
+    box-shadow: 10px 10px 10px rgba(46, 54, 68, 0.03);
+  }
+ 
+
+.mic-button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #007bff;
+  font-size: 1.2rem;
+}
+/* Dark mode styles */
+.dark-mode {
+  background-color: #333; /* Dark background color */
+  color: #fff; /* Light text color */
+}
+
+/* Example: Dark mode styles for specific elements */
+.dark-mode .navbar {
+  background-color: #222; /* Dark navbar background color */
+  color: #fff; /* Light text color */
+}
+
+/* Light mode styles (default styles) */
+body {
+  background-color: #fff; /* Light background color */
+  color: #333; /* Dark text color */
+}
+
+/* Example: Light mode styles for specific elements */
+.navbar {
+  background-color: #f8f9fa; /* Light navbar background color */
+  color: #333; /* Dark text color */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  .invisible-block {
+  height: 80px; /* Adjust the height based on your navbar's height */
+  width: 100%;
+}

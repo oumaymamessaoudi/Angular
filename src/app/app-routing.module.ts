@@ -53,11 +53,16 @@ import { AllTemplateRelativeComponent } from './FrontOffice/Ambulance/all-templa
 import { ProfiledownerComponent } from './FrontOffice/Auth+shop/profiledowner/profiledowner.component';
 import { ProfilerelativeComponent } from './FrontOffice/Auth+shop/profilerelative/profilerelative.component';
 import { AfficheOwnerComponent } from './FrontOffice/Ambulance/affiche-owner/affiche-owner.component';
-
+import {  TodosComponent } from './FrontOffice/pages2/todos/todos.component';
+import { TodoRelativeComponent } from './FrontOffice/pages2/todo-relative/todo-relative.component';
+import { JitsiComponent } from './FrontOffice/pages2/jitsi/jitsi.component';
+import { BoardComponent } from './FrontOffice/pages2/board/board.component';
+import { GameComponent } from './FrontOffice/pages2/game/game.component';
+ 
 const routes: Routes = [
+         { path: 'game', component: GameComponent },
 
   
-
 
   {
     path:"" , 
@@ -72,7 +77,8 @@ const routes: Routes = [
         path:"aff",
         component:AfficheAmbulanceComponent,
         
-      },
+      } ,  { path: 'todolist/:elderlyId', component: BoardComponent } 
+      
       
     ]
   },
@@ -164,7 +170,7 @@ const routes: Routes = [
     component:RoleStatisticsComponent,
    },
    
-   
+
 {
   path: '',
   component: AlltemplatesfontComponent ,
@@ -174,6 +180,9 @@ const routes: Routes = [
       component: HomeshopComponent
     },
     { path: 'dash/:elderlyId', component: ElderlyDashboardComponent },
+    { path: 'todo/:elderlyId', component: TodosComponent },
+    { path: 'game/:elderlyId', component: GameComponent },
+
 
   { path: 'doctor-profile/:id/:elderlyId', component: DoctorProfileComponent },
   //teb3a l elderly 
@@ -279,12 +288,13 @@ children: [
   {
     path: 'aff',
     component: AfficheAmbulanceComponent
-  },
+  }, 
   
   {
     path: 'aff/:relativeId', // Utilisation des paramètres de route pour l'ID du parent relatif
     component: AfficheAmbulanceComponent
   }
+,       { path: 'todoRelative/:relativeId', component: TodoRelativeComponent },
 
 
 
@@ -363,10 +373,16 @@ children: [
     component: CalendarDoctorComponent
   }
   ,
-
+  {
+    path: 'jitsi/:id',
+    component: JitsiComponent
+  },
   { path: 'doctor-dashboard/:id',
    component: DoctorDashboardComponent }
-  
+   ,{
+    path: "todo",
+    component: TodosComponent
+      }
     ]
 
   }

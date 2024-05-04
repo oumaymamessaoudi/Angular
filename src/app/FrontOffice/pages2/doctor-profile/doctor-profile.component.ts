@@ -8,6 +8,10 @@ import { Review } from '../../entities/review.model';
 import { ReviewService } from '../../services2/review.service';
 import { CalendarService } from '../../services2/calendar.service';
 import { Appointment } from '../../entities/appointment.model';
+import { interval } from 'rxjs';
+ import { switchMap } from 'rxjs/operators';
+import { SignService } from '../../Auth+shop/Services/sign.service';
+import {  Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-doctor-profile',
@@ -24,6 +28,10 @@ export class DoctorProfileComponent implements OnInit {
   completedAppointments: Appointment[] = [];
   showReviewForm = false;
   isFavoriteOfTheMonth: boolean; // Track favorite status
+  bannedUntil: Date; // Property to store the banned until date
+  remainingTime: string; // Property to store the remaining time string
+  remainingTimeSubscription: Subscription; // Subscription for the interval
+
 
   averageRating: number;
   totalRatings: number;
@@ -33,26 +41,84 @@ export class DoctorProfileComponent implements OnInit {
     private doctorService: DoctorProfileService,
     private router: Router // Add Router to constructor
 ,    private dialog: MatDialog ,// Inject MatDialog for opening the popup
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private authService: SignService
   ) { }
 
   ngOnInit(): void {
     // Extract doctorId from the route parameters
     this.route.params.subscribe(params => {
       this.showReviewForm = false;
-
+  
       this.doctorId = +params['id']; // '+' converts string to number
       this.elderlyId = +params['elderlyId']; // Add this line
-
+ 
       this.loadDoctorProfile();
       this.loadCabinetPictures();
       this.fetchDoctorReviews(this.doctorId);
-this.checkCompletedAppointments();
-this.calculateAverageRating(this.doctorId);
-this.getTotalRatings(this.doctorId);
+      this.checkCompletedAppointments();
+      this.calculateAverageRating(this.doctorId);
+      this.getTotalRatings(this.doctorId);
+  
+      this.doctorService.getElderlyBannedStatus(this.elderlyId).subscribe(
+        (bannedStatus: boolean) => {
+          if (bannedStatus) {
+            this.disableReviewButton(); // Disable the button if banned
+            this.updateRemainingTime(); // Start updating the remaining time
+
+          }
+        },
+        (error) => {
+          console.error('Error fetching banned status:', error);
+        }
+      );
     });
   }
+  updateRemainingTime(): void {
+    // Fetch the banned until date from the service
+    this.doctorService.getElderlyBannedUntil(this.elderlyId).subscribe(
+      (bannedUntilDate: Date) => {
+        this.bannedUntil = new Date(bannedUntilDate);
+        this.remainingTimeSubscription = interval(1000).subscribe(() => {
+          this.calculateRemainingTime();
+        });
+      },
+      (error) => {
+        console.error('Error fetching banned until date:', error);
+      }
+    );
+  }
 
+  calculateRemainingTime(): void {
+    const now = new Date();
+    const difference = this.bannedUntil.getTime() - now.getTime();
+
+    if (difference > 0) {
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+      this.remainingTime = `${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`;
+    } else {
+      this.remainingTime = 'Banned period expired';
+      this.remainingTimeSubscription.unsubscribe(); // Stop updating when ban expires
+    }
+  }
+
+  ngOnDestroy(): void {
+    if (this.remainingTimeSubscription) {
+      this.remainingTimeSubscription.unsubscribe(); // Unsubscribe to avoid memory leaks
+    }
+  }
+
+  disableReviewButton(): void {
+    const reviewButton = document.getElementById('reviewButton') as HTMLButtonElement;
+    if (reviewButton) {
+      reviewButton.innerText = 'You are banned';
+      reviewButton.disabled = true;
+    }
+  }
   loadDoctorProfile() {
     this.doctorService.getDoctorProfile(this.doctorId).subscribe(
       (data: any) => {
@@ -304,15 +370,8 @@ submitReview(): void {
   if (this.completedAppointments.length > 0 && this.newReview.comment && this.newReview.rating) {
     const confirmation = window.confirm('Are you sure you want to submit this review?');
     if (confirmation) {
-      // Filter bad words in the review comment
-
-      const filteredComment = this.filterBadWords(this.newReview.comment);
-      this.newReview.comment = filteredComment; // Update the comment with filtered text
-
       // Set the doctorId in the newReview object
-
       this.newReview.doctorId = this.doctorId;
-      console.log("psspsppsspps", this.selectedReviewId);
 
       if (this.selectedReviewId) {
         // Editing an existing review
@@ -322,11 +381,10 @@ submitReview(): void {
             // Reload the reviews or perform any other action
             this.closeReviewForm();
             window.location.reload(); // Reload the window after successful upload
-
           },
           (error) => {
             console.error('Error updating review:', error);
-            alert("You are not authorized no update this comment");
+            alert("You are not authorized to update this comment");
           }
         );
       } else {
@@ -336,12 +394,12 @@ submitReview(): void {
             console.log('Review submitted:', createdReview);
             // Reload the reviews or perform any other action
             this.closeReviewForm();
-            window.location.reload(); // Reload the window after successful upload
-
-
           },
           (error) => {
             console.error('Error submitting review:', error);
+            this.checkArchivedStatus(); // Check archived status after review submission
+
+            alert('Your review contains inappropriate language. Continuing with such behavior may result in a ban from posting reviews.');
           }
         );
       }
@@ -354,13 +412,21 @@ submitReview(): void {
     }
   }
 }
-filterBadWords(text: string): string {
-  const badWords = ['badword1', 'badword2', 'badword']; // List of bad words
-  badWords.forEach(badWord => {
-    const censoredWord = '*'.repeat(badWord.length); // Generate asterisks of the same length as the bad word
-    text = text.replace(new RegExp(badWord, 'gi'), censoredWord); // Replace bad word with asterisks
-  });
-  return text;
+
+// Method to check archived status after review submission
+private checkArchivedStatus(): void {
+  this.reviewService.getArchivedStatus(this.elderlyId).subscribe(
+    (isArchived: boolean) => {
+      if (isArchived) {
+        console.log('User is banned, logging out...', isArchived); // Log that logout is triggered
+        this.authService.logout(); // Trigger logout if user is archived
+      }
+    },
+    (error) => {
+      console.error('Error fetching archived status:', error);
+    }
+  );
 }
+
 
 }

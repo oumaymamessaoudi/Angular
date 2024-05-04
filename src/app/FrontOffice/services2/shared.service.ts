@@ -8,6 +8,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 export class SharedService {
   private onSubmitSource = new Subject<void>();
   private elderlyIdSubject: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+  private relativeIdSubject: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
 
   onSubmit$ = this.onSubmitSource.asObservable();
 
@@ -21,5 +22,8 @@ export class SharedService {
 
   getElderlyId(): BehaviorSubject<number | null> {
     return this.elderlyIdSubject;
+  }
+  setRelativeId(id: number | null): void {
+    this.relativeIdSubject.next(id);
   }
 }
