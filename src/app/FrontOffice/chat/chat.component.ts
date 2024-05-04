@@ -4,20 +4,27 @@ import { ChatService } from '../ChatServices/chat.service';
 import { ChatMessage } from '../Auth+shop/Model/chatmessage';
 import { UserService } from '../ChatServices/user.service';
 import { User } from '../Auth+shop/Model/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AudioRecorderService } from '../ChatServices/audio-recorder.service';
 import { interval, Observable, of, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { MatAutocomplete } from '@angular/material/autocomplete';
+import { FormControl } from '@angular/forms';
+import * as CryptoJS from 'crypto-js';
+import { SoundService } from '../ChatServices/sound.service';
+
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
+
 export class ChatComponent implements OnInit, OnDestroy {
-  // Component properties
-  
+
+  //for ng destroy
   private subscriptions: Subscription[] = [];
+  selectedUserEmail: string; // Define the email of the selected user
 
   currentUserEmail!: string;
   message: string = '';
@@ -25,15 +32,17 @@ export class ChatComponent implements OnInit, OnDestroy {
   users: User[] = [];
   selectedUser: User | null = null;
   recording = false;
+  //polling refreshing
   pollingInterval = 2000; 
   pollingSubscription: Subscription | undefined;
-  updatedText: string = ''; // Store the updated text
+  //edit
   contextMenuVisible = false;
   contextMenuX = 0;
   contextMenuY = 0;
   contextMessage: ChatMessage | null = null;
   editingMessageId: number | null = null;
-
+  updatedText: string = ''; 
+  //users list
   listVisibility: { [key: string]: boolean } = {
     nurse: false,
     doctor: false,
@@ -43,16 +52,24 @@ export class ChatComponent implements OnInit, OnDestroy {
     elderly: false
   };
 
+//msg non lus
   unreadMessageCounts: { [key: string]: number } = {};
+
+  //online
   onlineStatus: { [key: string]: boolean } = {}; 
 
-
-  
-
   @ViewChild('messageInput') messageInput!: ElementRef;
-
-
   @ViewChild('messagesContainer') messagesContainer!: ElementRef<any>;
+  @ViewChild(MatAutocomplete) autocomplete!: MatAutocomplete;
+  @ViewChild('autoInput') autoInput!: ElementRef<HTMLInputElement>;
+  autoCtrl = new FormControl();
+
+  searchText: string = ''; 
+  showEmojiPopup: boolean = false; // Declare the property here
+  emojis: { input_text: string; emoji: string; }[] = [];
+  textCorpus: string[] = [];
+  autocompleteSuggestions: string[] = []; // Ensure that autocompleteSuggestions is defined
+
 
   constructor(
     private signService: SignService,
@@ -61,24 +78,51 @@ export class ChatComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private audioRecorderService: AudioRecorderService,
     private cdr: ChangeDetectorRef,
-    private router: Router
-  ) {}
+    private router: Router,private soundservice: SoundService
+  ) {   
+  }
 
   ngOnInit() {
     this.scrollToBottom();
-
     this.currentUserEmail = this.signService.getUserEmail();
-    this.fetchUsers(); // Fetch users when the component initializes
+    this.fetchUsers(); 
+    this.autoCtrl.valueChanges.subscribe((value: string) => {
+    
+this.autocompleteSuggestions = this.generateAutocompleteSuggestions(value, this.textCorpus);
+    });
+    this.loadTextCorpus();
+
     console.log('Messages:', this.messages);
     this.startPolling();
     document.body.addEventListener('click', this.closeContextMenu.bind(this));
+
+  
+
   }
 
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
     this.stopPolling();
     document.body.removeEventListener('click', this.closeContextMenu.bind(this));
+
   }
+
+
+
+
+//recherche
+searchUsersByEmail(email: string): void {
+  this.userService.searchUsersByEmail(email).subscribe(
+    (data) => {
+      this.users = data;
+    },
+    (error) => {
+      console.error('Error searching users by email:', error);
+    }
+  );
+}
+
+  
 
 
 
@@ -106,10 +150,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
   
 
-
-
-
-
   updateUnreadMessageCounts(): void {
     const currentUserEmail = this.signService.getUserEmail();
     if (!currentUserEmail) return;
@@ -127,16 +167,27 @@ export class ChatComponent implements OnInit, OnDestroy {
           unreadCount++;
         }
       });
+      const previousCount = this.unreadMessageCounts[senderEmail] || 0;
       this.unreadMessageCounts[senderEmail] = unreadCount;
+      console.log('Unread Count:', unreadCount); // Log the unread count
+      if (unreadCount > previousCount) {
+        console.log('Playing notification sound...'); // Log that the notification sound is being played
+        this.soundservice.playNotificationSound(); // Call the method to play the notification sound
+      }
+    }, error => {
+      console.error('Error fetching unseen messages:', error); // Log any errors that occur
     });
   }
+  
   
 
   fetchOnlineStatus(): void {
     this.signService.fetchOnlineStatus().subscribe(
       (response: { [key: string]: boolean }) => {
         this.onlineStatus = response;
-          this.users.forEach(user => {
+  
+        // Update the online status for each user
+        this.users.forEach(user => {
           user.online = this.onlineStatus[user.email] ?? false;
           this.cdr.detectChanges();
 
@@ -187,9 +238,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   startPolling(): void {
     if (!this.recording) {
       this.pollingSubscription = interval(this.pollingInterval).subscribe(() => {
-        this.loadMessages();
-        this.updateUnreadMessageCounts(); // Add this line to update unread message counts
-        this.fetchOnlineStatus();
+        this.loadMessages();//new msgs
+        this.updateUnreadMessageCounts(); //update unread message counts
+        this.fetchOnlineStatus();//online status
 
       });
     }
@@ -207,6 +258,85 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
 
+
+
+
+  loadTextCorpus() {
+    this.http.get('assets/mariem/corpse_data.txt', { responseType: 'text' }).subscribe(
+      data => {
+        this.textCorpus = this.preprocessTextCorpus(data);
+      },
+      error => {
+        console.error('Error loading text corpus:', error);
+      }
+    );
+  }
+
+  preprocessTextCorpus(corpus: string): string[] {
+    return corpus.trim().split('\n');
+  }
+
+
+  onInput(inputValue: string): void {
+    if (inputValue.trim() === '') {
+      this.autocompleteSuggestions = [];
+    } else {
+      const lastWord = inputValue.trim().split(' ').pop(); // Get the last word
+      this.autocompleteSuggestions = this.generateAutocompleteSuggestions(lastWord, this.textCorpus);
+    }
+  
+  }
+
+
+  
+  
+  
+  
+  
+  
+
+  selectSuggestion(suggestion: string) {
+    const words = this.message.split(' '); // Split the message into words
+    const lastWordIndex = words.length - 1; // Get the index of the last word
+    words[lastWordIndex] = suggestion; // Replace the last word with the selected suggestion
+    this.message = words.join(' '); // Join the words back into a single string
+     // Prevent default behavior (e.g., line break) after selecting a suggestion
+  event.preventDefault();
+  }
+  
+
+
+
+  generateAutocompleteSuggestions(input: string, corpus: string[]): string[] {
+    const prefix = input.toLowerCase().trim();
+    console.log('Input:', input);
+    console.log('Prefix:', prefix);
+    console.log('Corpus:', corpus);
+    const suggestions = corpus.filter(token => token.toLowerCase().startsWith(prefix));
+    console.log('Autocomplete Suggestions:', suggestions);
+    //return suggestions;
+  
+    return suggestions.slice(0,15); // Return only the first 10 suggestions
+
+  }
+
+
+
+  encryptMessage(message: string): string {
+    // Replace 'YOUR_SECRET_KEY' with your secret key
+    const encryptedMessage = CryptoJS.AES.encrypt(message, 'KEY123').toString();
+    return encryptedMessage;
+  }
+  
+  // Function to decrypt the message after receiving
+  decryptMessage(encryptedMessage: string): string {
+    // Replace 'YOUR_SECRET_KEY' with your secret key
+    const decryptedMessage = CryptoJS.AES.decrypt(encryptedMessage, 'KEY123').toString(CryptoJS.enc.Utf8);
+    return decryptedMessage;
+  }
+  
+  
+//sendmessage 9bal emojii
   sendMessage(): void {
     if (!this.selectedUser) {
       console.error('No selected user');
@@ -241,7 +371,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         }
       });
     } else if (this.message.trim() !== '' && this.selectedUser) {
-      const messageToSend = this.message.trim();
+      const messageToSend = this.encryptMessage(this.message.trim()); // Encrypt the message
       const sendMessageSubscription = this.chatService.sendMessage(currentUserEmail, this.selectedUser.email!, messageToSend)
         .subscribe(
           (response: any) => {
@@ -256,10 +386,61 @@ export class ChatComponent implements OnInit, OnDestroy {
         );
       this.subscriptions.push(sendMessageSubscription);
       this.message = '';
+      this.autocompleteSuggestions = [];
+
 
     }
   }
 
+  fetchEmojis(query: string): void {
+    const headers = new HttpHeaders({
+      'X-RapidAPI-Key': 'fd8660f39fmshed609170e24cbb1p188704jsneb41d49c0619',
+      'X-RapidAPI-Host': 'emoji-ai.p.rapidapi.com'
+    });
+  
+    const params = {
+      query: query
+    };
+  
+    this.http.get<any>('https://emoji-ai.p.rapidapi.com/getEmoji', { headers, params }).subscribe(
+      (response: any) => {
+        if (response && response.input_text && response.emoji) {
+          this.emojis = [{ input_text: response.input_text, emoji: response.emoji }]; 
+          this.showEmojiPopup = true;
+        } else {
+          console.error('Invalid response format:', response);
+        }
+      },
+      (error) => {
+        console.error('Error fetching emojis:', error);
+      }
+    );
+  }
+  
+  
+  
+  selectEmoji(emoji: string): void {
+    this.message += emoji;
+    this.showEmojiPopup = false;
+  }
+
+
+
+
+  onInputEmoji(value: string): void {
+    const words = value.trim().split(/\s+/); // Split input text into words
+    const lastWord = words[words.length - 1]; // Get the last word
+  
+    if (lastWord !== '') {
+      this.fetchEmojis(lastWord); // Fetch emojis for the last word
+    } else {
+      this.showEmojiPopup = false;
+    }
+  }
+  
+  
+  
+  
   
   
 
@@ -271,7 +452,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   
     const loadMessagesSubscription = this.chatService.getMessages(this.currentUserEmail, this.selectedUser.email)
       .subscribe(messages => {
-        console.log('Fetched messages:', messages); // Add this line to check fetched messages
+        console.log('Fetched messages:', messages); 
 
         if (!messages || messages.length === 0) {
           console.warn('No messages received from backend');
@@ -281,7 +462,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.messages = messages.map(message => ({
           ...message,
           timestamp: this.parseTimestamp(message.timestamp),
-          textContent: message.textContent ?? '',
+          textContent: message.textContent ? this.decryptMessage(message.textContent) || '' : '', // Decrypt the message if not null
           audioContent: message.audioContent ? this.getAudioUrl(message.audioContent) : null
         }));
   
@@ -321,38 +502,40 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   playAudio(message: ChatMessage): void {
     const audioContent = message.audioContent;
-
+  
     if (!audioContent) {
       console.error('No audio content found');
       return;
     }
-
-    this.stopPolling();
+  
+    this.stopPolling(); // Stop polling before playing audio
     const playAudioSubscription = this.getAudioUrl(audioContent).subscribe(audioUrl => {
       const audioElement = new Audio(audioUrl);
       audioElement.play()
         .then(() => {
           this.audioPlaybackStart();
-          this.startPolling();
         })
         .catch(error => {
           console.error('Error playing audio:', error);
-          this.startPolling();
         });
       audioElement.addEventListener('ended', () => {
         this.audioPlaybackEnd();
+        this.startPolling(); // Resume polling after audio playback ends
       });
     });
     this.subscriptions.push(playAudioSubscription);
   }
+  
+  audioPlaybackEnd(): void {
+    console.log('Audio playback ended');
+  }
+  
 
   audioPlaybackStart(): void {
     console.log('Audio playback started');
   }
 
-  audioPlaybackEnd(): void {
-    console.log('Audio playback ended');
-  }
+
 
   showContextMenu(event: MouseEvent, message: ChatMessage): void {
     event.preventDefault();

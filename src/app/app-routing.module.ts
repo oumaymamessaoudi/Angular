@@ -62,6 +62,8 @@ import { ElderlyNadhirComponent } from './FrontOffice/Ambulance/elderly-nadhir/e
 import { DriverNadhirComponent } from './FrontOffice/Ambulance/driver-nadhir/driver-nadhir.component';
 import { AllTemplateDriveComponent } from './FrontOffice/Ambulance/all-template-drive/all-template-drive.component';
 import { AfficheDriverComponent } from './FrontOffice/Ambulance/affiche-driver/affiche-driver.component';
+import { RelativeComponent } from './FrontOffice/Tracking/relative/relative.component';
+import { TrackingComponent } from './FrontOffice/Tracking/tracking/tracking.component';
  
 const routes: Routes = [
 
@@ -237,7 +239,12 @@ const routes: Routes = [
     },
     {
       path: 'elderly/:elderlyId/cart',
-      component: ElderlyCartComponent}, { path: 'dash/:elderlyId', component: ElderlyDashboardComponent }
+      component: ElderlyCartComponent}, { path: 'dash/:elderlyId', component: ElderlyDashboardComponent },
+    
+    
+     //tracking Mariem 
+     { path: 'tracking/:id', component: TrackingComponent }, // Route to access the Tracking component with a parameter for elderly ID
+
     ]
   },
 
@@ -310,6 +317,11 @@ children: [
     component: AfficheAmbulanceComponent
   }
 ,       { path: 'todoRelative/:relativeId', component: TodoRelativeComponent },
+
+
+  //tracking Mariem 
+  { path: 'tracking/:id', component: RelativeComponent }, 
+
 
 
 
