@@ -103,7 +103,7 @@ export class SigninComponent {
             sessionStorage.setItem('idnurse',data.id);
             break;
           case 'ambulance-driver':
-            this.router.navigate(['/ambulanceDriver', data.roleId]);
+            this.router.navigate(['/d/DriverNadhir', data.roleId]);
             sessionStorage.setItem('iddriver',data.id);
             
             break;

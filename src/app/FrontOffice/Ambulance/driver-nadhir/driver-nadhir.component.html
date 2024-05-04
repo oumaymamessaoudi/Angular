@@ -1,0 +1,18 @@
+<!-- ambulance-driver.component.html -->
+
+<div class="container" *ngIf="ambulanceDriver">
+    <h2 class="heading">Ambulance Driver Details</h2>
+    <ul class="driver-details">
+      <li><strong>First Name:</strong> {{ ambulanceDriver.firstName }}</li>
+      <li><strong>Last Name:</strong> {{ ambulanceDriver.lastName }}</li>
+      <li><strong>Email:</strong> {{ ambulanceDriver.email }}</li>
+      <li><strong>Date of Birth:</strong> {{ ambulanceDriver.dateOfBirth }}</li>
+      <li><strong>Salary:</strong> {{ ambulanceDriver.totalForDriver }}</li>
+    </ul>
+    <button class="btn" (click)="openCamera()">Take a Photo</button>
+    <input type="file" accept="image/*" (change)="handleFileInput($event)">
+    <button class="btn" (click)="captureAndDownloadPDF()">Download as PDF</button>
+    <br>
+    <img *ngIf="capturedImage" [src]="capturedImage" alt="Captured Image" class="captured-image">
+</div>
+

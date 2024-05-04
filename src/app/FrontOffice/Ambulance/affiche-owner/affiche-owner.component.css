@@ -1,0 +1,72 @@
+.alert {
+    height: 60px; /* Ajustez cette valeur selon vos besoins */
+    line-height: 60px; /* Centrez le texte verticalement */
+    overflow: hidden; /* Assurez-vous que le texte supplémentaire est masqué */
+    transition: height 0.3s; /* Ajoutez une transition pour une animation fluide */
+}
+
+.close {
+    margin-top: 0; /* Aligner le bouton de fermeture en haut de la notification */
+}
+
+/* Appliquer un espacement entre les notifications */
+.row > .col {
+    margin-bottom: 10px; /* Ajoutez un espacement entre les notifications */
+}
+.chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Définissez la hauteur souhaitée */
+  }
+  
+  /* Ajoutez ces styles pour ajuster la taille du graphique */
+  canvas {
+    max-width: 80%; /* Vous pouvez ajuster la largeur maximale selon vos besoins */
+    max-height: 80%; /* Vous pouvez ajuster la hauteur maximale selon vos besoins */
+  }
+  /* Style du tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table th, table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+  }
+  
+  /* Style de l'en-tête du tableau */
+  table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    text-align: left;
+  }
+  
+  /* Style des lignes impaires du tableau */
+  table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+  }
+  
+  /* Style des images dans les cellules du tableau */
+  table img {
+    max-width: 50px;
+    max-height: 50px;
+    border-radius: 4px;
+  }
+  
+  /* Style des boutons dans les cellules du tableau */
+  table button {
+    padding: 6px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Style des boutons au survol */
+  table button:hover {
+    background-color: #45a049;
+  }
+  

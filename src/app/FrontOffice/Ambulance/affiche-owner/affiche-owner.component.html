@@ -1,23 +1,32 @@
-<div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
-    <div class="row">
-      <ng-container *ngIf="relatives.length > 0; else noData">
-        <div class="col">
-          <div *ngFor="let relative of relatives; let i = index">
-            <div *ngIf="!relative.dismissed" class="alert alert-info alert-dismissible fade show mb-2" role="alert">
-              {{ relative.firstName }} a appelé une ambulance pour {{ relative.elderly.firstName }}
-              <button type="button" class="btn btn-primary ml-2" (click)="removeNotification(i)">
-                OK
-              </button>
-              
-            </div>
-          </div>
-        </div>
-      </ng-container>
-      <ng-template #noData>
-        <div class="col">
-          <p>Aucune donnée disponible.</p>
-        </div>
-      </ng-template>
-    </div>
-  </div>
-  
+<div class="chart-container">
+  <canvas #myChart></canvas>
+</div>
+
+<h2>Liste des ambulances</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Numéro ID</th>
+      <th>Emplacement</th>
+      <th>Statut</th>
+      <th>Image</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ambulance of ambulances">
+      <td>{{ ambulance.ambulanceID }}</td>
+      <td>{{ ambulance.location }}</td>
+      <td>{{ ambulance.status }}</td>
+      <td>
+        <img *ngIf="ambulance.imageAmbul" [src]="imageBaseUrl + ambulance.imageAmbul" alt="Ambulance Image" width="50">
+      </td>
+      <td>
+        <!-- Afficher le bouton "Affecter" si le statut est "Available" -->
+        <button *ngIf="ambulance.status === 'NotAvailable'" (click)="choisirAmbulance(ambulance.ambulanceID)">Choose Driver </button>
+        <!-- Afficher le bouton "Annuler le service" si le statut est "NotAvailable" -->
+      </td>
+    </tr>
+  </tbody>
+</table>

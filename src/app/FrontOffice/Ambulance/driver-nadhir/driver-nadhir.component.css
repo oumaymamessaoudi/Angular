@@ -1,0 +1,56 @@
+/* ambulance-driver.component.css */
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .driver-details {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .driver-details li {
+    margin-bottom: 10px;
+  }
+  
+  .btn {
+    background-color: #de8e5a;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .btn:hover {
+    background-color: #d4aa5c;
+  }
+  
+  .captured-image {
+    margin-top: 20px;
+    max-width: 100%;
+  }
+  /* ambulance-driver.component.css */
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}

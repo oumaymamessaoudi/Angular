@@ -62,6 +62,23 @@ export class HeadertempComponent {
     this.authService.logout();
   }
   
+
+   openNadhir(): void {
+    // Extract the ID from the current URL
+    const currentUrl = this.router.url; // Get the current URL
+    const urlParts = currentUrl.split('/'); // Split the URL by '/'
+    const idFromUrl = parseInt(urlParts[urlParts.length - 1], 10); // Get the last part as ID
+
+    // Send the ID to the shared service
+    this.sharedService.setElderlyId(idFromUrl);
+
+    // Navigate to the Elderly Dashboard component
+    this.router.navigate(['/elderly/nadhir/', idFromUrl]);
+  }
+
+
+
+
   goToShop(): void {
     // Extract the ID from the current URL
     const currentUrl = this.router.url; // Get the current URL

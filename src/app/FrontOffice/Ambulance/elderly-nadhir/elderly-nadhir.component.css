@@ -1,0 +1,33 @@
+/* Style du bouton */
+button {
+    background-color: #e7a07f; /* Couleur de fond du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+    padding: 10px 20px; /* Espacement à l'intérieur du bouton */
+    font-size: 16px; /* Taille de la police */
+    border: none; /* Supprimez la bordure du bouton */
+    border-radius: 5px; /* Bordure arrondie */
+    cursor: pointer; /* Curseur de souris sur le bouton */
+  }
+  
+  /* Style pour les paragraphes */
+  p {
+    font-size: 18px; /* Taille de la police des paragraphes */
+    margin-bottom: 10px; /* Espacement en bas des paragraphes */
+  }
+  
+  /* Style pour le titre */
+  h1 {
+    font-size: 36px; /* Taille de la police du titre */
+    margin-bottom: 20px; /* Espacement en bas du titre */
+  }
+  
+  /* Style pour le conteneur principal */
+  .container {
+    max-width: 960px; /* Largeur maximale du conteneur */
+    margin: 0 auto; /* Centrage horizontal du conteneur */
+    padding: 0 15px; /* Espacement intérieur du conteneur */
+  }
+  
+  /* Style pour le conteneur central */
+
+  

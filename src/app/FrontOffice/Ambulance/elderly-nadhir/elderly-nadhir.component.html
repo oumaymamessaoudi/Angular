@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Elderly &mdash; Website Template by Colorlib</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .custom-table {
+      background-color: white; /* Définir le fond du tableau en blanc */
+    }
+
+    /* Style pour le cadre rouge */
+    .alert-danger {
+      border: 2px solid red;
+      padding: 10px;
+      color: red;
+    }
+
+    /* Style pour le cadre vert */
+    .alert-success {
+      border: 2px solid green;
+      padding: 10px;
+      color: green;
+    }
+
+    /* Style pour le bouton */
+    button {
+      background-color: #e7a07f; /* Couleur de fond du bouton */
+      color: #fff; /* Couleur du texte du bouton */
+      padding: 10px 20px; /* Espacement à l'intérieur du bouton */
+      font-size: 16px; /* Taille de la police */
+      border: none; /* Supprimez la bordure du bouton */
+      border-radius: 5px; /* Bordure arrondie */
+      cursor: pointer; /* Curseur de souris sur le bouton */
+    }
+
+    /* Style pour les paragraphes */
+    p {
+      font-size: 18px; /* Taille de la police des paragraphes */
+      margin-bottom: 10px; /* Espacement en bas des paragraphes */
+    }
+
+    /* Style pour le titre */
+    h1 {
+      font-size: 36px; /* Taille de la police du titre */
+      margin-bottom: 20px; /* Espacement en bas du titre */
+    }
+
+    /* Style pour le conteneur principal */
+    .container {
+      max-width: 960px; /* Largeur maximale du conteneur */
+      margin: 100px auto 0; /* Centrage horizontal du conteneur et déplacement vers le bas */
+      padding: 0 15px; /* Espacement intérieur du conteneur */
+    }
+
+    /* Style pour le conteneur de la vidéo */
+    .video-container {
+      border: 2px solid #ccc; /* Ajout d'une bordure autour de la vidéo */
+      padding: 10px; /* Espacement à l'intérieur du cadre de la vidéo */
+      margin-bottom: 20px; /* Espacement en bas du cadre de la vidéo */
+      text-align: center; /* Centrer le contenu de la vidéo */
+      overflow: hidden; /* Pour cadrer la vidéo dans le cadre */
+    }
+
+    /* Style pour le cadre de la vidéo */
+    .video-frame {
+      width: 100%; /* Largeur de la vidéo */
+    }
+
+    /* Style pour l'icône de danger */
+    .danger-icon {
+      font-size: 36px; /* Taille de l'icône */
+      color: red; /* Couleur de l'icône */
+    }
+
+    /* Style pour l'icône de good */
+    .good-icon {
+      font-size: 36px; /* Taille de l'icône */
+      color: green; /* Couleur de l'icône */
+    }
+
+    /* Forcer le déplacement vers le centre */
+    .col-lg-6 {
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+  </style>
+</head>
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu site-navbar-target">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+  
+    <!-- Contenu de la première page avec l'image en arrière-plan -->
+    <div class="container"> <!-- Suppression de la classe mx-auto pour centrer les éléments -->
+      <div class="row">
+        <div class="col-lg-6 mt-4"> <!-- Suppression de la classe ml-lg-auto pour centrer les éléments -->
+          <!-- Ajout d'une div pour le cadre de la vidéo -->
+          <div class="video-container">
+            <h1>Drowsiness Detection</h1>
+            <div class="video-frame">
+              <img [src]="videoSrc" alt="Webcam Stream"> <!-- Suppression de la taille fixe pour ajuster automatiquement -->
+              <!-- Afficher l'icône de danger si le statut est "Drowsy" -->
+              <span *ngIf="drowsinessStatus === 'Drowsy'" class="danger-icon">⚠️</span>
+              <!-- Afficher l'icône de good si le statut est "Not Drowsy" -->
+              <span *ngIf="drowsinessStatus === 'Not Drowsy'" class="good-icon">✔️</span>
+            </div>
+          </div>
+          <!-- Fin de la div pour le cadre de la vidéo -->
+          
+          <!-- Affichage conditionnel en fonction de drowsinessStatus -->
+          <div [ngClass]="{'alert-danger': drowsinessStatus === 'Drowsy', 'alert-success': drowsinessStatus === 'Not Drowsy'}">
+            <p *ngIf="drowsinessStatus === 'Drowsy'">Drowsy</p>
+            <p *ngIf="drowsinessStatus === 'Not Drowsy'">Good condition</p>
+            <!-- Utilisation de ngIf pour afficher "Call for help" uniquement si le statut est "Drowsy" -->
+            <p *ngIf="drowsinessStatus === 'Drowsy'">Call for help</p>
+          </div>
+          
+          <p *ngIf="totalAverageEAR">{{ 'Total Average EAR: ' + totalAverageEAR }}</p>
+          
+          <button (click)="sendDrowsinessStatus()">Send Drowsiness Status</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
