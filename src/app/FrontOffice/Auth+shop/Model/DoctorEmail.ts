@@ -1,0 +1,3 @@
+interface DoctorEmail {
+    email: string;
+  }

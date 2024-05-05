@@ -12,6 +12,8 @@ export class AuthService {
     public test!: any;
     private baseUrl="http://localhost:8081/auth"
     private base1Url="http://localhost:8081/auth1"
+    private apiUrl="http://localhost:8081/api/complaints"
+
  
   constructor(private httpClient: HttpClient) {
 
@@ -24,6 +26,8 @@ export class AuthService {
     return this.httpClient.post(`${this.baseUrl}`,user);
   }
 
-
+  getDoctorEmailById(doctorId: number): Observable<string> {
+    return this.httpClient.get<string>(`${this.apiUrl}/${doctorId}/email`);
+  }
  
 } 

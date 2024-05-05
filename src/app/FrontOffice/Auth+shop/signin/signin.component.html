@@ -35,17 +35,18 @@
       <input [(ngModel)]="user.email" type="text" id="email" class="fadeIn second" name="email" placeholder="Your Email">
       <input [(ngModel)]="user.password" type="password" id="password" class="fadeIn second" name="password" placeholder="password" required>
       <div *ngIf="submitted && !user.password" class="error-message">Please fill out this field</div> <!-- Affiche le message d'erreur si le champ est vide et le formulaire a été soumis -->
-      <button type="submit" class="btn btn-primary">Login</button>
+      <button type="submit" class="btn btn-primary" style="font-weight: bold;">Login</button>
 
+</form>
 
       <a (click)="showResetPasswordForm = true">Forgot Password?</a>
     
 <!-- Forgot Password Form -->
 <form *ngIf="showResetPasswordForm">
   <ng-container *ngIf="!emailSent; else verificationCodeSection">
-    <div class="form-group">
+    <div class="form-group" style="opacity: 0;">
       <label for="emailLabel"></label>
-      <input type="text" id="mail" class="form-control" name="email" [(ngModel)]="email" required placeholder="Email">
+      <input type="text" id="mail" class="form-control" name="email" [(ngModel)]="user.email" required placeholder="Email">
     </div>
     <button type="button" class="btn btn-primary" (click)="sendVerificationCode()">Send Code</button>
   </ng-container>
@@ -77,7 +78,7 @@
 
 
 
-    </form>
+    
     
 
     <!-- Remind Passowrd -->

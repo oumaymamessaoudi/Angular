@@ -26,4 +26,8 @@ export class SharedService {
   setRelativeId(id: number | null): void {
     this.relativeIdSubject.next(id);
   }
+
+  setDoctorId(id: number | null): void {
+    this.elderlyIdSubject.next(id);
+  }
 }

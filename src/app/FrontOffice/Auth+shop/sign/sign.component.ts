@@ -5,6 +5,8 @@ import { SignService } from '../Services/sign.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmailService } from '../Services/email.service';
 import { UserService } from '../Services/user.service';
+import { HttpClient } from '@angular/common/http';
+import { RecaptchaService } from '../Services/recaptcha.service';
 
 @Component({
   selector: 'app-sign',
@@ -13,20 +15,34 @@ import { UserService } from '../Services/user.service';
 })
 export class SignComponent implements OnInit {
 
+  captchaImageUrl: string;
+  captchaData: any;
+  captchaError: string = ''; // Variable pour stocker le message d'erreur du captcha
+  captchaWarningMessage: string = '';
   test: any;
   message: any;
   user: any = {};
   userForm!: FormGroup;
   emailAlreadyUsed: boolean = false; // Initialize with a default value
 
+  loggedIn: boolean = false;
 
+  captchaImage: string;
+  captchaInput: string;
+  verificationResult: boolean | null = null;
+  generatedCaptcha: string = ''; // Declare generatedCaptcha as a class member
+  isCodeCorrect: boolean = false;
+  codeVerificationMessage: string = '';
 
 
 constructor(private loginuser: SignService,
    private router: Router, 
-   private formBuilder: FormBuilder ) {}
+   private formBuilder: FormBuilder,
+   private http: HttpClient ,
+   private recaptchaService: RecaptchaService) {}
 
 ngOnInit(): void {
+
   this.userForm = this.formBuilder.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
@@ -49,10 +65,14 @@ ngOnInit(): void {
     certification: [''], // Assurez-vous que 'certification' est correctement défini ici
     address:['', Validators.required],
     elderlyEmail:['', [Validators.required, Validators.email, this.emailValidator]],
-    language:['']
+    language:[''],
+    captchaInput: ['', Validators.required] // Assurez-vous que le champ captchaInput est ajouté au groupe de formulaires
+
 
 
   });
+ 
+
 }phoneNumberValidator(control: any) {
   const phoneNumber = control.value;
   const phoneNumberPattern = /^(2|5|9)\d{7}$/; // Pattern pour vérifier que le numéro commence par 2, 5 ou 9 et a une longueur totale de 8 chiffres
@@ -133,5 +153,46 @@ userSign() {
   );
 }
 
+// Fonction pour générer le captcha
+  generateCaptcha(): void {
+    this.verificationResult = null;
+    this.recaptchaService.generateCaptcha().subscribe(
+      (captchaData: any) => {
+        this.captchaData = captchaData;
+        this.captchaImage = captchaData.image_url;
+        this.captchaError = ''; // Réinitialiser le message d'erreur
+      },
+      error => {
+        console.error('Erreur lors de la génération du captcha:', error);
+      }
+    );
+  }
+
+verifyCode(): void {
+  const enteredCaptcha = this.captchaInput; // Le code saisi par l'utilisateur
+
+  console.log('Entered Captcha:', enteredCaptcha); // Ajouter cette ligne pour vérifier le code captcha saisi par l'utilisateur
+
+  // Récupérez la solution du captcha de captchaData
+  const captchaSolution = this.captchaData ? this.captchaData.solution : '';
+
+  console.log('Captcha Solution:', captchaSolution); // Ajouter cette ligne pour vérifier la solution du captcha extraite
+
+  // Vérifiez si le code saisi correspond à la solution du captcha
+  if (enteredCaptcha === captchaSolution) {
+    this.verificationResult = true;
+    this.codeVerificationMessage = 'Captcha correct !';
+    this.captchaWarningMessage = 'Captcha Correct !'; // Réinitialiser le message d'avertissement
+    this.userSign();
+
+  } else {
+    this.verificationResult = false;
+    this.codeVerificationMessage = 'Captcha incorrect.';
+    this.captchaWarningMessage = 'Incorrect captcha. Please try again.'; // Message d'avertissement pour captcha incorrect
+
+    // Régénérer automatiquement le captcha
+    this.generateCaptcha();
+  }
+}
 
 }

@@ -139,7 +139,18 @@ import { AllTemplateDriveComponent } from './FrontOffice/Ambulance/all-template-
 import { ElderlyNadhirComponent } from './FrontOffice/Ambulance/elderly-nadhir/elderly-nadhir.component';
 import { TrackingComponent } from './FrontOffice/Tracking/tracking/tracking.component';
 import { RelativeComponent } from './FrontOffice/Tracking/relative/relative.component';
- 
+import { ComplaintElderlyComponent } from './FrontOffice/complaint-elderly/complaint-elderly.component';
+import { ComplaintRelativeComponent } from './FrontOffice/complaint-relative/complaint-relative.component';
+import { ComplaintRelativeListFrontComponent } from './FrontOffice/complaint-relative-list-front/complaint-relative-list-front.component';
+import { DoctorComplaintsComponent } from './FrontOffice/doctor-complaints/doctor-complaints.component';
+import { UpdateComplaintComponent } from './FrontOffice/update-complaint/update-complaint.component';
+import { UserComplaintComponent } from './FrontOffice/user-complaint/user-complaint.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NewsComponent } from './FrontOffice/news/news.component';
+import { ChatBotComponent } from './FrontOffice/chat-bot/chat-bot.component';
+import { UpdateComplaintElderlyComponent } from './FrontOffice/update-complaint-elderly/update-complaint-elderly.component';
+
 
 
 @NgModule({
@@ -256,7 +267,17 @@ import { RelativeComponent } from './FrontOffice/Tracking/relative/relative.comp
     ElderlyNadhirComponent,
     DriverNadhirComponent,
     ///////////////////////
-    TrackingComponent,RelativeComponent
+    TrackingComponent,
+    RelativeComponent,
+    ComplaintRelativeComponent,
+    ComplaintRelativeListFrontComponent,
+    DoctorComplaintsComponent, 
+    UpdateComplaintComponent, 
+    ComplaintElderlyComponent,
+    UserComplaintComponent,
+    NewsComponent,
+    ChatBotComponent,
+    UpdateComplaintElderlyComponent
 
 
   ],
@@ -270,7 +291,11 @@ import { RelativeComponent } from './FrontOffice/Tracking/relative/relative.comp
     FullCalendarModule,
     BrowserAnimationsModule,    MatDialogModule,  ReactiveFormsModule
     
-   ,DragDropModule
+   ,DragDropModule,
+   ////////ghofrane//////////////////////////////////////////
+   
+   MatSnackBarModule,
+   NgxPaginationModule,
 
   ],
   providers: [SharedService,MatDialog,DatePipe,

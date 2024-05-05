@@ -38,9 +38,9 @@ export class SigninComponent {
 
   showLoginForm: boolean = true;
   verificationCodeSent: boolean = false;
+ isButtonDisabled: boolean = false;
 
 
-  isButtonDisabled: boolean = false;
 
   constructor(private loginuser: SignService,
     private http: HttpClient,
@@ -70,11 +70,12 @@ export class SigninComponent {
       alert("Please enter your password");
       return;
     }
+     // Ajouter la vérification pour s'assurer que le mot de passe a au moins 6 caractères
+  if (this.user.password.length < 6) {
+    alert("Password Incorrect");
+    return;
+  }
     // Vérifier si l'email et le mot de passe correspondent à ceux de l'administrateur
-    if(this.user.password.length<6){
-      alert("Password incorrect");
-      return;
-    }
   if (this.user.email == 'admin.pi@esprit.tn' && this.user.password == 'admin1') {
 
     // Si les identifiants sont corrects, rediriger vers le backend
@@ -93,6 +94,8 @@ export class SigninComponent {
           case 'doctor':
             this.router.navigate(['/doctor-dashboard', data.roleId]);
             sessionStorage.setItem('id',data.id);
+
+
             break;
           case 'elderly':
             this.router.navigate(['/products', data.roleId]);
@@ -103,7 +106,7 @@ export class SigninComponent {
             sessionStorage.setItem('idnurse',data.id);
             break;
           case 'ambulance-driver':
-            this.router.navigate(['/d/DriverNadhir', data.roleId]);
+            this.router.navigate(['/ambulanceDriver', data.roleId]);
             sessionStorage.setItem('iddriver',data.id);
             
             break;
@@ -145,7 +148,7 @@ sendVerificationCode() {
   if(this.resetMethod==='email'){
     this.emailSent = true; // Update emailSent when code is sent
 
-    this.emailService.sendVerificationCode(this.email,"Password Reset ",this.generatedCode);
+    this.emailService.sendVerificationCode(this.user.email,"Password Reset ",this.generatedCode);
   }
 }
   verifyCode(){
@@ -183,6 +186,10 @@ sendVerificationCode() {
 
     
   }
-  
+  signInWithGoogle(): void {
+    this.http.get<any>('http://localhost:8081/auth/google').subscribe(response => {
+      window.location.href = response.redirectUrl;
+    });
+  }
 
   }
