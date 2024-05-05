@@ -428,7 +428,7 @@ destinationMarkerClicked: boolean = false;
         method: 'GET',
         url: `https://open-weather13.p.rapidapi.com/city/latlon/${latitude}/${longitude}`,
         headers: {
-          'X-RapidAPI-Key': '123cb19f33msh98b71bfa6b5505ep110a25jsna54f08b1e676',
+          'X-RapidAPI-Key': 'df79b1ab08msh4f58568443817bap1014f7jsn16f408c1e685',
           'X-RapidAPI-Host': 'open-weather13.p.rapidapi.com'
         }
       };
