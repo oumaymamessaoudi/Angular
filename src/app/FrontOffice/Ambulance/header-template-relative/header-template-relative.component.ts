@@ -13,10 +13,9 @@ export class HeaderTemplateRelativeComponent {
   //ghofrane
 id: any;
 roleId:any;
-  constructor(private router: Router, private sharedService: SharedService,
-    
-    
-    public authService: SignService
+  constructor(private router: Router,
+     private sharedService: SharedService,
+     public authService: SignService
     ) {}
 
   goToTrack(): void {
