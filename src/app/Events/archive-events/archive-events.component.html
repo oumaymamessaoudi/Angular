@@ -1,0 +1,125 @@
+<p>archive-events works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Event List</title>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 70%;
+            position: relative;
+            background-color: #fff;
+            margin-right: 50px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .event-img {
+            width: 200px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .action-button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            color: #ffffff;
+            background-color: #070637;
+        }
+
+        .action-button:hover {
+            background-color: #73adca;
+        }
+
+        .no-events {
+            text-align: center;
+            font-style: italic;
+            color: #73adca;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Admin Event List</h1>
+        <button class="action-button" [routerLink]="['/admin/addevent']">
+            Add Event
+        </button>
+        <button class="action-button" [routerLink]="['/admin/EventManagement']">
+            Event Management
+          </button>
+          <button class="action-button" [routerLink]="['/admin/getevents']">
+            All Events
+          </button>
+
+        <div *ngIf="events.length > 0; else noEvents">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Capacity</th>
+                        <th>Date</th>
+                        <th>Action</th> <!-- New column for action buttons -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let event of events">
+                        <td><img class="event-img" [src]="event.imageUrl" alt="Event Image"></td>
+                        <td>{{ event.name }}</td>
+                        <td>{{ event.description }}</td>
+                        <td>{{ event.capacity }}</td>
+                        <td>{{ event.date }}</td>
+                        <td>
+                            <button class="action-button" (click)="navigateToEditEvent(event.eventID)">Edit</button>
+
+                            <button class="action-button" (click)="toggleArchive(event.eventID)">Desarchive</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <ng-template #noEvents>
+            <p class="no-events">No events available</p>
+        </ng-template>
+    </div>
+</body>
+
+</html>

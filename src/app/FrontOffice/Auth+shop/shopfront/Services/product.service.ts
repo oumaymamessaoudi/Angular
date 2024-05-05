@@ -39,7 +39,53 @@ export class ProductService {
     return this.http.post(url, {}, { responseType: 'blob' });
   }
 
+  payRelative(relativeId: number, amount: number, tokenId: string): Observable<any> {
+    const formData = new FormData();
+    formData.append('amount', amount.toString());
+    formData.append('tokenId', tokenId);
+  
+    const url = `${this.apiUrl}/pay-relative/${relativeId}`;
+  
+    return this.http.post<any>(url, formData).pipe(
+      catchError(this.handleError)
+    );
+  }
 
+  
+
+
+
+sendEmail(emailData: any, htmlBody: string) {
+  const url = `${this.apiUrl}/send-email`; // Correct API endpoint for sending emails
+  
+  // Include HTML body in the request data
+  emailData.htmlBody = htmlBody;
+
+  return this.http.post<any>(url, emailData).pipe(
+    catchError(this.handleError)
+  );
+}
+
+
+getBoughtOrdersForElderly(elderlyId: number): Observable<Order[]> {
+  const url = `${this.apiUrl}/elderly/${elderlyId}/boughtOrders`;
+  console.log('Fetching bought orders for elderly with ID:', elderlyId);
+  console.log('URL:', url);
+  return this.http.get<Order[]>(url)
+    .pipe(
+      catchError(this.handleError)
+    );
+}
+
+
+
+
+
+  
+  buyOrderWithElderlyAccount(orderId: number, elderlyId: number): Observable<any> {
+  const url = `${this.apiUrl}/buyOrderWithElderlyAccount/${orderId}/${elderlyId}`;
+  return this.http.post<any>(url, {});
+}
 
 
   sendNotification(elderlyId: number, productId: number): Observable<any> {

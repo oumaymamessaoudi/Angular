@@ -73,6 +73,15 @@ import { ComplaintElderlyComponent } from './FrontOffice/complaint-elderly/compl
 import { ChatBotComponent } from './FrontOffice/chat-bot/chat-bot.component';
 import { NewsComponent } from './FrontOffice/news/news.component';
 import { UpdateComplaintElderlyComponent } from './FrontOffice/update-complaint-elderly/update-complaint-elderly.component';
+import { RelativepaymentComponent } from './FrontOffice/Auth+shop/shopfront/relativepayment/relativepayment.component';
+import { EditeventComponent } from './Events/editevent/editevent.component';
+import { EventAddComponent } from './Events/event-add/event-add.component';
+import { EventManagementComponent } from './Events/event-management/event-management.component';
+import { ArchiveEventsComponent } from './Events/archive-events/archive-events.component';
+import { BoughtProductsComponent } from './FrontOffice/Auth+shop/shopfront/bought-products/bought-products.component';
+import { SHOWMOREComponent } from './Events/showmore/SHOWMOREComponent';
+import { EventelderlyComponent } from './Events/eventelderly/eventelderly.component';
+import { GeteventsComponent } from './Events/getevents/getevents.component';
  
 const routes: Routes = [
 
@@ -244,6 +253,16 @@ component: UpdateComplaintElderlyComponent
       path: 'products/:elderlyId',
       component: ProductlistclientComponent
     },
+    {
+      path: 'elderly/events/:elderlyId',
+      component: EventelderlyComponent}, 
+      {
+        path: 'showmoreevent/eve/:idevent',
+        component:SHOWMOREComponent
+      },
+      {
+        path: 'elderly/:elderlyId/bought',
+        component: BoughtProductsComponent}, 
 
       {
         path: 'elderly/nadhir/:elderlyId',
@@ -294,6 +313,24 @@ component: UpdateComplaintElderlyComponent
       path: 'admin',
       component: AllTemplateBackComponent,
       children: [
+        {
+          path: 'arvchivedevent',
+          component: ArchiveEventsComponent
+        },
+        { path: 'EventManagement', component: EventManagementComponent }
+        ,
+        { 
+          path: 'addevent', 
+          component: EventAddComponent // Assuming you have a component named AddEventComponent for adding events
+        },
+        { 
+          path: 'editevents/:id', 
+          component: EditeventComponent // Assuming you have a component named AddEventComponent for adding events
+        },
+        { 
+          path: 'getevents', 
+          component: GeteventsComponent // Assuming you have a component named AddEventComponent for adding events
+        },
        
         {
           path: 'add-product',
@@ -322,6 +359,7 @@ component: UpdateComplaintElderlyComponent
   path: 'nadhir',
   component: AllTemplateNadhirComponent,
   children: [
+  
    
     {
       path: 'add',
@@ -345,6 +383,10 @@ component: UpdateComplaintElderlyComponent
 {path: 'relative',
 component: AllTemplateRelativeComponent,
 children: [
+  {
+    path: 'relative/:relativeId',
+    component: RelativepaymentComponent
+  },
  
  
   {

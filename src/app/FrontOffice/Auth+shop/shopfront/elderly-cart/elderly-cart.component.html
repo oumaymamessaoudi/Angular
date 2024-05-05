@@ -1,3 +1,6 @@
+
+
+
 <section class="h-100 h-custom" style="background-color: #eee;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -7,10 +10,20 @@
             <div class="row">
               <div class="col-lg-7">
                 <h5 class="mb-3">
+                  
                   <a (click)="goToProductsPage(elderlyId)" class="text-body" [style.cursor]="'pointer'">
                     <i class="fas fa-hand-point-left me-2"></i>Continue shopping
-                  </a>
-                </h5>             <hr>
+                  </a><br><br>
+                  <div class="announcement-box mb-4">
+                    <div class="announcement-icon">
+                      <i class="fas fa-percent"></i>
+                    </div>
+                    <div class="announcement-text">
+                      Get a 5% discount on each order when you buy with your account balance!
+                    </div>
+                  </div>
+                </h5>       
+                      <hr>
                 <div class="d-flex justify-content-between align-items-center mb-4">
                   <div>
                     <h2 class="mb-1">Your shopping cart</h2>
@@ -48,8 +61,9 @@
                           </div>
                         </td>
                         <td>
-                          <button class="action-btn buy-btn" (click)="toggleStripeInput(cartItem.orderId)"><i class="fas fa-shopping-cart"></i> Buy</button>
-                          <button class="action-btn cancel-btn" (click)="cancelOrder(cartItem.orderId)"><i class="fas fa-times"></i> Cancel</button>
+                          <button class="action-btn buy-btn" (click)="buyOrder2(cartItem.orderId)"> <i class="fas fa-wallet"></i> Buy with 💰 </button>
+                          <button class="action-btn buy-btn" (click)="toggleStripeInput(cartItem.orderId)"><i class="fas fa-credit-card"></i>  Buy with 💳</button>
+                          <button class="action-btn cancel-btn" (click)="cancelOrder(cartItem.orderId)"><i class="fas fa-times"></i> </button>
                         </td>
                       </ng-container>
 

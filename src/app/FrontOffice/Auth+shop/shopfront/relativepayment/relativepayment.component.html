@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+<div class="modal">
+  <div class="side">
+    <img src="assets/FrontOffice/images/slider-2.jpg" alt="Google OnHub Shell">
+  </div>
+  
+  <div class="form">
+    <form [formGroup]="paymentForm" (ngSubmit)="onSubmit()">
+      <fieldset class="input-group">
+        <label for="cardNumber">Card Number</label>
+        <input type="text" id="cardNumber" formControlName="cardNumber">
+        <div *ngIf="paymentForm.get('cardNumber').errors && paymentForm.get('cardNumber').errors['required']" class="error">Card number is required</div>
+        <div *ngIf="paymentForm.get('cardNumber').errors && paymentForm.get('cardNumber').errors['pattern']" class="error">Invalid card number format</div>
+      </fieldset>
+      
+      <fieldset class="input-group">
+        <label for="expiryDate">Expiration</label>
+        <input type="text" id="expiryDate" formControlName="expiryDate">
+        <div *ngIf="paymentForm.get('expiryDate').errors && paymentForm.get('expiryDate').errors['required']" class="error">Expiration date is required</div>
+        <div *ngIf="paymentForm.get('expiryDate').errors && paymentForm.get('expiryDate').errors['pattern']" class="error">Invalid expiration date format (MM/YY)</div>
+      </fieldset>
+      
+      <fieldset class="input-group">
+        <label for="cvv">CVV</label>
+        <input type="text" id="cvv" formControlName="cvv">
+        <div *ngIf="paymentForm.get('cvv').errors && paymentForm.get('cvv').errors['required']" class="error">CVV is required</div>
+        <div *ngIf="paymentForm.get('cvv').errors && paymentForm.get('cvv').errors['pattern']" class="error">Invalid CVV format</div>
+      </fieldset>
+      
+      <fieldset class="input-group">
+        <label for="amount">Amount to Donate</label>
+        <input type="number" id="amount" formControlName="amount">
+        <div *ngIf="paymentForm.get('amount').errors && paymentForm.get('amount').errors['required']" class="error">Amount is required</div>
+      </fieldset>
+      
+      <button type="submit" [disabled]="paymentForm.invalid">Donate</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

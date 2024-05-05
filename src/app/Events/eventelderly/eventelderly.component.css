@@ -1,0 +1,379 @@
+ 
+ 
+ 
+
+    .ticket {
+        background-color: #ffffff;
+        border-radius: 5px;
+        display: flex;
+        grid-template-columns: 200px auto;
+        height: 300px;
+        margin-left: 100000000000px; /* Adjust the margin-left value to move the ticket more to the right */
+        margin: 0 auto; /* Center the ticket horizontally */
+        width: 900px;
+    }
+    
+    
+
+  
+  .ticket-body {
+    background-image: url("/assets/images/abstract-variation-wallpaper.jpg");
+    background-position: right;
+	background-size: cover;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: 80% 20%;
+	justify-content: center;
+	padding: 0.5em;
+	position: relative;
+}
+
+
+.vip {
+	align-items: center;
+	animation: neon 0.08s ease-in-out infinite alternate;
+	color: #c6e2ff;
+	display: flex;
+	font-family: "Staatliches", cursive;
+	font-size: 10rem;
+	justify-content: center;
+	letter-spacing: 5px;
+	margin-left: 10px;
+	line-height: 1;
+}
+
+.event {
+	animation: neon 0.08s ease-in-out infinite alternate;
+	align-items: center;
+	color: #c6e2ff;
+	display: flex;
+	font-family: "Staatliches", cursive;
+	font-size: 3rem;
+	margin-left: -40px;
+	margin-top: 70px;
+}
+
+.location {
+	background: linear-gradient(to right, #00467f, #a5cc82);
+	border-radius: 5px;
+	bottom: 10px;
+	color: #ffffff;
+	display: flex;
+	font-family: "helvetica";
+	font-size: 1.1rem;
+	font-weight: 700;
+	grid-column: 1/3;
+	grid-row: 2/3;
+	height: 35px;
+	justify-content: space-around;
+	left: 20px;
+	padding: 4px;
+	position: absolute;
+	text-transform: uppercase;
+	width: 100%;
+}
+
+.location p {
+	background-color: #13638c;
+	border-radius: 5px;
+	line-height: 28px;
+	text-align: center;
+	width: 25%;
+}
+
+.details {
+	color: #fbf0ff;
+	font-family: "Staatliches";
+	grid-column-start: 3;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.details.name {
+	font-family: "arial";
+	font-size: 1.7rem;
+}
+
+.details.date {
+	font-size: 3.9rem;
+	font-weight: 800;
+}
+
+.details.gate {
+	font-size: 1.4rem;
+	text-align: left;
+}
+
+.despegable {
+	border-right: 3px dotted black;
+	grid-column: 1/2;
+}
+
+.barcode-container {
+	display: flex;
+	justify-content: end;
+	margin-left: 10px;
+	margin-top: 90px;
+	padding: 5px;
+	transform: rotate(-90deg);
+	width: 250px;
+}
+
+.barcode {
+	color: #333;
+	font-family: "Libre Barcode 39";
+	font-size: 1.9rem;
+	letter-spacing: 2px;
+}
+
+.bar-number {
+	font-family: Arial;
+}
+
+.disclaimer {
+	font-size: 0.6rem;
+	margin-left: -70px;
+	margin-right: 40px;
+	margin-top: -40px;
+	transform: rotate(-90deg);
+}
+
+/* Text animation neon effect */
+@keyframes neon {
+	from {
+		text-shadow: 0 0 6px rgba(202, 228, 225, 0.92),
+			0 0 30px rgba(202, 228, 225, 0.34), 0 0 12px rgba(30, 132, 242, 0.52),
+			0 0 21px rgba(30, 132, 242, 0.92), 0 0 34px rgba(30, 132, 242, 0.78),
+			0 0 54px rgba(30, 132, 242, 0.92);
+	}
+	to {
+		text-shadow: 0 0 6px rgba(202, 228, 225, 0.98),
+			0 0 30px rgba(202, 228, 225, 0.42), 0 0 12px rgba(30, 132, 242, 0.58),
+			0 0 22px rgba(30, 132, 242, 0.84), 0 0 38px rgba(30, 132, 242, 0.88),
+			0 0 60px rgba(30, 132, 242, 1);
+	}
+}
+
+
+
+
+
+@media print {
+    body {
+        background-color: transparent;
+    }
+    .ticket {
+        background-color: transparent !important;
+    }
+    body * {
+        visibility: hidden;
+    }
+    .ticket, .ticket * {
+        visibility: visible !important;
+    }
+    .historical-places, .filter-panel, .popup, .disclaimer {
+        display: none;
+    }
+}
+
+
+.invisible {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.fixed-top {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
+  
+  .bg-white {
+    background-color: #fff;
+  }
+
+
+
+
+
+
+
+.close-popup-btn {
+    background-color: #02acf0;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.close-popup-btn:hover {
+    background-color: #0283b8;
+}
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Ensure popup appears above other content */
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Box shadow for depth */
+    max-width: 80%; /* Adjust as needed */
+    max-height: 80%; /* Adjust as needed */
+    overflow-y: auto; /* Enable scrolling if content overflows */
+    text-align: center; /* Center align content */
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #777;
+    font-size: 24px;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #333; /* Darken color on hover */
+}
+
+.popup h2 {
+    margin-bottom: 20px;
+    color: #030942; /* Adjust heading color */
+    font-size: 24px; /* Adjust heading font size */
+}
+
+.popup ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.popup ul li {
+    margin-bottom: 10px;
+    color: #555; /* Adjust text color */
+    font-size: 16px; /* Adjust text font size */
+}
+
+.close-popup-btn {
+    background-color: #02acf0; /* Button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    margin-top: 20px; /* Adjust margin as needed */
+}
+
+.close-popup-btn:hover {
+    background-color: #0283b8; /* Darken button color on hover */
+}
+.filter-panel {
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 300px; /* Adjust the maximum width as needed */
+    margin-left: 20px; /* Adjust the left margin as needed */
+}
+
+.filter-input {
+    margin-bottom: 15px;
+}
+
+.filter-input label {
+    font-weight: bold;
+}
+
+.filter-input input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.filter-button {
+    background-color: #02acf0;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.filter-button:hover {
+    background-color: #0283b8;
+}
+.price-input {
+    display: flex;
+    align-items: center;
+}
+
+.price-input input[type="range"] {
+    width: 100%;
+    margin-right: 10px;
+}
+
+.price-input span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    min-width: 60px; /* Adjust as needed */
+}
+.capacity-input {
+    display: flex;
+    align-items: center;
+}
+
+.capacity-input input[type="range"] {
+    width: 100%;
+    margin-right: 10px;
+}
+
+.capacity-input span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    min-width: 60px; /* Adjust as needed */
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+
+* {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}

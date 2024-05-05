@@ -150,6 +150,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NewsComponent } from './FrontOffice/news/news.component';
 import { ChatBotComponent } from './FrontOffice/chat-bot/chat-bot.component';
 import { UpdateComplaintElderlyComponent } from './FrontOffice/update-complaint-elderly/update-complaint-elderly.component';
+import { TicketComponent } from './Events/ticket/ticket.component';
+import { ArchiveEventsComponent } from './Events/archive-events/archive-events.component';
+import { EditeventComponent } from './Events/editevent/editevent.component';
+import { EventAddComponent } from './Events/event-add/event-add.component';
+import { EventManagementComponent } from './Events/event-management/event-management.component';
+import { EventelderlyComponent } from './Events/eventelderly/eventelderly.component';
+import { GeteventsComponent } from './Events/getevents/getevents.component';
+import { SHOWMOREComponent } from './Events/showmore/SHOWMOREComponent';
+import { BoughtProductsComponent } from './FrontOffice/Auth+shop/shopfront/bought-products/bought-products.component';
+import { EmailCompositionComponentComponent } from './FrontOffice/Auth+shop/shopfront/email-composition-component/email-composition-component.component';
+import { RelativepaymentComponent } from './FrontOffice/Auth+shop/shopfront/relativepayment/relativepayment.component';
 
 
 
@@ -277,7 +288,19 @@ import { UpdateComplaintElderlyComponent } from './FrontOffice/update-complaint-
     UserComplaintComponent,
     NewsComponent,
     ChatBotComponent,
-    UpdateComplaintElderlyComponent
+    UpdateComplaintElderlyComponent,
+
+    RelativepaymentComponent,
+    EventAddComponent,
+    GeteventsComponent,
+    EditeventComponent,
+    EventelderlyComponent,
+    EmailCompositionComponentComponent,
+    SHOWMOREComponent,
+    BoughtProductsComponent,
+    EventManagementComponent,
+    ArchiveEventsComponent,
+    TicketComponent
 
 
   ],

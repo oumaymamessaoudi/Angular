@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../Services/product.service';
 import { Product } from '../Models/product.module';
+import { Order } from '../Models/order.modules';
 
 @Component({
   selector: 'app-productlistclient',
@@ -40,6 +41,29 @@ export class ProductlistclientComponent implements OnInit {
     } else {
       console.warn('Voice search is not supported in this browser.');
     }
+  }
+
+  showPopup: boolean = false;
+  boughtOrders: Order[] = [];
+
+  showBoughtOrdersPopup(): void {
+    if (this.elderlyId !== undefined) {
+      this.productService.getBoughtOrdersForElderly(this.elderlyId).subscribe(
+        (orders: Order[]) => {
+          this.boughtOrders = orders;
+          this.showPopup = true;
+        },
+        (error) => {
+          console.error('Error fetching bought orders: ', error);
+        }
+      );
+    } else {
+      console.error('Elderly ID is undefined');
+    }
+  }
+
+  closePopup(): void {
+    this.showPopup = false;
   }
 
   initializeVoiceSearch(): void {
