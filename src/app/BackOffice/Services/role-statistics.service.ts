@@ -6,9 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RoleStatisticsService {
-
-  
-  private apiUrl = 'http://localhost:8081/role-statistics'; // Remplacez ceci par l'URL de votre API
+  private apiUrl = 'http://localhost:8081/role-statistics/user-count-by-role';
 
   constructor(private http: HttpClient) { }
 
@@ -16,4 +14,5 @@ export class RoleStatisticsService {
     return this.http.get<any>(this.apiUrl);
   }
 }
+
 

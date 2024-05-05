@@ -24,14 +24,12 @@
           <table class="table mx-auto">
             <thead>
               <tr>
-                <th>User ID</th>
-                <th>AmbulanceOwner ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>email</th>
                 <th>Phone Number</th>
                 <th>Gender</th>
-                <th>Role</th>
+                <th>Address</th>
                 <th> years Of Experience</th>
                 <th>Actions</th>
              
@@ -39,14 +37,13 @@
             </thead>
             <tbody>
               <tr *ngFor="let ambulanceOwner of ambulanceOwners">
-                <td>{{ ambulanceOwner.user.id }}</td>
-                <td>{{ ambulanceOwner.ambulanceOwnerID }}</td>
+              
                 <td>{{ ambulanceOwner.firstName }}</td>
                 <td>{{ ambulanceOwner.lastName }}</td>
                 <td>{{ambulanceOwner.email}}</td>
                 <td>{{ ambulanceOwner.phoneNumber }}</td>
                 <td>{{ambulanceOwner.gender}}</td>
-                <td>{{ ambulanceOwner.role}}</td>
+                <td>{{ambulanceOwner.address}}</td>
                 <td>{{ ambulanceOwner.yearsofexperience }}</td>
                
 
@@ -95,7 +92,8 @@
    
     <div class="form-group">
       <label for=" yearsofexperience"> years Of Experience</label>
-      <input formControlName=" yearsofexperience" class="form-control" type="text" id=" yearsofexperience">
+      <input formControlName=" yearsofexperience" class="form-control" type="number" min="0">
+
     </div>
     
     <button type="submit" class="btn btn-primary">Update</button>

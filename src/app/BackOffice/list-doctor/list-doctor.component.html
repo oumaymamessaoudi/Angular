@@ -24,13 +24,11 @@
           <table class="table mx-auto">
             <thead>
               <tr>
-                <th>Doctor ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>email</th>
                 <th>Phone Number</th>
                 <th>Gender</th>
-                <th>Role</th>
                 <th>Doctor Type</th>
 
                 <th>Schedule</th>
@@ -46,15 +44,13 @@
             </thead>
             <tbody>
               <tr *ngFor="let doctor of doctors">
-                <td>{{ doctor.idDoctor }}</td>
                 <td>{{ doctor.firstName }}</td>
                 <td>{{ doctor.lastName }}</td>
                 <td>{{doctor.email}}</td>
 
                 <td>{{ doctor.phoneNumber }}</td>
                 <td>{{doctor.gender}}</td>
-          
-                <td>{{ doctor.role }}</td>
+        
                 <td>{{ doctor.doctorType }}</td>
 
                 <td>{{ doctor.schedule }}</td>

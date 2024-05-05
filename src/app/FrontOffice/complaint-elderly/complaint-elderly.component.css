@@ -1,0 +1,7 @@
+/* styles.css ou styles.scss */
+
+/* Augmenter la taille du Snackbar */
+.mat-snack-bar-container {
+    max-width: 800px; /* Définir la largeur maximale selon vos besoins */
+    max-height: 200px;  }
+  

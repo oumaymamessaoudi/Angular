@@ -1,141 +1,141 @@
- <link href="/assets/BackOffice/assets/libs/css/style.css "rel="stylesheet">
+<link href="/assets/BackOffice/assets/libs/css/style.css "rel="stylesheet">
 
- <!-- Bootstrap CSS -->
- <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/bootstrap/css/bootstrap.min.css">
- <link href="/assets/BackOffice/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
- <link rel="stylesheet" href="/assets/BackOffice/assets/libs/css/style.css">
- <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
- <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/chartist-bundle/chartist.css">
- <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/morris-bundle/morris.css">
- <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
- <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/c3charts/c3.css">
- <link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="/assets/BackOffice/assets/vendor/bootstrap/css/bootstrap.min.css">
+<link href="/assets/BackOffice/assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
+<link rel="stylesheet" href="/assets/BackOffice/assets/libs/css/style.css">
+<link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/fontawesome/css/fontawesome-all.css">
+<link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/chartist-bundle/chartist.css">
+<link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/morris-bundle/morris.css">
+<link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
+<link rel="stylesheet" href="/assets/BackOffice/assets/vendor/charts/c3charts/c3.css">
+<link rel="stylesheet" href="/assets/BackOffice/assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
 
 
 <app-sidebar-back></app-sidebar-back>
 <!-- user-list.component.html -->
 <div></div>
 <div class="container mt-md-5 pt-md-4">
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <div *ngIf="relatives.length > 0; else noRelatives">
-          <h2 class="text-center mb-4">Relative List</h2>
-  
-          <table class="table mx-auto">
-            <thead>
-              <tr>
-                <th>User ID</th>
-                <th>Relative ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>email</th>
-                <th>Phone Number</th>
-                <th>Gender</th>
-                <th>Role</th>
-                <th>Relationship</th>
+   <div class="row justify-content-center">
+     <div class="col-md-8">
+       <div *ngIf="relatives.length > 0; else noRelatives">
+         <h2 class="text-center mb-4">Relative List</h2>
+ 
+         <table class="table mx-auto">
+           <thead>
+             <tr>
+               <th>User ID</th>
+               <th>Relative ID</th>
+               <th>First Name</th>
+               <th>Last Name</th>
+               <th>email</th>
+               <th>Phone Number</th>
+               <th>Gender</th>
+               <th>Role</th>
+               <th>Relationship</th>
 
-                <th>Address</th>
-                <th>Elderly</th> <!-- Nouvelle colonne pour afficher les détails de l'ancien -->
+               <th>Address</th>
+               <th>Elderly</th> <!-- Nouvelle colonne pour afficher les détails de l'ancien -->
 
-                <th>Action</th>              
+               <th>Action</th>              
+            
+             </tr>
              
-              </tr>
-              
-            </thead>
-            <tbody>
-              <tr *ngFor="let relative of relatives">
-                <td>{{ relative.user.id }}</td>
-                <td>{{ relative.idRelative }}</td>
-                <td>{{ relative.firstName }}</td>
-                <td>{{ relative.lastName }}</td>
-                <td>{{relative.email}}</td>
-                <td>{{relative.phoneNumber }}</td>
-                <td>{{relative.gender}}</td>
-                <td>{{relative.role }}</td>
-                <td>{{relative.relationship}}</td>
-                <td>{{ relative.address}}</td>
-                <td>{{ relative.elderly.email }}
-                    {{ relative.elderly.firstName }}
-                    {{ relative.elderly.lastName }}</td>
+           </thead>
+           <tbody>
+             <tr *ngFor="let relative of relatives">
+               <td>{{ relative.user.id }}</td>
+               <td>{{ relative.idRelative }}</td>
+               <td>{{ relative.firstName }}</td>
+               <td>{{ relative.lastName }}</td>
+               <td>{{relative.email}}</td>
+               <td>{{relative.phoneNumber }}</td>
+               <td>{{relative.gender}}</td>
+               <td>{{relative.role }}</td>
+               <td>{{relative.relationship}}</td>
+               <td>{{ relative.address}}</td>
+               <td>{{ relative.elderly.email }}
+                   {{ relative.elderly.firstName }}
+                   {{ relative.elderly.lastName }}</td>
 
 
-                
                
+              
 <!-- Ajoutez le bouton "Update" à chaque ligne du tableau -->
 <td>
-  <button class="btn btn-primary" (click)="updateRelative(relative.idRelative)">Update</button>
+ <button class="btn btn-primary" (click)="updateRelative(relative.idRelative)">Update</button>
 </td>
 
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- Form for updating relative -->
-    <div class="col-md-4">
-      <div class="container">
-        <h3 class="text-right">Edit Relative</h3>
-        <form [formGroup]="relativeForm" (ngSubmit)="submitUpdate()">
-          <div class="form-group">
-            <label for="firstName">first Name</label>
-            <input formControlName="firstName" class="form-control" type="firstName" id="firstName">
-          </div>
-      <div class="form-group">
-        <label for="lastName">last Name</label>
-        <input formControlName="lastName" class="form-control" type="lastName" id="lastName">
-      </div>
-        
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input formControlName="email" class="form-control" type="email" id="email">
-    </div>
-    <div class="form-group">
-      <label for="phoneNumber">Phone Number</label>
-      <input formControlName="phoneNumber" class="form-control" type="text" id="phoneNumber">
-    </div>
-    <div class="form-group">
-      <label>Gender</label>
-      <div class="form-check">
-        <input formControlName="gender" class="form-check-input" type="radio" id="female" value="Female">
-        <label class="form-check-label" for="female">Female</label>
-      </div>
-      <div class="form-check">
-        <input formControlName="gender" class="form-check-input" type="radio" id="male" value="Male">
-        <label class="form-check-label" for="male">Male</label>
-      </div>
-    </div>
-    <div class="form-group">
-        <label for="address">Address</label>
-        <input formControlName="address" class="form-control" type="address" id="address">
-      </div>
+             </tr>
+           </tbody>
+         </table>
+       </div>
+       <!-- Form for updating relative -->
+   <div class="col-md-4">
+     <div class="container">
+       <h3 class="text-right">Edit Relative</h3>
+       <form [formGroup]="relativeForm" (ngSubmit)="submitUpdate()">
+         <div class="form-group">
+           <label for="firstName">first Name</label>
+           <input formControlName="firstName" class="form-control" type="firstName" id="firstName">
+         </div>
+     <div class="form-group">
+       <label for="lastName">last Name</label>
+       <input formControlName="lastName" class="form-control" type="lastName" id="lastName">
+     </div>
+       
+   <div class="form-group">
+     <label for="email">Email</label>
+     <input formControlName="email" class="form-control" type="email" id="email">
+   </div>
+   <div class="form-group">
+     <label for="phoneNumber">Phone Number</label>
+     <input formControlName="phoneNumber" class="form-control" type="text" id="phoneNumber">
+   </div>
+   <div class="form-group">
+     <label>Gender</label>
+     <div class="form-check">
+       <input formControlName="gender" class="form-check-input" type="radio" id="female" value="Female">
+       <label class="form-check-label" for="female">Female</label>
+     </div>
+     <div class="form-check">
+       <input formControlName="gender" class="form-check-input" type="radio" id="male" value="Male">
+       <label class="form-check-label" for="male">Male</label>
+     </div>
+   </div>
+   <div class="form-group">
+       <label for="address">Address</label>
+       <input formControlName="address" class="form-control" type="address" id="address">
+     </div>
+
+  
+   <div class="form-group">
+       <label for="relationship">Relationship</label>
+       <input formControlName="relationship" class="form-control" type="relationship" id="relationship">
+     </div>
+   
+   
+   <button type="submit" class="btn btn-primary">Update</button>
+ </form>
+</div>
+   
+       <ng-template #noRelatives>
+         <p class="text-center">No relatives found.</p>
+       </ng-template>
+   </div>
+   </div>
+   </div>
 
    
-    <div class="form-group">
-        <label for="relationship">Relationship</label>
-        <input formControlName="relationship" class="form-control" type="relationship" id="relationship">
-      </div>
-    
-    
-    <button type="submit" class="btn btn-primary">Update</button>
-  </form>
-</div>
-    
-        <ng-template #noRelatives>
-          <p class="text-center">No relatives found.</p>
-        </ng-template>
-    </div>
-    </div>
-    </div>
-
-    
-    <app-navbar-back></app-navbar-back>
-    
-    <script src="/assets/BackOffice/assets/libs/js/dashboard-ecommerce.js"></script>
-    <script src="/assets/BackOffice/assets/libs/js/dashboard-finance.js"></script>
-    <script src="/assets/BackOffice/assets/libs/js/dashboard-influencer.js"></script>
-    <script src="/assets/BackOffice/assets/libs/js/dashboard-sales.js"></script>
-    <script src="/assets/BackOffice/assets/libs/js/gmaps.minjs"></script>
-    <script src="/assets/BackOffice/assets/libs/js/google_map.js"></script>
-    <script src="/assets/BackOffice/assets/libs/js/jvectormap.custom.js"></script>
-    <script src="/assets/BackOffice/assets/libs/js/main-js"></script>
-    
-    
+   <app-navbar-back></app-navbar-back>
+   
+   <script src="/assets/BackOffice/assets/libs/js/dashboard-ecommerce.js"></script>
+   <script src="/assets/BackOffice/assets/libs/js/dashboard-finance.js"></script>
+   <script src="/assets/BackOffice/assets/libs/js/dashboard-influencer.js"></script>
+   <script src="/assets/BackOffice/assets/libs/js/dashboard-sales.js"></script>
+   <script src="/assets/BackOffice/assets/libs/js/gmaps.minjs"></script>
+   <script src="/assets/BackOffice/assets/libs/js/google_map.js"></script>
+   <script src="/assets/BackOffice/assets/libs/js/jvectormap.custom.js"></script>
+   <script src="/assets/BackOffice/assets/libs/js/main-js"></script>
+   
+   

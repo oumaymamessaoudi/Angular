@@ -1,0 +1,85 @@
+.chat-container {
+    max-width: 400px; /* Largeur maximale de la boîte de chat */
+    margin: 0 auto; /* Centre la boîte de chat horizontalement */
+    border: 1px solid #ccc; /* Bordure autour de la boîte de chat */
+    border-radius: 8px; /* Coins arrondis */
+    overflow-y: auto; /* Ajoute une barre de défilement vertical si nécessaire */
+    height: 400px; /* Hauteur maximale de la boîte de chat */
+    padding: 10px; /* Espace intérieur de la boîte de chat */
+  }
+  
+  .message {
+    margin-bottom: 10px; /* Espacement entre les messages */
+  }
+  
+  .input-container {
+    display: flex; /* Utilisation de flexbox pour aligner les éléments horizontalement */
+    justify-content: space-between; /* Répartition égale de l'espace entre les éléments */
+    align-items: center; /* Centrage vertical des éléments */
+    padding: 10px; /* Espace intérieur */
+  }
+  
+  .input-container input {
+    flex: 1; /* L'entrée prend tout l'espace disponible */
+    padding: 8px; /* Espacement interne de l'entrée */
+    border: 1px solid #ccc; /* Bordure de l'entrée */
+    border-radius: 4px; /* Coins arrondis */
+    margin-right: 10px; /* Espacement entre l'entrée et le bouton */
+  }
+  
+  .input-container button {
+    padding: 8px 16px; /* Espacement interne du bouton */
+    background-color: #007bff; /* Couleur de fond du bouton */
+    color: #fff; /* Couleur du texte du bouton */
+    border: none; /* Suppression de la bordure */
+    border-radius: 4px; /* Coins arrondis */
+    cursor: pointer; /* Curseur de la souris */
+  }
+  
+  .input-container button:hover {
+    background-color: #0056b3; /* Couleur de fond du bouton au survol */
+  }
+  .message {
+    margin-bottom: 10px; /* Espacement entre les messages */
+    padding: 10px; /* Espacement intérieur des messages */
+    border-radius: 8px; /* Coins arrondis */
+    max-width: 80%; /* Largeur maximale des messages */
+    word-wrap: break-word; /* Permet aux mots longs de se diviser sur plusieurs lignes */
+  }
+  
+  .user-message {
+    background-color: #007bff; /* Couleur de fond pour les messages de l'utilisateur */
+    color: #fff; /* Couleur du texte pour les messages de l'utilisateur */
+  }
+  
+  .bot-message {
+    background-color: #f0f0f0; /* Couleur de fond pour les messages du bot */
+    color: #000; /* Couleur du texte pour les messages du bot */
+  }
+  .avatar {
+    width: 30px; /* Largeur de l'avatar */
+    height: 30px; /* Hauteur de l'avatar */
+    margin-right: 10px; /* Espacement à droite du message */
+    border-radius: 50%; /* Pour créer une forme circulaire */
+  }
+  .input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centrer horizontalement */
+  }
+  
+  .input-container input[type="text"] {
+    flex: 1;
+    max-width: 80%; /* Réduire la largeur du champ */
+    margin-right: 10px; /* Espacement entre le champ et le bouton */
+  }
+  
+  .input-container button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

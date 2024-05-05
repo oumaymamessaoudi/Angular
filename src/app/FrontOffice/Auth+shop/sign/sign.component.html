@@ -102,7 +102,7 @@ background-size: cover;
         
       </div>
       <div *ngIf="userForm.get('email')?.hasError('invalidEmail') && userForm.get('email')?.touched" class="text-danger">
-        Please enter a valid email address
+        Please enter a valid email 
       </div> <!-- form-group// -->
       <div class="form-group input-group">
         <div class="input-group-prepend">
@@ -302,12 +302,46 @@ background-size: cover;
         </div>
       </div>
 
-     
-     
+     <!-- app.component.html -->
+
+<!-- app.component.html -->
+
+<!-- captcha.component.html -->
+
+<!-- captcha.component.html -->
+ <!-- Champ de saisie du captcha -->
+ <div>
+  <div>
+    <button type="button" class="btn btn-primary" (click)="generateCaptcha()">Generate Captcha</button>
+  </div>
+  <div *ngIf="captchaImage">
+    <img [src]="captchaImage" alt="Captcha">
+  </div>
+  <div>
+    <input formControlName="captchaInput" [(ngModel)]="captchaInput" class="form-control" placeholder="Enter the captcha code">
+    <!-- Votre formulaire et autres éléments HTML -->
+
+<div *ngIf="captchaWarningMessage" class="alert alert-warning">{{ captchaWarningMessage }}</div>
+  
+
+
+  </div>
+  <div *ngIf="verificationResult !== null">
+    <p *ngIf="verificationResult === false">Captcha incorrect.</p>
+  </div>
+</div>
+
+
+     <!-- example.component.html -->
+
+
 
       <div class="form-group">
-        <button type="submit" class="btn btn-primary btn-block" >Create Account</button>
-    </div> <!-- form-group// -->
+        <button type="button" class="btn btn-primary btn-block" (click)="verifyCode()">Create Account</button>
+      </div> 
+    <!-- sign.component.html -->
+    
+
     </form>
     <p class="text-center">Have an account? <a routerLink="/signIn">Log In</a></p>
 </article></div>

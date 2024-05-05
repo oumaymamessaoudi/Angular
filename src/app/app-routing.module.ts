@@ -64,6 +64,15 @@ import { AllTemplateDriveComponent } from './FrontOffice/Ambulance/all-template-
 import { AfficheDriverComponent } from './FrontOffice/Ambulance/affiche-driver/affiche-driver.component';
 import { RelativeComponent } from './FrontOffice/Tracking/relative/relative.component';
 import { TrackingComponent } from './FrontOffice/Tracking/tracking/tracking.component';
+import { ComplaintRelativeComponent } from './FrontOffice/complaint-relative/complaint-relative.component';
+import { UserComplaintComponent } from './FrontOffice/user-complaint/user-complaint.component';
+import { ComplaintRelativeListFrontComponent } from './FrontOffice/complaint-relative-list-front/complaint-relative-list-front.component';
+import { DoctorComplaintsComponent } from './FrontOffice/doctor-complaints/doctor-complaints.component';
+import { UpdateComplaintComponent } from './FrontOffice/update-complaint/update-complaint.component';
+import { ComplaintElderlyComponent } from './FrontOffice/complaint-elderly/complaint-elderly.component';
+import { ChatBotComponent } from './FrontOffice/chat-bot/chat-bot.component';
+import { NewsComponent } from './FrontOffice/news/news.component';
+import { UpdateComplaintElderlyComponent } from './FrontOffice/update-complaint-elderly/update-complaint-elderly.component';
  
 const routes: Routes = [
 
@@ -179,7 +188,38 @@ const routes: Routes = [
     path:'statistics',
     component:RoleStatisticsComponent,
    },
-   
+   ////complaint/////////////////////////////
+   { path: 'complaint1/:id', 
+   component: ComplaintElderlyComponent },
+  { path: 'complaintRelative/:id', 
+  component: ComplaintRelativeComponent },
+  {
+    path:'listComplaintElderly/:id',
+    component:UserComplaintComponent
+  },
+
+
+  
+  { path: 'user-complaints/:id', 
+  component: UserComplaintComponent 
+},
+{ path: 'ComplaintRelativeList/:id', 
+  component: ComplaintRelativeListFrontComponent 
+},
+{ path: 'DoctorComplaints/:id', 
+  component: DoctorComplaintsComponent
+},
+{ path: 'update-complaint/:id', 
+component: UpdateComplaintComponent
+ },
+ { path: 'update-complaintElderly/:id', 
+component: UpdateComplaintElderlyComponent
+ },
+ { path: 'chatbot',
+ component: ChatBotComponent },
+ { path: 'news',
+ component: NewsComponent },
+
 
 {
   path: '',

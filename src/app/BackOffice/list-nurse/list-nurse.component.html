@@ -24,14 +24,12 @@
           <table class="table mx-auto">
             <thead>
               <tr>
-                <th>User ID</th>
-                <th>Nurse ID</th>
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>email</th>
                 <th>Phone Number</th>
-                <th>Gender</th>
-                
+                <th>Gender</th>    
+                <th>Address</th>            
                 <th>Responsabilities</th>
                 <th>List Elderly</th>
                 <th>Action</th>
@@ -41,15 +39,12 @@
             </thead>
             <tbody>
               <tr *ngFor="let nurse of nurses">
-                <td>{{ nurse.user.id }}</td>
-                <td>{{ nurse.nurseID }}</td>
                 <td>{{ nurse.firstName }}</td>
                 <td>{{ nurse.lastName }}</td>
                 <td>{{nurse.user.email}}</td>
-
                 <td>{{ nurse.phoneNumber }}</td>
                 <td>{{nurse.gender}}</td>
-
+                <td>{{nurse.address}}</td>
                 <td>{{ nurse.responsibilities}}</td>
 
                 <ul>
@@ -84,7 +79,7 @@
       <label for="email">Email</label>
       <input formControlName="email" class="form-control" type="email" id="email">
     </div>
-    <div class="form-group">
+    <div class="form-group" >
       <label for="phoneNumber">Phone Number</label>
       <input formControlName="phoneNumber" class="form-control" type="text" id="phoneNumber">
     </div>
@@ -103,8 +98,13 @@
    
     <div class="form-group">
       <label for="responsibilities">Responsabilities</label>
-      <input formControlName="responsibilities" class="form-control" type="text" id="responsibilities">
     </div>
+    <select formControlName="responsibilities" class="form-control"id="responsibilities" >
+      <option value="Gerontological Nursing">Gerontological Nursing</option>
+<option value="Geriatric CNA (CNA-G)">Geriatric CNA (CNA-G)</option>
+<option value="Hospice & Palliative">Hospice & Palliative</option>
+<option value="Nurse Manager (Gerontology)">Nurse Manager (Gerontology)</option>
+</select>
     <button type="submit" class="btn btn-primary">Update</button>
   </form>
 </div>
