@@ -257,4 +257,37 @@ async redirectToCheckout(clientSecret: string) {
 }
 
 
+
+
+
+
+buyOrder2(orderId: number): void {
+  const confirmed = confirm("Are you sure you want to buy this order?");
+  if (!confirmed) {
+    console.log('Action cancelled');
+    return; // Exit the method if not confirmed
+  }
+
+  this.route.params.subscribe(params => {
+    const elderlyId = +params['elderlyId'];
+    console.log('Elderly ID from URL:', elderlyId);
+    this.productService.buyOrderWithElderlyAccount(orderId, elderlyId).subscribe(
+      response => {
+        console.log('Order bought successfully:', response);
+        // Handle success response here, if needed
+        window.location.reload();
+      },
+      error => {
+        console.error('Failed to buy order:', error);
+        window.location.reload();
+
+        // Handle error response here, if needed
+      }
+    );
+  });
+}
+
+
+
+
 }

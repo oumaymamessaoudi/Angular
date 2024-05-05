@@ -4,7 +4,7 @@ import { Product } from "./product.module";
 export interface Order {
     id: number;
     productName: string;
-    quantity: number;
+    quantite: number;
     totalPrice: number;
     orderstatus:string;
     price: number; // Add price property

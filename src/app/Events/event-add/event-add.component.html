@@ -1,0 +1,61 @@
+<div class="container">
+  <section class="add-event-section">
+    <h2><i class="fas fa-calendar-plus"></i> Add Event</h2>
+    <form [formGroup]="addEventForm" (ngSubmit)="onSubmit()" class="add-event-form">
+      <div class="form-group">
+        <label for="name">Event Name</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+        <!-- Error message for name field -->
+      </div>
+      <div class="form-group">
+        <label for="date">Event Date</label>
+        <input type="date" class="form-control" id="date" formControlName="date">
+        <!-- Error message for date field -->
+      </div>
+      <div class="form-group">
+        <label for="description">Event Description</label>
+        <textarea class="form-control" id="description" formControlName="description"></textarea>
+        <!-- Error message for description field -->
+      </div>
+      <div class="form-group">
+        <label for="capacity">Event Capacity</label>
+        <input type="number" class="form-control" id="capacity" formControlName="capacity">
+        <!-- Error message for capacity field -->
+      </div>
+      <div class="form-group">
+        <label for="place">Place</label>
+        <input type="text" class="form-control" id="place" formControlName="place">
+        <!-- Error message for place field -->
+      </div>
+      <div class="form-group">
+        <label for="ticketprice">Ticket Price</label>
+        <input type="number" class="form-control" id="ticketprice" formControlName="ticketprice">
+        <!-- Error message for ticketprice field -->
+      </div>
+      <div class="form-group">
+        <label for="archiveevent">Archive Event</label>
+        <select id="archiveevent" formControlName="archiveevent" class="form-control">
+          <option value="available">Available</option>
+          <option value="notavailable">Not Available</option>
+        </select>
+        <!-- Error message for archiveevent field -->
+      </div>
+      
+      
+      <div class="form-group">
+        <label for="image">Image</label>
+        <input type="file" id="image" name="image" class="form-control" (change)="onFileSelected($event)">
+        <div class="image-preview" *ngIf="imagePath">
+          <img [src]="imagePath" alt="Selected Image">
+        </div>
+      </div>      
+        
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add Event
+      </button>
+      <a [routerLink]="['/admin/getevents']" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Go Back
+      </a>
+    </form>
+  </section>
+</div>

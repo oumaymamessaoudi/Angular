@@ -1,0 +1,64 @@
+<section class="h-100 h-custom" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col">
+          <div class="card">
+            <div class="card-body p-4">
+              <div class="row">
+                <div class="col-lg-7">
+                  <h5 class="mb-3">
+                    <a (click)="goToProductsPage(elderlyId)" class="text-body" [style.cursor]="'pointer'">
+                      <i class="fas fa-hand-point-left me-2"></i>Continue shopping
+                    </a>
+                  </h5>             <hr>
+                  <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                      <h2 class="mb-1">Your bought products:</h2>
+                    </div>
+                  </div>
+                  <script src="https://js.stripe.com/v3/"></script>
+  
+  
+                  <!-- Cart Table -->
+                  <div class="cart-container">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                              <th>Product Name</th>
+                              <th>Price</th>
+                              <th>Total Price</th>
+                              <th>Quantity</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!-- Angular Loop for Bought Orders -->
+                            <tr *ngFor="let boughtItem of boughtOrders; let i = index">
+                                <td>{{ boughtItem.productName }}</td>
+                                <td>${{ boughtItem.price }}</td>
+                                <td>${{ boughtItem.totalPrice }}</td>
+                                <td>{{ boughtItem.quantite }}</td>
+                                <!-- Add actions if needed -->
+                              </tr>
+                            <!-- End Angular Loop -->
+                          </tbody>
+                        </table>
+                  </div>
+                  <!-- End Cart Table -->
+                </div>
+                <div class="col-lg-5">
+                  <!-- Payment Form Section -->
+                
+                  
+                  
+                  <!-- End Payment Form Section -->
+              
+                  <!-- End Stripe Card Input Section -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  

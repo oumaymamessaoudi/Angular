@@ -15,19 +15,26 @@
                 <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                   <button class="no-style-button" (click)="goToElderlyDashboard()">Find a doctor</button>
                   <li  class="nav-link">
-                    <button class="no-style-button" (click)="goToShop()"> Shop</button>
-                     
-                    <button class="no-style-button" (click)="goToTrack()">Tracking</button>
+                    <button class="no-style-button" (click)="goToevent()">Events</button>
 
-  
+                    <button class="no-style-button" (click)="goToTrack()">Tracking</button>
                     <li><a href="/profileeldery" class="nav-link">Profile</a></li>
-                    <li>  <a class="nav-link" (click)="goToComplaint()"class="nav-link"> Complaint</a></li>
-                    <li><a href="/news" class="nav-link">News</a></li>
-                    <li><a (click)="openNadhir()" class="nav-link">Detect Eyes</a></li>
+                    
+                    <button class="no-style-button" (click)="goToComplaint()">Complaint</button>
+
+              
 
                     <button class="no-style-button" (click)="goToToDoList()">To Do List</button>
-                    <button class="no-style-button" (click)="PlayAGame()">Play A Game</button>
-                  <li  ><a href="#contact-section" class="nav-link"><i class="fab fa-facebook fa-lg"></i></a></li>
+                    <li class="has-children">
+                      <a href="services.html" class="nav-link">More <i  ></i></a>
+                      <ul class="dropdown">
+                        <li><a  (click)="goToShop()"> Shop</a></li>
+
+                        <li><a (click)="PlayAGame()" class="nav-link">Play A Game</a></li>
+                        <li><a href="/news" class="nav-link">News</a></li>
+                        <li><a (click)="openNadhir()" class="nav-link">Detect Eyes</a></li>
+                      </ul>
+                    </li>                  <li  ><a href="#contact-section" class="nav-link"><i class="fab fa-facebook fa-lg"></i></a></li>
                   <li  ><a href="#contact-section" class="nav-link"><i class="fab fa-twitter fa-lg"></i></a></li>
                   <li  ><a href="#contact-section" class="nav-link"><i class="fab fa-linkedin fa-lg"></i></a></li>
                      

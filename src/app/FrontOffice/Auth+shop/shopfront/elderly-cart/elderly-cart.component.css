@@ -66,7 +66,7 @@ body {
 }
 
 .buy-btn {
-  background-color: #28a745;
+  background-color: #89abf0;
   color: #fff;
 }
 
@@ -209,4 +209,23 @@ body {
 
 .payment-form-container button:hover {
   background-color: #0056b3;
+}
+.announcement-box {
+  display: flex;
+  align-items: center;
+  background-color: #00b894;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.announcement-icon {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.announcement-text {
+  font-size: 16px;
+  line-height: 1.5;
 }
