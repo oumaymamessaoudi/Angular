@@ -17,14 +17,19 @@
 
 
               </li>
-              <li><a routerLink="/nadhir/aff" class="nav-link">Profile</a></li>
+              <li><a routerLink="/profilerelative" class="nav-link">Profile</a></li>
               <li>  <a class="nav-link" (click)="goToComplaint()"class="nav-link"> Complaint</a></li>
 
               <li> <a class="nav-link" (click)="goToTrack()">Tracking</a></li>
               <button class="no-style-button" (click)="goToToDoList()">To Do List</button>
               <button class="no-style-button" (click)="gotopayment()">Donation</button>
-
-              <li><a routerLink="" class="nav-link">SignOut</a></li>
+              <div *ngIf="authService.isLoggedIn()" class="floating-chat">
+                <a href="#" class="btn btn-primary" routerLink="/chat">
+                   <i class="fas fa-comment"></i>
+                 </a>
+                </div>
+                
+              <li><a routerLink="/signIn" class="nav-link">SignOut</a></li>
               
             </ul> 
           </nav>

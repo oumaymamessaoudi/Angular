@@ -92,13 +92,13 @@ export class SigninComponent {
         // Redirigez l'utilisateur vers le composant approprié en fonction de son rôle et de son ID spécifique au rôle
         switch (data.role) {
           case 'doctor':
-            this.router.navigate(['/doctor-dashboard', data.roleId]);
+            this.router.navigate(['/doctorhome', data.roleId]);
             sessionStorage.setItem('id',data.id);
 
 
             break;
           case 'elderly':
-            this.router.navigate(['/products', data.roleId]);
+            this.router.navigate(['elderlyhome', data.roleId]);
             sessionStorage.setItem('ideldery',data.id);
             break;
           case 'nurse':
