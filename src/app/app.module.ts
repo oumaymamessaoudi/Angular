@@ -161,6 +161,7 @@ import { SHOWMOREComponent } from './Events/showmore/SHOWMOREComponent';
 import { BoughtProductsComponent } from './FrontOffice/Auth+shop/shopfront/bought-products/bought-products.component';
 import { EmailCompositionComponentComponent } from './FrontOffice/Auth+shop/shopfront/email-composition-component/email-composition-component.component';
 import { RelativepaymentComponent } from './FrontOffice/Auth+shop/shopfront/relativepayment/relativepayment.component';
+import { HomeRelative1Component } from './FrontOffice/home-relative1/home-relative1.component';
 
 
 
@@ -300,7 +301,8 @@ import { RelativepaymentComponent } from './FrontOffice/Auth+shop/shopfront/rela
     BoughtProductsComponent,
     EventManagementComponent,
     ArchiveEventsComponent,
-    TicketComponent
+    TicketComponent,
+    HomeRelative1Component
 
 
   ],

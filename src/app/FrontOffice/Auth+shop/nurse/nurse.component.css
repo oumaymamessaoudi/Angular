@@ -1,0 +1,20 @@
+.floating-chat {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+  
+  .floating-chat .btn {
+  border-radius: 50%;
+  padding: 15px; /* Increase padding for larger size */
+  font-size: 24px; /* Increase font size for larger icon */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease-in-out;
+  }
+  
+  
+  .floating-chat .btn:hover {
+    transform: scale(1.1);
+  }
+  

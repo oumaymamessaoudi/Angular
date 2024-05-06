@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { SignService } from '../Services/sign.service';
 
 @Component({
   selector: 'app-nurse',
@@ -7,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./nurse.component.css']
 })
 export class NurseComponent {
-  constructor(private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,public authService: SignService
     ) {}
 
     ngOnInit(): void {

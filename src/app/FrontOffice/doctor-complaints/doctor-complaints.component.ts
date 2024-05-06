@@ -2,9 +2,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter } from '@angular/core';
 import { Complaint } from '../Auth+shop/Model/Complaint';
 import { AuthService } from '../Auth+shop/Services/AuthService';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ComplaintService } from '../Auth+shop/Services/complaint.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SharedService } from '../services2/shared.service';
 
 @Component({
   selector: 'app-doctor-complaints',
@@ -26,7 +27,9 @@ export class DoctorComplaintsComponent {
     private authService: AuthService,
     private route: ActivatedRoute,
     private complaintService: ComplaintService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private sharedService: SharedService,
+    private router: Router, 
    
     
   ) { }
@@ -151,5 +154,41 @@ isComplaintProcessedLocally(complaintId: number): boolean {
   const processedComplaints = JSON.parse(localStorage.getItem('processedComplaints')) || [];
   return processedComplaints.includes(complaintId);
 }
-
+goToDoc(): void {
+  // Extract the ID from the current URL
+   const currentUrl = this.router.url; // Get the current URL
+   const urlParts = currentUrl.split('/'); // Split the URL by '/'
+   const idFromUrl = parseInt(urlParts[urlParts.length - 1], 10); // Get the last part as ID
+  
+   // Send the ID to the shared service
+   this.sharedService.setElderlyId(idFromUrl);
+  
+   // Navigate to the Elderly Dashboard component
+   this.router.navigate(['/doctor-dashboard', idFromUrl]);
+  }
+  goToHome(): void {
+    // Extract the ID from the current URL
+     const currentUrl = this.router.url; // Get the current URL
+     const urlParts = currentUrl.split('/'); // Split the URL by '/'
+     const idFromUrl = parseInt(urlParts[urlParts.length - 1], 10); // Get the last part as ID
+    
+     // Send the ID to the shared service
+     this.sharedService.setElderlyId(idFromUrl);
+    
+     // Navigate to the Elderly Dashboard component
+     this.router.navigate(['/doctorhome', idFromUrl]);
+    }
+    
+    goToComplaint(): void {
+      // Extract the ID from the current URL
+       const currentUrl = this.router.url; // Get the current URL
+       const urlParts = currentUrl.split('/'); // Split the URL by '/'
+       const idFromUrl = parseInt(urlParts[urlParts.length - 1], 10); // Get the last part as ID
+      
+       // Send the ID to the shared service
+       this.sharedService.setDoctorId(idFromUrl);
+      
+       // Navigate to the Elderly Dashboard component
+       this.router.navigate(['/DoctorComplaints', idFromUrl]);
+      }
 }

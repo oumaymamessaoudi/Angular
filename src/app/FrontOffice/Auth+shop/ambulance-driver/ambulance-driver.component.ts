@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SignService } from '../Services/sign.service';
+import { SharedService } from '../../services2/shared.service';
 
 @Component({
   selector: 'app-ambulance-driver',
@@ -10,6 +11,8 @@ import { SignService } from '../Services/sign.service';
 export class AmbulanceDriverComponent {
 
   constructor(private route: ActivatedRoute,public authService: SignService
+    ,private router: Router,
+    private sharedService: SharedService
 
     ) {}
 
@@ -35,5 +38,25 @@ export class AmbulanceDriverComponent {
 
   onLogoutClick() {
     this.authService.logout();
+  }
+
+
+
+
+
+  goToSalary(): void {
+
+
+
+    // Extract the ID from the current URL
+    const currentUrl = this.router.url; // Get the current URL
+    const urlParts = currentUrl.split('/'); // Split the URL by '/'
+    const idFromUrl = parseInt(urlParts[urlParts.length - 1], 10); // Get the last part as ID
+
+    // Send the ID to the shared service
+    this.sharedService.setRelativeId(idFromUrl);
+
+    // Navigate to the Elderly Dashboard component
+    this.router.navigate(['/d/DriverNadhir', idFromUrl]);
   }
 }

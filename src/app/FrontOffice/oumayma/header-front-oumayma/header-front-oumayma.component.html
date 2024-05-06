@@ -17,13 +17,20 @@
               <button class="no-style-button" (click)="goToDoc()">Dashboard</button>
 
               <li>  <a class="nav-link" (click)="goToComplaint()"class="nav-link"> Complaint</a></li>
-
+             
            <li>  <a class="nav-link"  (click)="onLogoutClick()" class="nav-link">SignOut</a></li>
-
+          
               <li  ><a href="#contact-section" class="nav-link"><i class="fab fa-facebook fa-lg"></i></a></li>
               <li  ><a href="#contact-section" class="nav-link"><i class="fab fa-twitter fa-lg"></i></a></li>
               <li  ><a href="#contact-section" class="nav-link"><i class="fab fa-linkedin fa-lg"></i></a></li>
+              <div *ngIf="authService.isLoggedIn()" class="floating-chat">
+                <a href="#" class="btn btn-primary" routerLink="/chat">
+                   <i class="fas fa-comment"></i>
+                 </a>
+                </div>
+              
                   </ul>
+                  
           </nav>
         </div>
 

@@ -82,9 +82,28 @@ import { BoughtProductsComponent } from './FrontOffice/Auth+shop/shopfront/bough
 import { SHOWMOREComponent } from './Events/showmore/SHOWMOREComponent';
 import { EventelderlyComponent } from './Events/eventelderly/eventelderly.component';
 import { GeteventsComponent } from './Events/getevents/getevents.component';
+import { HomeRelative1Component } from './FrontOffice/home-relative1/home-relative1.component';
  
 const routes: Routes = [
+  {
+    path: 'profilenurse',
+    component:ProfilenurseComponent
+  },
+  {
+    path: 'profilerelative',
+    component:ProfilerelativeComponent
+    
+  },
+ 
+  {
+    path: 'profileowner',
+    component:ProfiledownerComponent
 
+  },
+  {
+    path: 'profiledriver',
+    component:ProfiledriverComponent
+  },
 
   { path: 'admin/get/edit/:id', component: UpdateAmbulanceComponent },
 
@@ -105,7 +124,8 @@ const routes: Routes = [
         path:"aff",
         component:AfficheAmbulanceComponent,
         
-      } ,  { path: 'todolist/:elderlyId', component: BoardComponent } 
+      } ,  { path: 'todolist/:elderlyId', component: BoardComponent } ,
+      
       
       
     ]
@@ -215,15 +235,14 @@ const routes: Routes = [
 { path: 'ComplaintRelativeList/:id', 
   component: ComplaintRelativeListFrontComponent 
 },
-{ path: 'DoctorComplaints/:id', 
-  component: DoctorComplaintsComponent
-},
+
 { path: 'update-complaint/:id', 
 component: UpdateComplaintComponent
  },
  { path: 'update-complaintElderly/:id', 
 component: UpdateComplaintElderlyComponent
  },
+ 
  { path: 'chatbot',
  component: ChatBotComponent },
  { path: 'news',
@@ -242,7 +261,7 @@ component: UpdateComplaintElderlyComponent
       path: 'elderlyhome/:elderlyId',
       component: HomeshopComponent
     },
-
+   
     { path: 'dash/:elderlyId', component: ElderlyDashboardComponent },
     { path: 'todo/:elderlyId', component: TodosComponent },
     { path: 'game/:elderlyId', component: GameComponent },
@@ -281,26 +300,14 @@ component: UpdateComplaintElderlyComponent
       path: 'doctor-profile',
       component: ProfildoctorComponent
     },
-    {
-      path: 'profilerelative',
-      component:ProfilerelativeComponent
-    },
+    
     {
       path: 'nurse/:id',
       component:NurseComponent
     },
-    {
-      path: 'profiledriver',
-      component:ProfiledriverComponent
-    },
-    {
-      path: 'profilenurse',
-      component:ProfilenurseComponent
-    },
-    {
-      path: 'profileowner',
-      component:ProfiledownerComponent
-    },
+    
+   
+   
     {
       path: 'elderly/:elderlyId/cart',
       component: ElderlyCartComponent}, { path: 'dash/:elderlyId', component: ElderlyDashboardComponent },
@@ -414,7 +421,9 @@ children: [
 
 ]
 
+
 }
+
 
 
 
@@ -524,7 +533,17 @@ children: [
         component: DriverNadhirComponent
       }
     ]
-  }
+  },
+  { path: 'DoctorComplaints/:id', 
+  component: DoctorComplaintsComponent
+},
+
+
+{ path: 'HomeRelative/:id', 
+  component: HomeRelative1Component
+},
+
+
 
 ];
 
