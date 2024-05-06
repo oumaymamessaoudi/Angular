@@ -115,7 +115,7 @@ export class SigninComponent {
             sessionStorage.setItem('idowner',data.id);
             break;
             case 'relative':
-            this.router.navigate(['/relative/aff', data.roleId]);
+            this.router.navigate(['/HomeRelative', data.roleId]);
             sessionStorage.setItem('idrelative',data.id);
             
             break;

@@ -18,7 +18,7 @@
 <header class="site-navbar light js-sticky-header site-navbar-target" role="banner">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-qi99IU6MzfE0zJ4tZ6R7nv5CqZLef5NGFBkODe7Jq9FtJRMX+lsbM+gwRfJBK6Ix0U9ROA6ek6P7J2EN2pAYAJA==" crossorigin="anonymous" />
    
-   <body style="background-image: url('/assets/FrontOffice/images/Welcome Driver.jpg'); 
+   <body style="background-image: url('/assets/FrontOffice/images/driver12.jpg'); 
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat;
@@ -41,24 +41,9 @@
               <li><a routerLink="/home"class="active nav-link">Home</a></li>
               <li class="has-children">
 
-<a href="#" class="nav-link dropdown-toggle" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> Services </a>  
-              <ul class="dropdown">
-                  <li><a  class="nav-link" routerLink="/new">New Appointment</a></li>
-                  <li><a routerLink="/listE" class="nav-link">My Appointments</a></li>
-       
-                  <li class="has-children">
-                    <a href="#">More Links</a>
-                    <ul class="dropdown">
-                      <li><a href="#">Menu One</a></li>
-                      <li><a href="#">Menu Two</a></li>
-                      <li><a href="#">Menu Three</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
 
-              <li><a routerLink="/driv/:ambulanceId" class="nav-link">Driver Salary</a></li>
-              <div *ngIf="authService.isLoggedIn()" class="floating-chat">
+                <li> <a class="nav-link" (click)="goToSalary()">DriverSalary</a></li>
+                <div *ngIf="authService.isLoggedIn()" class="floating-chat">
         
                 <a href="#" class="btn btn-primary" routerLink="/chat">
                     <i class="fas fa-comment"></i>
