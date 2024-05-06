@@ -238,6 +238,11 @@ component: UpdateComplaintElderlyComponent
       path: '',
       component: HomeshopComponent
     },
+    {
+      path: 'elderlyhome/:elderlyId',
+      component: HomeshopComponent
+    },
+
     { path: 'dash/:elderlyId', component: ElderlyDashboardComponent },
     { path: 'todo/:elderlyId', component: TodosComponent },
     { path: 'game/:elderlyId', component: GameComponent },
@@ -463,9 +468,15 @@ children: [
   {
     path: "",
     component: AllTemplateFrontOumaymaComponent,
+
+
+
     children: [
+
+
+      
       {
-        path: "home",
+        path: "doctorhome/:id",
         component: HomeFrontOumaymaComponent
       },
       {

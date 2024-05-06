@@ -12,16 +12,13 @@
           <nav class="site-navigation position-relative text-right" role="navigation">
 
             <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-              <li><a routerLink="/homeDoctor"class="active nav-link">Home</a></li>
+              <button class="no-style-button" (click)="goToHome()">Home</button>
               <li><a href="/doctor-profile" class="nav-link">Profile</a></li>
+              <button class="no-style-button" (click)="goToDoc()">Dashboard</button>
+
               <li>  <a class="nav-link" (click)="goToComplaint()"class="nav-link"> Complaint</a></li>
 
-
-                  
-                <li><a href="about.html" class="nav-link">About</a></li>
-
-              <li><a href="contact.html" class="nav-link">Contact</a></li>
-              <li>  <a class="nav-link"  (click)="onLogoutClick()" class="nav-link">SignOut</a></li>
+           <li>  <a class="nav-link"  (click)="onLogoutClick()" class="nav-link">SignOut</a></li>
 
               <li  ><a href="#contact-section" class="nav-link"><i class="fab fa-facebook fa-lg"></i></a></li>
               <li  ><a href="#contact-section" class="nav-link"><i class="fab fa-twitter fa-lg"></i></a></li>

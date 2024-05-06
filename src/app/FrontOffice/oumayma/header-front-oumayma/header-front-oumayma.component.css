@@ -1,0 +1,10 @@
+.no-style-button {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+    margin-right: 10px; /* Add margin between buttons */
+
+    cursor: pointer;
+    color: black; /* Set the text color to black */
+}

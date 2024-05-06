@@ -19,6 +19,11 @@ export class EventService {
   getApiUrl(): string {
     return this.apiUrl;
   }
+  getElderlyAccountBalance(elderlyId: number): Observable<number> {
+    const url = `${this.apiUrl}/elderly/${elderlyId}/accountBalance`;
+
+    return this.http.get<number>(url);
+  }
 
   getEventsForElderly(elderlyId: number): Observable<Event[]> {
     const url = `${this.apiUrl}/for-elderly/${elderlyId}`;

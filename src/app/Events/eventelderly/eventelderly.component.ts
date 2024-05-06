@@ -35,7 +35,7 @@ export class EventelderlyComponent implements OnInit {
     maxTicketPrice: number;
     maxEventCapacity: number;
     showTicket: boolean = false; // Initialize to false
-
+elderlyAccountBalance: number;
 
   constructor(private eventService: EventService, private route: ActivatedRoute ,private router: Router) { }
 
@@ -46,7 +46,16 @@ export class EventelderlyComponent implements OnInit {
       
       // Retrieve user's position using Leaflet API
       this.getUserPosition();
+      this.eventService.getElderlyAccountBalance(this.elderlyId).subscribe(
+        (balance: number) => {
+          this.elderlyAccountBalance = balance;
+        },
+        (error: any) => {
+          console.error('Error fetching elderly account balance:', error);
+        }
+      );
     });
+  
     this.fetchRecommendedEvents();
 
 
@@ -68,6 +77,7 @@ export class EventelderlyComponent implements OnInit {
       }
     );
   
+    
     
   }
   
